@@ -2,7 +2,7 @@
 
 A Python library and JSON CLI for materials science and engineering calculations that AI agents can discover, validate and invoke automatically.
 
-This is the first working foundation for a broader toolkit. It supplies seven bounded calculations; advanced simulation, structure analysis, MCP integration and trained models are tracked in [ROADMAP.md](ROADMAP.md). Every tool declares its assumptions and exposes input/output JSON schemas. Results carry input hashes, software versions and scientific references. Invalid inputs produce structured errors.
+The toolkit supplies seven bounded calculations through a Python library, JSON CLI and optional MCP server. Advanced simulation, structure analysis and trained models are tracked in [ROADMAP.md](ROADMAP.md). Every tool declares its assumptions and exposes input/output JSON schemas. Results carry input hashes, software versions and scientific references. Invalid inputs produce structured errors.
 
 ## Install and run
 
@@ -29,7 +29,7 @@ matkit run < examples/water-composition.json
 matkit validate < examples/water-composition.json
 ```
 
-`list` includes the full tool descriptors; `describe` returns one descriptor. `validate` checks schemas and normalizes inputs without executing a calculation. `run` returns a JSON response and exits with code 0 on success or 2 on error. Stdout contains JSON; CLI usage text goes to stderr. Schema validation and scientific domain validation are separate: a request can pass `validate` and still fail a tool's physical domain checks during `run`.
+`list` includes the full tool descriptors; `describe` returns one descriptor. `validate` checks schemas and normalizes inputs without executing a calculation. `run` returns a JSON response and exits with code 0 on success or 2 on error. Calculation stdout contains JSON; usage errors go to stderr. Schema validation and scientific domain validation are separate: a request can pass `validate` and still fail a tool's physical domain checks during `run`.
 
 ```python
 from materials_agent_toolkit.registry import list_tools, run_tool
@@ -58,14 +58,26 @@ Input hashes identify canonical validated inputs, including defaults. Record the
 
 No tool downloads data or launches external jobs. Predictions and expensive simulation adapters will have separate contracts when implemented. Model assumptions and warnings must be considered before applying outputs to an engineering decision.
 
+## Connect an MCP client
+
+Install the optional official MCP SDK and launch the stdio server:
+
+```sh
+uv sync --locked --extra mcp
+uv run --no-sync matkit-mcp
+```
+
+Compatible AI clients can discover the seven tools by their existing names and call them using the input fields shown in their schemas. The server returns the same result/error envelope as the Python and CLI interfaces, with `structuredContent` for machine consumption and equivalent JSON text for other clients. It also exposes the complete catalog and response schema as MCP resources. See [MCP setup and protocol details](docs/MCP.md) for a client configuration and a runnable example.
+
 ## Contributing and hourly development
 
 [AGENTS.md](AGENTS.md) specifies the completion criteria for AI contributors. [BACKLOG.md](BACKLOG.md) is the persistent queue, and [RUN_LOG.md](RUN_LOG.md) records verified work. [The hourly task specification](docs/HOURLY_TASK.md) contains a schedule and prompt ready for a ChatGPT automation with GitHub and execution access. The specification is a setup artifact; it does not itself schedule any job.
 
 ```sh
-uv run pytest
-uv run ruff check .
-uv run ruff format --check .
+uv sync --locked --extra dev --extra mcp
+uv run --no-sync pytest
+uv run --no-sync ruff check .
+uv run --no-sync ruff format --check .
 ```
 
-The exact development dependency resolution is committed in `uv.lock`. CI checks supported Python versions. Add scientific reference cases and explicit domain limits alongside each calculation.
+The exact dependency resolution is committed in `uv.lock`. CI checks Python 3.11–3.13 with MCP enabled and separately checks that the base installation works without it. MCP-specific tests skip when the optional extra is absent. Add scientific reference cases and explicit domain limits alongside each calculation.

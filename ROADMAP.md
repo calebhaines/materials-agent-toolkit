@@ -1,6 +1,6 @@
 # Roadmap
 
-The aim is a broad, agent-callable materials science and engineering platform. Capability grows through completed, validated tools. The initial release implements composition, density and selected engineering calculations; the items below are future work.
+The aim is a broad, agent-callable materials science and engineering platform. Capability grows through completed, validated tools. The toolkit implements composition, density, selected engineering calculations and an optional MCP stdio interface. Later capabilities remain planned; publication status is recorded in RUN_LOG.md.
 
 | Stage | Deliverables | Evidence required |
 | --- | --- | --- |
@@ -12,5 +12,7 @@ The aim is a broad, agent-callable materials science and engineering platform. C
 | 5 — Simulation workflows | Reproducible inputs and parsers for selected engines; job lifecycle API; local/remote execution adapters with budgets and cancellation | Round-trip fixtures, engine availability checks, integration cases, complete job provenance |
 | 6 — Property models | Curated datasets and baseline property prediction; split strategy, uncertainty, applicability limits and model cards | Leakage-resistant evaluations, uncertainty calibration, baseline comparisons |
 | 7 — Discovery loops | Candidate generation, workflow planning, caching and adaptive experiment/simulation selection | End-to-end reproducibility, quantitative scientific benchmarks and bounded compute |
+
+Stage 1 progress in package 0.2.0: the optional MCP stdio server, native tool discovery, structured errors, catalog/schema resources and runnable client example are implemented. Batch operations and standalone catalog export remain in the backlog.
 
 Scope and ordering can be adjusted by the owner. Open tasks, acceptance criteria and dependencies belong in BACKLOG.md; completed work belongs in RUN_LOG.md.

@@ -233,4 +233,4 @@ def test_existing_single_request_cli_contract_is_preserved():
     process = invoke(["list"])
     assert process.returncode == 0
     assert process.stderr == ""
-    assert len(json.loads(process.stdout)["tools"]) == 8
+    assert len(json.loads(process.stdout)["tools"]) == 9

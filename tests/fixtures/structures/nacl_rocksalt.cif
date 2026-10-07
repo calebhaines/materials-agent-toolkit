@@ -1,0 +1,26 @@
+# SPDX-License-Identifier: CC0-1.0
+# Authored analytical fixture; no third-party coordinate dataset is copied.
+# Ideal rocksalt NaCl, conventional cell, approximately room temperature.
+# a = 5.64 Angstrom is rounded; not a measured precision lattice parameter.
+# Reference crystal prototype: https://aflow.org/p/AB_cF8_225_a_b-001/
+# Density reference: 4*(22.98976928+35.45) g/mol/(N_A*a^3)
+# gives 2163.616424776758 kg/m^3, using exact SI N_A = 6.02214076e23/mol.
+# Test tolerances: relative 1e-12 for volume and 1e-10 for density.
+data_nacl_rocksalt
+_cell_length_a 5.64
+_cell_length_b 5.64
+_cell_length_c 5.64
+_cell_angle_alpha 90
+_cell_angle_beta 90
+_cell_angle_gamma 90
+_space_group_IT_number 225
+_space_group_name_H-M_alt 'F m -3 m'
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+Na1 Na 0 0 0 1
+Cl1 Cl 0.5 0.5 0.5 1

@@ -6,6 +6,7 @@ import subprocess
 import sys
 from dataclasses import replace
 from importlib.metadata import version
+from importlib.util import find_spec
 from pathlib import Path
 
 import pytest
@@ -19,6 +20,11 @@ from materials_agent_toolkit.registry import (
     run_request,
     run_tool,
     validate_input,
+)
+
+HAS_ASE = find_spec("ase") is not None
+AL_CIF = (Path(__file__).parent / "fixtures" / "structures" / "al_fcc.cif").read_text(
+    encoding="utf-8"
 )
 
 STIFFNESS = [
@@ -46,6 +52,12 @@ CASES = [
     (
         "kinetics.arrhenius_diffusivity",
         {"pre_exponential_m2_s": 1e-5, "activation_energy_J_mol": 50000, "temperature_K": 1000},
+    ),
+    pytest.param(
+        "structure.analyze_cif",
+        {"cif_text": AL_CIF},
+        marks=pytest.mark.skipif(not HAS_ASE, reason="Install the optional structures extra"),
+        id="structure.analyze_cif",
     ),
 ]
 
@@ -167,7 +179,7 @@ def invoke(command, stdin=None):
     )
 
 
-@pytest.mark.parametrize("name,inputs", CASES[:2])
+@pytest.mark.parametrize("name,inputs", [*CASES[:2], CASES[-1]])
 def test_cli_and_python_return_same_scientific_result(name, inputs):
     process = invoke(["run"], json.dumps({"tool": name, "input": inputs}))
     assert process.returncode == 0

@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v6
-      - run: uv sync --locked --extra dev --extra mcp
+      - run: uv sync --locked --extra dev --extra mcp --extra structures
       - run: uv run --no-sync python scripts/export_catalog.py --check
       - run: uv run --no-sync pytest
       - run: uv run --no-sync ruff check .
@@ -36,7 +36,7 @@ jobs:
       - run: uv sync --locked --extra dev
       - run: uv run --no-sync python scripts/export_catalog.py --check
       - run: uv run --no-sync pytest
-      - name: Verify optional MCP dependency behavior
+      - name: Verify optional dependency behavior
         run: |
           uv run --no-sync python - <<'PY'
           import importlib.util
@@ -44,9 +44,17 @@ jobs:
           import subprocess
           import sys
           assert importlib.util.find_spec("mcp") is None
+          assert importlib.util.find_spec("ase") is None
           result = subprocess.run([sys.executable, "-m", "materials_agent_toolkit", "list"], capture_output=True, text=True)
           assert result.returncode == 0, result.stderr
-          assert len(json.loads(result.stdout)["tools"]) == 8
+          assert len(json.loads(result.stdout)["tools"]) == 9
+          from pathlib import Path
+          from materials_agent_toolkit.registry import run_tool
+          response = run_tool("structure.analyze_cif", {"cif_text": Path("tests/fixtures/structures/al_fcc.cif").read_text()})
+          assert response.status == "error"
+          assert response.error.code == "MISSING_DEPENDENCY"
+          assert "[structures]" in response.error.message
+          assert response.provenance.software_versions["ase"] == "not-installed"
           result = subprocess.run([sys.executable, "-m", "materials_agent_toolkit.mcp_server"], capture_output=True, text=True)
           assert result.returncode == 2
           assert result.stdout == ""

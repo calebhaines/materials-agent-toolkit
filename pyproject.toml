@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "materials-agent-toolkit"
-version = "0.5.0"
+version = "0.6.0"
 description = "Discoverable, validated materials science tools for AI agents"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -13,6 +13,10 @@ dependencies = ["numpy>=2.0,<3", "pydantic>=2.9,<3", "periodictable>=2.0,<3"]
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.9,<1", "jsonschema>=4.23,<5"]
 mcp = ["mcp>=1.30,<2"]
+structures = [
+    "ase>=3.26,<4",
+    "scipy>=1.11,<2",
+]
 
 [project.scripts]
 matkit = "materials_agent_toolkit.cli:main"

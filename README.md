@@ -40,6 +40,34 @@ assert response.status == "ok", response.error
 print(response.result)
 ```
 
+## Batch calls
+
+Run 1–100 independent requests in one invocation:
+
+```sh
+uv run matkit batch < examples/batch/mixed.json
+uv run matkit batch-schema
+```
+
+```python
+from materials_agent_toolkit.registry import run_batch
+
+batch = run_batch(
+    {
+        "requests": [
+            {"tool": "composition.analyze", "input": {"formula": "H2O"}},
+            {
+                "tool": "mechanics.isotropic_moduli",
+                "input": {"young_modulus": 210, "poisson_ratio": 0.3},
+            },
+        ]
+    }
+)
+assert batch.status == "ok", batch.responses
+```
+
+Responses retain input order, per-item errors and provenance. Requests run sequentially; an item failure does not stop the remaining calculations. An invalid batch envelope is rejected before execution. The CLI exits with code 2 for mixed or failed batches while still printing their complete JSON responses. The mixed example intentionally includes an unknown tool. See [batch contracts, limits and error handling](docs/BATCH.md).
+
 ## Initial tool catalog
 
 | Tool | Purpose |

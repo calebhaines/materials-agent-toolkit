@@ -12,6 +12,9 @@ from pydantic import Field, ValidationError
 from materials_agent_toolkit import __version__
 from materials_agent_toolkit.contracts import StrictModel, ToolSpec
 
+MAX_BATCH_SIZE = 100
+BATCH_VERSION = "1"
+
 
 class ToolRequest(StrictModel):
     tool: str = Field(min_length=1, max_length=120)
@@ -44,6 +47,66 @@ class ToolResponse(StrictModel):
     error: ToolError | None = None
 
 
+class BatchRequest(StrictModel):
+    """Bounded batch envelope; each raw item is validated independently during execution."""
+
+    batch_version: Literal["1"] = Field(
+        default=BATCH_VERSION, description="Batch envelope contract version."
+    )
+    requests: list[Any] = Field(
+        min_length=1,
+        max_length=MAX_BATCH_SIZE,
+        description=(
+            "Raw request items, executed sequentially in input order. Each item is validated "
+            "independently against the tool request contract; malformed items do not reject "
+            "the entire batch."
+        ),
+    )
+
+
+class BatchSummary(StrictModel):
+    """Counts of processed requests and their individual outcomes."""
+
+    total: int = Field(
+        ge=0, le=MAX_BATCH_SIZE, description="Processed item count; zero for an invalid envelope."
+    )
+    succeeded: int = Field(ge=0, le=MAX_BATCH_SIZE, description="Items with an ok response.")
+    failed: int = Field(ge=0, le=MAX_BATCH_SIZE, description="Items with an error response.")
+
+
+class BatchResponse(StrictModel):
+    """Ordered individual responses with aggregate status and execution provenance."""
+
+    batch_version: Literal["1"] = Field(
+        default=BATCH_VERSION, description="Batch envelope contract version."
+    )
+    status: Literal["ok", "partial", "error"] = Field(
+        description=(
+            "ok when all items succeed; partial for mixed successes and failures; error when "
+            "all items fail or the outer envelope is invalid."
+        )
+    )
+    responses: list[ToolResponse] = Field(
+        min_length=0,
+        max_length=MAX_BATCH_SIZE,
+        description="One response per item in stable input order; empty only for an invalid envelope.",
+    )
+    summary: BatchSummary = Field(description="Counts of processed items and their outcomes.")
+    provenance: Provenance = Field(
+        description=(
+            "Batch execution provenance with no input hash. Each individual response preserves "
+            "its tool provenance and validated input hash when available."
+        )
+    )
+    error: ToolError | None = Field(
+        default=None,
+        description=(
+            "Structural INVALID_BATCH error for an invalid outer envelope; null for every valid "
+            "envelope, including batches where all individual items fail."
+        ),
+    )
+
+
 def _tools() -> dict[str, ToolSpec]:
     from materials_agent_toolkit.tools import composition, engineering, mechanics
 
@@ -62,6 +125,18 @@ def describe_tool(name: str) -> dict[str, Any]:
     if name not in _tools():
         raise ValueError(f"Unknown tool: {name}")
     return _tools()[name].describe()
+
+
+def describe_batch() -> dict[str, Any]:
+    """Describe the batch envelope and the separately validated item contract."""
+    return {
+        "batch_version": BATCH_VERSION,
+        "max_batch_size": MAX_BATCH_SIZE,
+        "execution": "sequential",
+        "request_schema": BatchRequest.model_json_schema(),
+        "response_schema": BatchResponse.model_json_schema(),
+        "item_request_schema": ToolRequest.model_json_schema(),
+    }
 
 
 def validate_input(name: str, inputs: dict[str, Any]) -> dict[str, Any]:
@@ -186,3 +261,45 @@ def run_request(request: dict[str, Any]) -> ToolResponse:
 
 def run_tool(name: str, inputs: dict[str, Any], *, tool_version: str | None = None) -> ToolResponse:
     return run_request({"tool": name, "input": inputs, "tool_version": tool_version})
+
+
+def batch_error_response(
+    message: str, details: list[dict[str, Any]] | None = None
+) -> BatchResponse:
+    """Return a structural batch failure without executing any item."""
+    return BatchResponse(
+        status="error",
+        responses=[],
+        summary=BatchSummary(total=0, succeeded=0, failed=0),
+        provenance=_provenance(),
+        error=ToolError(code="INVALID_BATCH", message=message, details=details or []),
+    )
+
+
+def run_batch(payload: dict[str, Any]) -> BatchResponse:
+    """Run 1–100 independent requests sequentially, preserving their input order."""
+    try:
+        batch = BatchRequest.model_validate(payload)
+    except ValidationError as exc:
+        return batch_error_response(
+            "Invalid batch request",
+            details=exc.errors(include_url=False, include_context=False, include_input=False),
+        )
+
+    responses = []
+    for request in batch.requests:
+        try:
+            response = run_request(request)
+        except Exception:
+            response = error_response("INTERNAL_ERROR", "Unexpected request failure")
+        responses.append(response)
+
+    succeeded = sum(response.status == "ok" for response in responses)
+    failed = len(responses) - succeeded
+    status = "ok" if failed == 0 else "error" if succeeded == 0 else "partial"
+    return BatchResponse(
+        status=status,
+        responses=responses,
+        summary=BatchSummary(total=len(responses), succeeded=succeeded, failed=failed),
+        provenance=_provenance(),
+    )

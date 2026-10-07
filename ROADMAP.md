@@ -13,7 +13,7 @@ The aim is a broad, agent-callable materials science and engineering platform. C
 | 6 — Property models | Curated datasets and baseline property prediction; split strategy, uncertainty, applicability limits and model cards | Leakage-resistant evaluations, uncertainty calibration, baseline comparisons |
 | 7 — Discovery loops | Candidate generation, workflow planning, caching and adaptive experiment/simulation selection | End-to-end reproducibility, quantitative scientific benchmarks and bounded compute |
 
-Stage 1 progress in package 0.2.0: the optional MCP stdio server, native tool discovery, structured errors, catalog/schema resources and runnable client example are implemented. Batch operations and standalone catalog export remain in the backlog.
+Stage 1 progress: package 0.2.0 introduced the optional MCP stdio server, native tool discovery, structured errors, catalog/schema resources and runnable client example. Package 0.4.0 adds versioned Python/CLI batches with 1–100 sequential calls, stable ordering, independent item errors and schema discovery. Standalone catalog export remains in the backlog.
 
 Stage 2 progress in package 0.3.0: `composition.from_fractions` supports explicit atomic or mass fractions, optional normalization of relative weights, conversion between bases and mean atomic mass. Formula-unit counts are not inferred. Structure parsing and analysis remain in the backlog.
 

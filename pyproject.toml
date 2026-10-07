@@ -1,0 +1,28 @@
+[build-system]
+requires = ["hatchling>=1.25,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "materials-agent-toolkit"
+version = "0.1.0"
+description = "Discoverable, validated materials science tools for AI agents"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["numpy>=2.0,<3", "pydantic>=2.9,<3", "periodictable>=2.0,<3"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1", "jsonschema>=4.23,<5"]
+
+[project.scripts]
+matkit = "materials_agent_toolkit.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]

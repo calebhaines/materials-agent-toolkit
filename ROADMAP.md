@@ -1,0 +1,16 @@
+# Roadmap
+
+The aim is a broad, agent-callable materials science and engineering platform. Capability grows through completed, validated tools. The initial release implements composition, density and selected engineering calculations; the items below are future work.
+
+| Stage | Deliverables | Evidence required |
+| --- | --- | --- |
+| 0 — Contracts and calculations | Strict schemas, discovery, JSON CLI, provenance, seven initial calculations, reproducible dependencies, CI | Analytical cases, domain failures, JSON schema conformance and CLI integration |
+| 1 — Agent integration | MCP server wrapping the same registry; batch calls with per-item errors; error taxonomy; versioned machine-readable catalog | Client integration, matching library/CLI/MCP results, predictable concurrency |
+| 2 — Composition and structures | Structured fractional compositions; CIF/POSCAR/XYZ reading and writing; cell validation; symmetry, neighbors and structure density through optional pymatgen/ASE adapters | Reference structures, format round trips, consistent units, cross-library cases |
+| 3 — Engineering design | Anisotropic stress/strain transformations; orientation dependence; constrained material screening; unit-aware property records; physical model applicability metadata | Tensor transformation invariants, benchmark cases, source-traceable property data |
+| 4 — Thermodynamics | Phase diagrams and energy-above-hull with compatible supplied reference energies; explicit reference states and energy corrections | Known hulls, composition conservation, incompatible-dataset rejection |
+| 5 — Simulation workflows | Reproducible inputs and parsers for selected engines; job lifecycle API; local/remote execution adapters with budgets and cancellation | Round-trip fixtures, engine availability checks, integration cases, complete job provenance |
+| 6 — Property models | Curated datasets and baseline property prediction; split strategy, uncertainty, applicability limits and model cards | Leakage-resistant evaluations, uncertainty calibration, baseline comparisons |
+| 7 — Discovery loops | Candidate generation, workflow planning, caching and adaptive experiment/simulation selection | End-to-end reproducibility, quantitative scientific benchmarks and bounded compute |
+
+Scope and ordering can be adjusted by the owner. Open tasks, acceptance criteria and dependencies belong in BACKLOG.md; completed work belongs in RUN_LOG.md.

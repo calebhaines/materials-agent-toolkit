@@ -29,7 +29,7 @@ Use [Codex Cloud](https://developers.openai.com/codex/cloud/) for code changes a
 3. Review the prepared setup, select **Publish**, and wait for **Environment published**.
 4. Select **Start a new task**. Ask Codex to continue the repository using AGENTS.md, BACKLOG.md, ROADMAP.md and RUN_LOG.md, and deliver changes as pull requests.
 
-The MCP implementation is complete, verified, and published in [PR #1](https://github.com/calebhaines/materials-agent-toolkit/pull/1). It has not been merged. Other environments can fetch the published feature branch without transferring local artifacts from this conversation.
+The MCP implementation is complete, verified, and merged through [PR #1](https://github.com/calebhaines/materials-agent-toolkit/pull/1). Other environments can check out `main` without transferring local artifacts from this conversation. Future changes follow the [protected repository policy](REPOSITORY_POLICY.md).
 
 The repository is currently public because the owner changed its visibility while diagnosing access. A CLI login with repository scope, or Codex with the relevant GitHub authorization, can also work with private repositories the account is allowed to access.
 

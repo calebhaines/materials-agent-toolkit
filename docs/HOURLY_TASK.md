@@ -2,7 +2,7 @@
 
 Status: **prepared only, not scheduled**. Activate this in a ChatGPT context that supports automations and exposes authenticated GitHub write access and code execution. The current session exposes no automation creation tool.
 
-**Connection limitation:** the standard GitHub app in ChatGPT is read-only, according to [OpenAI's connection guide](https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt). It cannot publish the development changes described below. The full development loop requires a write-enabled Codex environment or another authorized coding runner; no such hourly runner has been configured here. See [GitHub setup](GITHUB_SETUP.md). A scheduled ChatGPT task alone does not supply these write capabilities.
+**Connection limitation:** the standard GitHub app in ChatGPT is read-only, according to [OpenAI's connection guide](https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt). It cannot publish the development changes described below. A separately authorized GitHub CLI login has successfully published changes from the current execution environment. The full development loop needs that execution access and write authorization, a write-enabled Codex environment, or another authorized coding runner; no hourly runner has been configured here. See [GitHub setup](GITHUB_SETUP.md). A scheduled ChatGPT task alone does not supply these capabilities.
 
 - Title: Improve the materials science agent toolkit
 - Time zone: Etc/UTC

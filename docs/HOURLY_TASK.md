@@ -6,7 +6,7 @@ Status: **prepared only, not scheduled**. Activate this in a ChatGPT context tha
 - Time zone: Etc/UTC
 - Cadence: every hour at minute 00, second 00
 - Schedule: `BEGIN:VEVENT\nRRULE:FREQ=HOURLY;INTERVAL=1;BYMINUTE=0;BYSECOND=0\nEND:VEVENT`
-- Repository: https://github.com/calebhaines/materials-agent-toolkit (private by default).
+- Repository: https://github.com/calebhaines/materials-agent-toolkit (public).
 - Delivery mode: open pull requests by default; update if the owner requests direct commits.
 
 Paste the following task prompt:

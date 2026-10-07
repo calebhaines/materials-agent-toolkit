@@ -5,7 +5,7 @@ Select one bounded item per development run. Update status and link the branch/p
 | Priority | Task | Acceptance criteria | Status |
 | --- | --- | --- | --- |
 | P0 | Ship initial scientific tool foundation | Seven tools, discoverable schemas, validated envelopes, reference tests, CLI checks, dependency lock and CI | Complete; 146 tests and package build pass; see RUN_LOG.md |
-| P1 | Add MCP interface | Same tools/results as registry; discoverable schemas; client example; real stdio integration test; optional dependency with base-install coverage | Implemented and verified locally on `feat/mcp-agent-interface`; GitHub publication awaits repository access |
+| P1 | Add MCP interface | Same tools/results as registry; discoverable schemas; client example; real stdio integration test; optional dependency with base-install coverage | Implemented and verified on `feat/mcp-agent-interface`; prepared for pull request |
 | P1 | Add structured fractional composition input | Atomic fractions and mass fractions support alloys without ambiguous formula syntax; documented normalization; known alloy cases | Ready |
 | P1 | Batch API and CLI | Per-item success/error; stable ordering; no all-or-nothing failure; documented bounded batch size | Ready |
 | P1 | Export machine-readable tool catalog | Versioned catalog and response schema; examples validate against schemas; reproducible generation | Ready |

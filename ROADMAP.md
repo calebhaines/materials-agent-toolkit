@@ -17,4 +17,6 @@ Stage 1 progress: package 0.2.0 introduced the optional MCP stdio server, native
 
 Stage 2 progress: package 0.3.0 introduced `composition.from_fractions` with explicit atomic or mass fractions, optional normalization of relative weights, conversion between bases and mean atomic mass. Formula-unit counts are not inferred. Package 0.6.0 adds the optional ASE-backed `structure.analyze_cif`: bounded ordered CIF 1.x parsing, supplied-cell and symmetry validation, expanded coordinates, volume and crystallographic density. Other formats, writing, neighbors and broader symmetry analysis remain planned; Stage 2 is partial.
 
+A user-directed discovery experiment now exercises the existing tools on sourced aluminum–ceramic heat-spreader recipes, with controls, provenance, deterministic sensitivity scenarios and a scoped prior-art review. It nominates unvalidated recipes; no calibrated property predictor, verified chemical novelty or fabrication result is claimed. See experiments/lightweight_composites/REPORT.md.
+
 Scope and ordering can be adjusted by the owner. Open tasks, acceptance criteria and dependencies belong in BACKLOG.md; completed work belongs in RUN_LOG.md.

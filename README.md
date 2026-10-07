@@ -121,6 +121,10 @@ uv run --no-sync matkit-mcp
 
 Compatible AI clients can discover the nine tools by their names and call them using the input fields shown in their schemas. The server returns the same result/error envelope as the Python and CLI interfaces, with `structuredContent` for machine consumption and equivalent JSON text for other clients. It also exposes the complete catalog and response schema as MCP resources. See [MCP setup and protocol details](docs/MCP.md) for a client configuration and a runnable example.
 
+## Discovery experiments
+
+The [aluminum–ceramic heat-spreader experiment](experiments/lightweight_composites/REPORT.md) uses sourced constituent data and the existing tools to screen 8,401 recipes, compare controls and test sensitivity. It produces unvalidated candidate hypotheses with explicit prior-art and model limitations. The scripts, inputs, numerical outputs and plot are committed for reproducibility; these results are separate from the scientific tool catalog.
+
 ## Contributing and hourly development
 
 [AGENTS.md](AGENTS.md) specifies the completion criteria for AI contributors. [BACKLOG.md](BACKLOG.md) is the persistent queue, and [RUN_LOG.md](RUN_LOG.md) records verified work. [The hourly task specification](docs/HOURLY_TASK.md) contains a schedule and prompt ready for a ChatGPT automation with GitHub and execution access. The specification is a setup artifact; it does not itself schedule any job.

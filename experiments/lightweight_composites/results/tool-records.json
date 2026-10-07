@@ -1,0 +1,3163 @@
+{
+  "ideal_recipe": {
+    "label": "ideal_elemental_recipe",
+    "requests": [
+      {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "Al": 0.840777578656458,
+            "C": 0.019427276210734402,
+            "N": 0.0943688648581864,
+            "Si": 0.04542628027462124
+          },
+          "normalization": "require_unity"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      }
+    ],
+    "responses": [
+      {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-07T23:04:35.069976+00:00",
+          "input_sha256": "ac874b215965ba6806bcb9b0e1f0fc711d1b4dfbb4d9736293359ef2190aeaa8",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "Al": 0.7575649078743324,
+            "C": 0.03932223400170204,
+            "N": 0.16379062412226353,
+            "Si": 0.03932223400170204
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 1.0,
+          "mass_fractions": {
+            "Al": 0.840777578656458,
+            "C": 0.019427276210734402,
+            "N": 0.0943688648581864,
+            "Si": 0.04542628027462124
+          },
+          "mean_atomic_mass_g_mol": 24.31114621891655
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    ]
+  },
+  "illustrative_thermal_expansion": {
+    "assumption": "Illustration for a 0.1 m part and a 25 K temperature increase using each constant CTE proxy; not validated composite expansion.",
+    "label": "illustrative_constant_CTE_proxy_expansion",
+    "proxy_fields": [
+      "cte_volume_average_per_K",
+      "cte_turner_per_K"
+    ],
+    "requests": [
+      {
+        "input": {
+          "delta_temperature_K": 25.0,
+          "expansion_coefficient_per_K": 1.7515199999999998e-05,
+          "initial_length_m": 0.1
+        },
+        "tool": "thermal.linear_expansion",
+        "tool_version": "1"
+      },
+      {
+        "input": {
+          "delta_temperature_K": 25.0,
+          "expansion_coefficient_per_K": 1.3575989719168735e-05,
+          "initial_length_m": 0.1
+        },
+        "tool": "thermal.linear_expansion",
+        "tool_version": "1"
+      }
+    ],
+    "responses": [
+      {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-07T23:04:35.071792+00:00",
+          "input_sha256": "84a60cae5e34b74d6b7142a0e6f84e17fd78d742b0a7faa799c822901300044c",
+          "python_version": "3.12.14",
+          "references": [
+            "Linear thermal expansion relation: delta_L = L0 * alpha * delta_T."
+          ],
+          "software_versions": {
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "delta_length_m": 4.3787999999999995e-05,
+          "final_length_m": 0.10004378800000001
+        },
+        "status": "ok",
+        "tool": "thermal.linear_expansion",
+        "tool_version": "1",
+        "warnings": [
+          "Uses a constant expansion coefficient and a linear small-strain model; phase changes are excluded."
+        ]
+      },
+      {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-07T23:04:35.072659+00:00",
+          "input_sha256": "5bd7ac39b8e5553bf1bf856ce5339f24409e3c5c89281a9d9e5f588d7afcf923",
+          "python_version": "3.12.14",
+          "references": [
+            "Linear thermal expansion relation: delta_L = L0 * alpha * delta_T."
+          ],
+          "software_versions": {
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "delta_length_m": 3.3939974297921836e-05,
+          "final_length_m": 0.10003393997429792
+        },
+        "status": "ok",
+        "tool": "thermal.linear_expansion",
+        "tool_version": "1",
+        "warnings": [
+          "Uses a constant expansion coefficient and a linear small-strain model; phase changes are excluded."
+        ]
+      }
+    ]
+  },
+  "inputs_sha256": "772b736d09f78cc9df0ec6f971bbbe268df3871b60e8c62b27a5ade742860f3d",
+  "provenance_policy": "Complete schema-valid toolkit execution response snapshots, including actual timestamps, input hashes, references and runtime versions. --check compares scientific records independently of execution timestamps and runtime version fields; data tables and summary are byte deterministic.",
+  "selected_and_control_replays": [
+    {
+      "candidate_id": "Al100_SiC000_AlN000_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              1.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.030706+00:00",
+            "input_sha256": "c3a6512d0c2fcd425284cc7fde5ecd33b62f4c90b3bdec9d7b0616a36243ef69",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 75.48387096774192,
+            "voigt_bound": 75.48387096774192
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.031519+00:00",
+            "input_sha256": "abfcfda5bab4cef81b42a6e634dba07403ccf28a28b0e272f2df9b804add37cc",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 26.096654275092938,
+            "voigt_bound": 26.096654275092938
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.032248+00:00",
+            "input_sha256": "17131c9c8c28d85c0b0190a66f21eaace4ba7d207b4a1e639a68e18572469d19",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 237.0,
+            "voigt_bound": 237.0
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "nominal"
+    },
+    {
+      "candidate_id": "Al070_SiC030_AlN000_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.3,
+              0.0,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.3,
+              0.0,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.3,
+              0.0,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.033746+00:00",
+            "input_sha256": "8214d1e17169a162c6610858027404929f7e1249040907b469a9ade98a786cb4",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 89.88818305141295,
+            "voigt_bound": 101.44982078853046
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.034476+00:00",
+            "input_sha256": "5133aa8beaab44d96156236f58f947710191bc8085a26f0c3e95d58d7c13391c",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 34.74919201410673,
+            "voigt_bound": 64.32028957151242
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.035183+00:00",
+            "input_sha256": "7964de41afac1966b181de877ec9147086dfe45335928ca9c4ae338c462f3f4a",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 170.13853904282115,
+            "voigt_bound": 196.67999999999998
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "nominal"
+    },
+    {
+      "candidate_id": "Al070_SiC000_AlN030_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.0,
+              0.3,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.0,
+              0.3,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.0,
+              0.3,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.037025+00:00",
+            "input_sha256": "ad86243b5c7e1f11ec4adea439d90eb320e2c41acd32e27741fd0f3e13534171",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 92.17860589706721,
+            "voigt_bound": 109.98156682027647
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.037830+00:00",
+            "input_sha256": "b0a54ded5b557d2cd9445f0c6e139f1c4bf093e4d588b94a318129cc978afb1d",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 34.35143920052163,
+            "voigt_bound": 57.61192028764702
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.038584+00:00",
+            "input_sha256": "920b9f690cde4176b2ac4749c7906432b4a3381efe6c8280644b34c770ce8067",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 211.9410836401894,
+            "voigt_bound": 216.9
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "nominal"
+    },
+    {
+      "candidate_id": "Al070_SiC000_AlN000_Al2O3030",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.0,
+              0.0,
+              0.3
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.0,
+              0.0,
+              0.3
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.0,
+              0.0,
+              0.3
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.040256+00:00",
+            "input_sha256": "57255f1acbe77f661c6b8806e226c84902843326dec282629a706cf281afc212",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 94.45530555604041,
+            "voigt_bound": 121.35722819593785
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.041086+00:00",
+            "input_sha256": "1aebfe52bcfd312794933483e19ef3d0faa8da2f9a943c6815e1d355b0e3f63f",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 34.70058686662812,
+            "voigt_bound": 63.38960921207725
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.041837+00:00",
+            "input_sha256": "16fec38be3d4cdccc0fb35eed30ad991c07a3558e79a9058a3bddf19e6b06436",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 83.02547770700637,
+            "voigt_bound": 175.79999999999998
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "nominal"
+    },
+    {
+      "candidate_id": "Al070_SiC006_AlN024_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.043301+00:00",
+            "input_sha256": "523fcb40afdd8dbce60ab033d1bd3f4efc82d41b2291702bb9e297fbf496cb89",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 91.71123078487344,
+            "voigt_bound": 108.27521761392727
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.044036+00:00",
+            "input_sha256": "817201182115293efa740a8c4f68915afefc65f4303479c318495ffb1db8c51b",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 34.43025963834972,
+            "voigt_bound": 58.953594144420094
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.044761+00:00",
+            "input_sha256": "fb815d12f4f1fe59cbc9f8309d0c08591d251047dd8b4dd8caa5e1f624b496f8",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 202.0142221784352,
+            "voigt_bound": 212.856
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "nominal"
+    },
+    {
+      "candidate_id": "Al070_SiC006_AlN024_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              185.18518518518516,
+              208.33333333333331,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              175.43859649122805,
+              143.44262295081967,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.046822+00:00",
+            "input_sha256": "e2d6040ee783ab817a7ce5ebbc3509bf8893fdf8ba663d4f92d6646a0b0eb2f6",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 93.02754569481239,
+            "voigt_bound": 113.94982078853043
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.047733+00:00",
+            "input_sha256": "9f1096cdd3b5d391196df047e726992be27ed60e1abb2a50ec89e756a3d59ec3",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 34.67586170221985,
+            "voigt_bound": 63.22020329023545
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.048494+00:00",
+            "input_sha256": "fb815d12f4f1fe59cbc9f8309d0c08591d251047dd8b4dd8caa5e1f624b496f8",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 202.0142221784352,
+            "voigt_bound": 212.856
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "source_high_moduli"
+    },
+    {
+      "candidate_id": "Al070_SiC006_AlN024_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              71.70967741935482,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              24.79182156133829,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.050068+00:00",
+            "input_sha256": "0085f9b6e53922fc0d27620d3469c150af9d3f05df566860f9f853a1f1cd2c3b",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 87.78190707318524,
+            "voigt_bound": 105.6332821300563
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.050811+00:00",
+            "input_sha256": "54187410b76d013e96e2a0f20eb6d490580fc3b77fcaa546edc595a47a977b34",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 32.834279804559465,
+            "voigt_bound": 58.04021124479184
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.051577+00:00",
+            "input_sha256": "fb815d12f4f1fe59cbc9f8309d0c08591d251047dd8b4dd8caa5e1f624b496f8",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 202.0142221784352,
+            "voigt_bound": 212.856
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "matrix_5pct_softer"
+    },
+    {
+      "candidate_id": "Al070_SiC006_AlN024_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              213.3,
+              92.34,
+              153.0,
+              29.7
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.053004+00:00",
+            "input_sha256": "523fcb40afdd8dbce60ab033d1bd3f4efc82d41b2291702bb9e297fbf496cb89",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 91.71123078487344,
+            "voigt_bound": 108.27521761392727
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.054163+00:00",
+            "input_sha256": "817201182115293efa740a8c4f68915afefc65f4303479c318495ffb1db8c51b",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 34.43025963834972,
+            "voigt_bound": 58.953594144420094
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.055025+00:00",
+            "input_sha256": "70a2f7d638bf35b6b25731d2886960d8dc2ee817599b641e796b511d0413ff4c",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 181.8127999605917,
+            "voigt_bound": 191.5704
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "conductivity_10pct_lower"
+    },
+    {
+      "candidate_id": "Al070_SiC006_AlN024_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.056598+00:00",
+            "input_sha256": "523fcb40afdd8dbce60ab033d1bd3f4efc82d41b2291702bb9e297fbf496cb89",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 91.71123078487344,
+            "voigt_bound": 108.27521761392727
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.057385+00:00",
+            "input_sha256": "817201182115293efa740a8c4f68915afefc65f4303479c318495ffb1db8c51b",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 34.43025963834972,
+            "voigt_bound": 58.953594144420094
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.058272+00:00",
+            "input_sha256": "fb815d12f4f1fe59cbc9f8309d0c08591d251047dd8b4dd8caa5e1f624b496f8",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 202.0142221784352,
+            "voigt_bound": 212.856
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "density_2pct_higher"
+    },
+    {
+      "candidate_id": "Al070_SiC006_AlN024_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.059974+00:00",
+            "input_sha256": "523fcb40afdd8dbce60ab033d1bd3f4efc82d41b2291702bb9e297fbf496cb89",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 91.71123078487344,
+            "voigt_bound": 108.27521761392727
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.060818+00:00",
+            "input_sha256": "817201182115293efa740a8c4f68915afefc65f4303479c318495ffb1db8c51b",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 34.43025963834972,
+            "voigt_bound": 58.953594144420094
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.061715+00:00",
+            "input_sha256": "fb815d12f4f1fe59cbc9f8309d0c08591d251047dd8b4dd8caa5e1f624b496f8",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 202.0142221784352,
+            "voigt_bound": 212.856
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "cte_proxies_10pct_higher"
+    },
+    {
+      "candidate_id": "Al070_SiC006_AlN024_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              71.70967741935482,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              24.79182156133829,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.7,
+              0.06,
+              0.24,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              213.3,
+              92.34,
+              153.0,
+              29.7
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.063191+00:00",
+            "input_sha256": "0085f9b6e53922fc0d27620d3469c150af9d3f05df566860f9f853a1f1cd2c3b",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 87.78190707318524,
+            "voigt_bound": 105.6332821300563
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.063963+00:00",
+            "input_sha256": "54187410b76d013e96e2a0f20eb6d490580fc3b77fcaa546edc595a47a977b34",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 32.834279804559465,
+            "voigt_bound": 58.04021124479184
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.064696+00:00",
+            "input_sha256": "70a2f7d638bf35b6b25731d2886960d8dc2ee817599b641e796b511d0413ff4c",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 181.8127999605917,
+            "voigt_bound": 191.5704
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "combined_stress"
+    },
+    {
+      "candidate_id": "Al066_SiC007_AlN027_Al2O3000",
+      "properties": [
+        "bulk",
+        "shear",
+        "conductivity"
+      ],
+      "requests": [
+        {
+          "input": {
+            "fractions": [
+              0.66,
+              0.07,
+              0.27,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              75.48387096774192,
+              162.03703703703704,
+              190.47619047619045,
+              228.39506172839504
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.66,
+              0.07,
+              0.27,
+              0.0
+            ],
+            "property_unit": "GPa",
+            "values": [
+              26.096654275092938,
+              153.50877192982455,
+              131.14754098360655,
+              150.40650406504065
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "fractions": [
+              0.66,
+              0.07,
+              0.27,
+              0.0
+            ],
+            "property_unit": "W/(m K)",
+            "values": [
+              237.0,
+              102.6,
+              170.0,
+              33.0
+            ]
+          },
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.066337+00:00",
+            "input_sha256": "a5c2927a048d83eb1585c7d07bd439112d9c40d4a9f8d91eff679e0567b246d5",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 94.40116379691162,
+            "voigt_bound": 112.59051885987368
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.067079+00:00",
+            "input_sha256": "65b1ad178d8ed71910c0162499f52b61636b712b3d0e518f4141d9399e74a0c5",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "GPa",
+            "reuss_bound": 35.96430404499288,
+            "voigt_bound": 63.379241922222825
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:04:35.067834+00:00",
+            "input_sha256": "eeca3f73e1466523d29c5a5efcbf8cc136b7cba4d5f982ad1c2bd562ce22d44f",
+            "python_version": "3.12.14",
+            "references": [
+              "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+              "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+            ],
+            "software_versions": {
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "property_unit": "W/(m K)",
+            "reuss_bound": 197.811937699026,
+            "voigt_bound": 209.502
+          },
+          "status": "ok",
+          "tool": "mixtures.scalar_bounds",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ],
+      "scenario_id": "nominal"
+    }
+  ],
+  "setup": [
+    {
+      "label": "constituent_compositions",
+      "requests": [
+        {
+          "input": {
+            "formula": "Al"
+          },
+          "tool": "composition.analyze",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "formula": "SiC"
+          },
+          "tool": "composition.analyze",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "formula": "AlN"
+          },
+          "tool": "composition.analyze",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "formula": "Al2O3"
+          },
+          "tool": "composition.analyze",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.599726+00:00",
+            "input_sha256": "d1c72bc695cb03091ceaf8ae6050e996ae6125f5cfd1cbe603e8f57494eef6cf",
+            "python_version": "3.12.14",
+            "references": [
+              "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+              "https://ciaaw.org/atomic-weights.htm"
+            ],
+            "software_versions": {
+              "periodictable": "2.1.0",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "atomic_counts": {
+              "Al": 1
+            },
+            "atomic_fractions": {
+              "Al": 1.0
+            },
+            "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+            "mass_fractions": {
+              "Al": 1.0
+            },
+            "molar_mass_g_mol": 26.9815384
+          },
+          "status": "ok",
+          "tool": "composition.analyze",
+          "tool_version": "1",
+          "warnings": [
+            "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+          ]
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.606171+00:00",
+            "input_sha256": "7f0cbf4a80c689c0d0a3aee1afe75176b793869f1e26fca15b56533c11095bc0",
+            "python_version": "3.12.14",
+            "references": [
+              "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+              "https://ciaaw.org/atomic-weights.htm"
+            ],
+            "software_versions": {
+              "periodictable": "2.1.0",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "atomic_counts": {
+              "C": 1,
+              "Si": 1
+            },
+            "atomic_fractions": {
+              "C": 0.5,
+              "Si": 0.5
+            },
+            "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+            "mass_fractions": {
+              "C": 0.2995560654429369,
+              "Si": 0.700443934557063
+            },
+            "molar_mass_g_mol": 40.096000000000004
+          },
+          "status": "ok",
+          "tool": "composition.analyze",
+          "tool_version": "1",
+          "warnings": [
+            "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+          ]
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.607584+00:00",
+            "input_sha256": "47d9d049c3fb8b9b97e8e7d3f42b2bbaf91979be75abc1fca7c7421d08b6e560",
+            "python_version": "3.12.14",
+            "references": [
+              "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+              "https://ciaaw.org/atomic-weights.htm"
+            ],
+            "software_versions": {
+              "periodictable": "2.1.0",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "atomic_counts": {
+              "Al": 1,
+              "N": 1
+            },
+            "atomic_fractions": {
+              "Al": 0.5,
+              "N": 0.5
+            },
+            "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+            "mass_fractions": {
+              "Al": 0.6582703227105068,
+              "N": 0.34172967728949316
+            },
+            "molar_mass_g_mol": 40.9885384
+          },
+          "status": "ok",
+          "tool": "composition.analyze",
+          "tool_version": "1",
+          "warnings": [
+            "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+          ]
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.608996+00:00",
+            "input_sha256": "808a9021b8f33cf1f30fc6a979d507321af05d8cd99516d30d22f118f4596f65",
+            "python_version": "3.12.14",
+            "references": [
+              "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+              "https://ciaaw.org/atomic-weights.htm"
+            ],
+            "software_versions": {
+              "periodictable": "2.1.0",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "atomic_counts": {
+              "Al": 2,
+              "O": 3
+            },
+            "atomic_fractions": {
+              "Al": 0.4,
+              "O": 0.6
+            },
+            "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+            "mass_fractions": {
+              "Al": 0.5292569257852894,
+              "O": 0.4707430742147107
+            },
+            "molar_mass_g_mol": 101.9600768
+          },
+          "status": "ok",
+          "tool": "composition.analyze",
+          "tool_version": "1",
+          "warnings": [
+            "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+          ]
+        }
+      ]
+    },
+    {
+      "label": "constituent_elastic_moduli:nominal",
+      "requests": [
+        {
+          "input": {
+            "poisson_ratio": 0.345,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.14,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.22,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.23,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.610954+00:00",
+            "input_sha256": "4cacc49da157665c27b3dc5316ea2d7ba48d497a76ddc0da57f82ce697848d47",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 75.48387096774192,
+            "lame_first_parameter": 58.0861014510133,
+            "poisson_ratio": 0.345,
+            "shear_modulus": 26.096654275092938,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.612129+00:00",
+            "input_sha256": "b213e9e0148c55d65677aee5c8a5253e5d9387854e00cbedfaaeb4cbb9b2715e",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 162.03703703703704,
+            "lame_first_parameter": 59.69785575048733,
+            "poisson_ratio": 0.14,
+            "shear_modulus": 153.50877192982455,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.613106+00:00",
+            "input_sha256": "d8a1751ac82bdb38c7892a75741df78907ae334592b402f0dcca076de81f4382",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 190.47619047619045,
+            "lame_first_parameter": 103.04449648711943,
+            "poisson_ratio": 0.22,
+            "shear_modulus": 131.14754098360655,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.614047+00:00",
+            "input_sha256": "549c9925e871fc49dc7ea250d6efcfa9473da5746d0f880dbef3cbd31eb4db55",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 228.39506172839504,
+            "lame_first_parameter": 128.12405901836794,
+            "poisson_ratio": 0.23,
+            "shear_modulus": 150.40650406504065,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "label": "constituent_elastic_moduli:source_high_moduli",
+      "requests": [
+        {
+          "input": {
+            "poisson_ratio": 0.345,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.14,
+            "stress_unit": "GPa",
+            "young_modulus": 400.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.22,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.23,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.615762+00:00",
+            "input_sha256": "4cacc49da157665c27b3dc5316ea2d7ba48d497a76ddc0da57f82ce697848d47",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 75.48387096774192,
+            "lame_first_parameter": 58.0861014510133,
+            "poisson_ratio": 0.345,
+            "shear_modulus": 26.096654275092938,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.616859+00:00",
+            "input_sha256": "ff277a28c187552b994214b764a3869edb7c84bcaa17dbac17663f7c0e2ce55a",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 185.18518518518516,
+            "lame_first_parameter": 68.2261208576998,
+            "poisson_ratio": 0.14,
+            "shear_modulus": 175.43859649122805,
+            "stress_unit": "GPa",
+            "young_modulus": 400.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.617810+00:00",
+            "input_sha256": "cb2075cb2d1aba53db1370151a1068bdbb19bc3532740c4d5ce84f7ab88ee375",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 208.33333333333331,
+            "lame_first_parameter": 112.70491803278688,
+            "poisson_ratio": 0.22,
+            "shear_modulus": 143.44262295081967,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.618757+00:00",
+            "input_sha256": "549c9925e871fc49dc7ea250d6efcfa9473da5746d0f880dbef3cbd31eb4db55",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 228.39506172839504,
+            "lame_first_parameter": 128.12405901836794,
+            "poisson_ratio": 0.23,
+            "shear_modulus": 150.40650406504065,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "label": "constituent_elastic_moduli:matrix_5pct_softer",
+      "requests": [
+        {
+          "input": {
+            "poisson_ratio": 0.345,
+            "stress_unit": "GPa",
+            "young_modulus": 66.69
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.14,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.22,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.23,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.621054+00:00",
+            "input_sha256": "adbd7567fe7561e77ac22d2e86b179eb10d8d80abc2c70d55db49ac076253242",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 71.70967741935482,
+            "lame_first_parameter": 55.181796378462636,
+            "poisson_ratio": 0.345,
+            "shear_modulus": 24.79182156133829,
+            "stress_unit": "GPa",
+            "young_modulus": 66.69
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.622070+00:00",
+            "input_sha256": "b213e9e0148c55d65677aee5c8a5253e5d9387854e00cbedfaaeb4cbb9b2715e",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 162.03703703703704,
+            "lame_first_parameter": 59.69785575048733,
+            "poisson_ratio": 0.14,
+            "shear_modulus": 153.50877192982455,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.623383+00:00",
+            "input_sha256": "d8a1751ac82bdb38c7892a75741df78907ae334592b402f0dcca076de81f4382",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 190.47619047619045,
+            "lame_first_parameter": 103.04449648711943,
+            "poisson_ratio": 0.22,
+            "shear_modulus": 131.14754098360655,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.624500+00:00",
+            "input_sha256": "549c9925e871fc49dc7ea250d6efcfa9473da5746d0f880dbef3cbd31eb4db55",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 228.39506172839504,
+            "lame_first_parameter": 128.12405901836794,
+            "poisson_ratio": 0.23,
+            "shear_modulus": 150.40650406504065,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "label": "constituent_elastic_moduli:conductivity_10pct_lower",
+      "requests": [
+        {
+          "input": {
+            "poisson_ratio": 0.345,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.14,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.22,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.23,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.626178+00:00",
+            "input_sha256": "4cacc49da157665c27b3dc5316ea2d7ba48d497a76ddc0da57f82ce697848d47",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 75.48387096774192,
+            "lame_first_parameter": 58.0861014510133,
+            "poisson_ratio": 0.345,
+            "shear_modulus": 26.096654275092938,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.627456+00:00",
+            "input_sha256": "b213e9e0148c55d65677aee5c8a5253e5d9387854e00cbedfaaeb4cbb9b2715e",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 162.03703703703704,
+            "lame_first_parameter": 59.69785575048733,
+            "poisson_ratio": 0.14,
+            "shear_modulus": 153.50877192982455,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.628822+00:00",
+            "input_sha256": "d8a1751ac82bdb38c7892a75741df78907ae334592b402f0dcca076de81f4382",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 190.47619047619045,
+            "lame_first_parameter": 103.04449648711943,
+            "poisson_ratio": 0.22,
+            "shear_modulus": 131.14754098360655,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.629967+00:00",
+            "input_sha256": "549c9925e871fc49dc7ea250d6efcfa9473da5746d0f880dbef3cbd31eb4db55",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 228.39506172839504,
+            "lame_first_parameter": 128.12405901836794,
+            "poisson_ratio": 0.23,
+            "shear_modulus": 150.40650406504065,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "label": "constituent_elastic_moduli:density_2pct_higher",
+      "requests": [
+        {
+          "input": {
+            "poisson_ratio": 0.345,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.14,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.22,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.23,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.632039+00:00",
+            "input_sha256": "4cacc49da157665c27b3dc5316ea2d7ba48d497a76ddc0da57f82ce697848d47",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 75.48387096774192,
+            "lame_first_parameter": 58.0861014510133,
+            "poisson_ratio": 0.345,
+            "shear_modulus": 26.096654275092938,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.633062+00:00",
+            "input_sha256": "b213e9e0148c55d65677aee5c8a5253e5d9387854e00cbedfaaeb4cbb9b2715e",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 162.03703703703704,
+            "lame_first_parameter": 59.69785575048733,
+            "poisson_ratio": 0.14,
+            "shear_modulus": 153.50877192982455,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.634031+00:00",
+            "input_sha256": "d8a1751ac82bdb38c7892a75741df78907ae334592b402f0dcca076de81f4382",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 190.47619047619045,
+            "lame_first_parameter": 103.04449648711943,
+            "poisson_ratio": 0.22,
+            "shear_modulus": 131.14754098360655,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.634970+00:00",
+            "input_sha256": "549c9925e871fc49dc7ea250d6efcfa9473da5746d0f880dbef3cbd31eb4db55",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 228.39506172839504,
+            "lame_first_parameter": 128.12405901836794,
+            "poisson_ratio": 0.23,
+            "shear_modulus": 150.40650406504065,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "label": "constituent_elastic_moduli:cte_proxies_10pct_higher",
+      "requests": [
+        {
+          "input": {
+            "poisson_ratio": 0.345,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.14,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.22,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.23,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.636898+00:00",
+            "input_sha256": "4cacc49da157665c27b3dc5316ea2d7ba48d497a76ddc0da57f82ce697848d47",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 75.48387096774192,
+            "lame_first_parameter": 58.0861014510133,
+            "poisson_ratio": 0.345,
+            "shear_modulus": 26.096654275092938,
+            "stress_unit": "GPa",
+            "young_modulus": 70.2
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.638277+00:00",
+            "input_sha256": "b213e9e0148c55d65677aee5c8a5253e5d9387854e00cbedfaaeb4cbb9b2715e",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 162.03703703703704,
+            "lame_first_parameter": 59.69785575048733,
+            "poisson_ratio": 0.14,
+            "shear_modulus": 153.50877192982455,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.639420+00:00",
+            "input_sha256": "d8a1751ac82bdb38c7892a75741df78907ae334592b402f0dcca076de81f4382",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 190.47619047619045,
+            "lame_first_parameter": 103.04449648711943,
+            "poisson_ratio": 0.22,
+            "shear_modulus": 131.14754098360655,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.640632+00:00",
+            "input_sha256": "549c9925e871fc49dc7ea250d6efcfa9473da5746d0f880dbef3cbd31eb4db55",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 228.39506172839504,
+            "lame_first_parameter": 128.12405901836794,
+            "poisson_ratio": 0.23,
+            "shear_modulus": 150.40650406504065,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ]
+    },
+    {
+      "label": "constituent_elastic_moduli:combined_stress",
+      "requests": [
+        {
+          "input": {
+            "poisson_ratio": 0.345,
+            "stress_unit": "GPa",
+            "young_modulus": 66.69
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.14,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.22,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        },
+        {
+          "input": {
+            "poisson_ratio": 0.23,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1"
+        }
+      ],
+      "responses": [
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.642907+00:00",
+            "input_sha256": "adbd7567fe7561e77ac22d2e86b179eb10d8d80abc2c70d55db49ac076253242",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 71.70967741935482,
+            "lame_first_parameter": 55.181796378462636,
+            "poisson_ratio": 0.345,
+            "shear_modulus": 24.79182156133829,
+            "stress_unit": "GPa",
+            "young_modulus": 66.69
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.643908+00:00",
+            "input_sha256": "b213e9e0148c55d65677aee5c8a5253e5d9387854e00cbedfaaeb4cbb9b2715e",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 162.03703703703704,
+            "lame_first_parameter": 59.69785575048733,
+            "poisson_ratio": 0.14,
+            "shear_modulus": 153.50877192982455,
+            "stress_unit": "GPa",
+            "young_modulus": 350.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.644978+00:00",
+            "input_sha256": "d8a1751ac82bdb38c7892a75741df78907ae334592b402f0dcca076de81f4382",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 190.47619047619045,
+            "lame_first_parameter": 103.04449648711943,
+            "poisson_ratio": 0.22,
+            "shear_modulus": 131.14754098360655,
+            "stress_unit": "GPa",
+            "young_modulus": 320.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        },
+        {
+          "error": null,
+          "provenance": {
+            "created_at": "2026-10-07T23:03:45.646810+00:00",
+            "input_sha256": "549c9925e871fc49dc7ea250d6efcfa9473da5746d0f880dbef3cbd31eb4db55",
+            "python_version": "3.12.14",
+            "references": [
+              "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+            ],
+            "software_versions": {
+              "numpy": "2.5.3",
+              "pydantic": "2.13.5"
+            },
+            "toolkit_version": "0.6.0"
+          },
+          "result": {
+            "bulk_modulus": 228.39506172839504,
+            "lame_first_parameter": 128.12405901836794,
+            "poisson_ratio": 0.23,
+            "shear_modulus": 150.40650406504065,
+            "stress_unit": "GPa",
+            "young_modulus": 370.0
+          },
+          "status": "ok",
+          "tool": "mechanics.isotropic_moduli",
+          "tool_version": "1",
+          "warnings": []
+        }
+      ]
+    }
+  ],
+  "status": "screening_hypothesis"
+}

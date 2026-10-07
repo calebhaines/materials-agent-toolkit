@@ -6,7 +6,7 @@ Select one bounded item per development run. Update status and link the branch/p
 | --- | --- | --- | --- |
 | P0 | Ship initial scientific tool foundation | Seven tools, discoverable schemas, validated envelopes, reference tests, CLI checks, dependency lock and CI | Complete; 146 tests and package build pass; see RUN_LOG.md |
 | P1 | Add MCP interface | Same tools/results as registry; discoverable schemas; client example; real stdio integration test; optional dependency with base-install coverage | Complete; [PR #1](https://github.com/calebhaines/materials-agent-toolkit/pull/1) merged after independent review and passing CI |
-| P1 | Add structured fractional composition input | Atomic fractions and mass fractions support alloys without ambiguous formula syntax; documented normalization; known alloy cases | Ready |
+| P1 | Add structured fractional composition input | Explicit atomic/mass basis; strict fractions and element validation; documented normalization and numeric limits; alloy references and Python/CLI/MCP parity | Complete in package 0.3.0 on `feat/fractional-compositions`; 245 tests pass; see RUN_LOG.md |
 | P1 | Batch API and CLI | Per-item success/error; stable ordering; no all-or-nothing failure; documented bounded batch size | Ready |
 | P1 | Export machine-readable tool catalog | Versioned catalog and response schema; examples validate against schemas; reproducible generation | Ready |
 | P2 | Optional structure module using ASE/pymatgen | Installation extra; CIF parsing and structure validation/density; known reference structures and provenance | Ready |

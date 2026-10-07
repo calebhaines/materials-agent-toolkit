@@ -2,7 +2,7 @@
 
 A Python library and JSON CLI for materials science and engineering calculations that AI agents can discover, validate and invoke automatically.
 
-The toolkit supplies seven bounded calculations through a Python library, JSON CLI and optional MCP server. Advanced simulation, structure analysis and trained models are tracked in [ROADMAP.md](ROADMAP.md). Every tool declares its assumptions and exposes input/output JSON schemas. Results carry input hashes, software versions and scientific references. Invalid inputs produce structured errors.
+The toolkit supplies eight bounded calculations through a Python library, JSON CLI and optional MCP server. Advanced simulation, structure analysis and trained models are tracked in [ROADMAP.md](ROADMAP.md). Every tool declares its assumptions and exposes input/output JSON schemas. Results carry input hashes, software versions and scientific references. Invalid inputs produce structured errors.
 
 ## Install and run
 
@@ -45,6 +45,7 @@ print(response.result)
 | Tool | Purpose |
 | --- | --- |
 | `composition.analyze` | Element counts, atomic/mass fractions and formula molar mass |
+| `composition.from_fractions` | Explicit atomic/mass composition, fraction conversion and mean atomic mass |
 | `crystal.density` | Density from formula, formula units and unit-cell volume |
 | `mechanics.isotropic_moduli` | Convert Young's modulus and Poisson ratio into isotropic moduli |
 | `mechanics.elastic_vrh` | Stability validation and Voigt/Reuss/Hill aggregate elastic properties |
@@ -53,6 +54,8 @@ print(response.result)
 | `kinetics.arrhenius_diffusivity` | Diffusivity from an Arrhenius prefactor and activation energy |
 
 Discover the installed schemas instead of guessing argument names. Tool versions are independent of the package version. Requests may set `tool_version` to reject an incompatible implementation. Formula syntax is deliberately bounded; descriptors list the accepted syntax. Elastic stiffness uses the engineering Voigt ordering `xx, yy, zz, yz, xz, xy` with doubled shear strains. Calculation units are explicit in inputs and outputs.
+
+Alloys can use an explicit elemental fraction map and basis instead of a formula. For example, `{"tool":"composition.from_fractions","input":{"fractions":{"Ni":0.5,"Ti":0.5},"basis":"atomic"}}` describes equiatomic NiTi. Fractions must sum to one within the documented tolerance by default; `"normalization":"normalize"` explicitly accepts relative weights or percentages. See [fractional composition conventions and examples](docs/COMPOSITION.md).
 
 Input hashes identify canonical validated inputs, including defaults. Record the tool name/version and software versions alongside the hash for reproducibility. Timestamps identify execution time; they are not part of the input hash. Scientific references explain the model, while numerical tolerances and assumptions are declared in descriptors or source documentation.
 
@@ -67,7 +70,7 @@ uv sync --locked --extra mcp
 uv run --no-sync matkit-mcp
 ```
 
-Compatible AI clients can discover the seven tools by their existing names and call them using the input fields shown in their schemas. The server returns the same result/error envelope as the Python and CLI interfaces, with `structuredContent` for machine consumption and equivalent JSON text for other clients. It also exposes the complete catalog and response schema as MCP resources. See [MCP setup and protocol details](docs/MCP.md) for a client configuration and a runnable example.
+Compatible AI clients can discover the eight tools by their names and call them using the input fields shown in their schemas. The server returns the same result/error envelope as the Python and CLI interfaces, with `structuredContent` for machine consumption and equivalent JSON text for other clients. It also exposes the complete catalog and response schema as MCP resources. See [MCP setup and protocol details](docs/MCP.md) for a client configuration and a runnable example.
 
 ## Contributing and hourly development
 

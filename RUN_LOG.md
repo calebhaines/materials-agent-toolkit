@@ -50,3 +50,19 @@ Applied and independently verified these server settings:
 - Actions tokens have default read permissions and cannot approve PR reviews. Workflows from all external contributors require approval.
 
 The initial protection request contained both `contexts` and `checks`, which GitHub rejected as conflicting schema alternatives. A checks-only request succeeded, and GET verification confirmed all checks remain bound to the expected GitHub Actions app. No branch protection was bypassed for the merge. Public cloning/forking and issue/comment participation do not grant upstream code access or PR creation rights. The policy is recorded in docs/REPOSITORY_POLICY.md and a machine-readable snapshot in .github/repository-policy.json.
+
+## 2026-10-07 — Fractional alloy compositions, package 0.3.0
+
+Implemented the next P1 scientific item on branch `feat/fractional-compositions`: `composition.from_fractions`, tool version 1. Agents supply an explicit elemental map and atomic or mass basis, then receive both fraction bases, mean atomic mass in g/mol of atoms, the original input total and atomic-weight provenance. Existing seven tool contracts remain version 1. Registry discovery makes the new operation available through Python, the JSON CLI and the optional MCP server without separate calculation adapters.
+
+Default normalization requires a total within absolute tolerance `1e-8` of one; explicit `normalize` accepts weights or percentages with a positive finite total. Zero components are omitted. Invalid symbols, all-zero maps, non-finite or negative values, unknown fields and unrepresentable totals/components produce structured errors. No integer stoichiometry, formula-unit mass, alloy property or prediction uncertainty is inferred. Added NiTi and brass examples, full composition conventions and updated discovery documentation. Package version and lockfile metadata are now 0.3.0; dependency versions are unchanged.
+
+Verification completed on Python 3.12.14:
+
+- `uv sync --locked --extra dev --extra mcp`: passed.
+- `uv run --no-sync pytest -q`: **245 passed**. Includes **71** fractional-composition cases: independently tabulated NiTi/brass references, formula-composition equivalence, per-atom mass convention, conservation/round trips, explicit normalization, strict schema failures, provenance, representable subnormal traces and numerical rejection cases. CLI and real stdio MCP results/schemas match the Python registry.
+- `uv run --no-sync ruff check .`: passed. `uv run --no-sync ruff format --check .`: 28 files already formatted. `git diff --check`: passed.
+- `uv build`: source distribution and wheel for version 0.3.0 built successfully.
+- Independent scientific and interface review found a near-pure Li/Be conversion that rounded a dominant fraction above one. Added a regression for both bases, enforced positive fractions at most one and documented endpoint corrections bounded to four binary64 ulps. Larger excursions and loss of a positive trace remain domain errors. Review found no unresolved correctness issues after the fix.
+
+The owner permitted direct pushes, but protected `main` requires PR delivery and all four existing CI checks. This run preserves those controls and uses the maintainer-authorized merge workflow. CI exercises Python 3.11–3.13 and the base installation. The next P1 agent-interface item is a bounded batch API and CLI with stable ordering and per-item errors.

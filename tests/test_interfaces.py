@@ -31,6 +31,7 @@ STIFFNESS = [
 ]
 CASES = [
     ("composition.analyze", {"formula": "H2O"}),
+    ("composition.from_fractions", {"fractions": {"Ni": 0.5, "Ti": 0.5}, "basis": "atomic"}),
     ("crystal.density", {"formula": "Al", "formula_units": 4, "cell_volume_angstrom3": 4.05**3}),
     ("mechanics.isotropic_moduli", {"young_modulus": 210, "poisson_ratio": 0.3}),
     ("mechanics.elastic_vrh", {"stiffness_matrix": STIFFNESS}),
@@ -105,6 +106,17 @@ def test_hash_is_stable_across_default_and_explicit_unit():
         ),
         (
             {
+                "tool": "composition.from_fractions",
+                "input": {"fractions": {"Ni": True, "Ti": 0.5}, "basis": "atomic"},
+            },
+            "INVALID_INPUT",
+        ),
+        (
+            {"tool": "composition.from_fractions", "input": {"fractions": {"Ni": 1.0}}},
+            "INVALID_INPUT",
+        ),
+        (
+            {
                 "tool": "mechanics.isotropic_moduli",
                 "input": {"young_modulus": True, "poisson_ratio": 0.3},
             },
@@ -155,8 +167,8 @@ def invoke(command, stdin=None):
     )
 
 
-def test_cli_and_python_return_same_scientific_result():
-    name, inputs = CASES[0]
+@pytest.mark.parametrize("name,inputs", CASES[:2])
+def test_cli_and_python_return_same_scientific_result(name, inputs):
     process = invoke(["run"], json.dumps({"tool": name, "input": inputs}))
     assert process.returncode == 0
     assert process.stderr == ""

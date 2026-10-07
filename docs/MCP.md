@@ -1,6 +1,6 @@
 # Use the toolkit through MCP
 
-The optional stdio MCP server lets compatible AI clients discover and invoke every installed scientific tool. It uses the official Python MCP SDK and delegates validation and calculation to the existing registry. The scientific tool versions and input contracts remain unchanged in package version 0.2.0.
+The optional stdio MCP server lets compatible AI clients discover and invoke every installed scientific tool. It uses the official Python MCP SDK and delegates validation and calculation to the existing registry. Package version 0.3.0 adds `composition.from_fractions` at tool version 1; existing scientific tool versions and input contracts remain unchanged.
 
 ## Installation
 
@@ -42,7 +42,7 @@ Configuration formats vary between clients. The server uses local stdio and the 
 
 ## Discovery and invocation
 
-`tools/list` advertises the same seven names as `matkit list`, including input schemas, full response-envelope output schemas, tool versions, scientific assumptions and references. All tools are declared read-only and have no external side effects. MCP annotations are descriptive metadata; the actual tools enforce the supported scientific domains.
+`tools/list` advertises the same eight names as `matkit list`, including input schemas, full response-envelope output schemas, tool versions, scientific assumptions and references. All tools are declared read-only and have no external side effects. MCP annotations are descriptive metadata; the actual tools enforce the supported scientific domains.
 
 For example, call the native MCP tool `mechanics.isotropic_moduli` with arguments:
 

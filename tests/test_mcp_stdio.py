@@ -5,6 +5,7 @@ import math
 import sys
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
+from importlib.util import find_spec
 from pathlib import Path
 
 import pytest
@@ -16,6 +17,11 @@ from materials_agent_toolkit.registry import ToolResponse, list_tools, run_tool
 mcp = pytest.importorskip("mcp", reason="Install the optional mcp extra for stdio tests")
 anyio = pytest.importorskip("anyio")
 stdio_client = pytest.importorskip("mcp.client.stdio").stdio_client
+
+HAS_ASE = find_spec("ase") is not None
+AL_CIF = (Path(__file__).parent / "fixtures" / "structures" / "al_fcc.cif").read_text(
+    encoding="utf-8"
+)
 
 COPPER_STIFFNESS = [
     [168.4, 121.4, 121.4, 0, 0, 0],
@@ -70,6 +76,18 @@ CASES = [
         {"pre_exponential_m2_s": 1e-5, "activation_energy_J_mol": 50000, "temperature_K": 1000},
         {"diffusivity_m2_s": 1e-5 * math.exp(-50000 / (8.31446261815324 * 1000))},
     ),
+    pytest.param(
+        "structure.analyze_cif",
+        {"cif_text": AL_CIF},
+        {
+            "atom_count": 4,
+            "atomic_counts": {"Al": 4},
+            "cell_volume_angstrom3": 4.05**3,
+            "density_kg_m3": 2697.806069499423,
+        },
+        marks=pytest.mark.skipif(not HAS_ASE, reason="Install the optional structures extra"),
+        id="structure.analyze_cif",
+    ),
 ]
 
 
@@ -102,7 +120,9 @@ def response_envelope(result, schema):
     return envelope
 
 
-@pytest.mark.parametrize("name,inputs,reference", CASES, ids=[case[0] for case in CASES])
+@pytest.mark.parametrize(
+    "name,inputs,reference", CASES, ids=[case[0] for case in CASES[:-1]] + ["structure.analyze_cif"]
+)
 def test_mcp_scientific_results_schemas_and_provenance_match_python(name, inputs, reference):
     async def exercise():
         async with initialized_session() as session:
@@ -189,8 +209,13 @@ def test_mcp_error_envelopes_preserve_session_for_following_calls():
             "INVALID_INPUT",
         ),
         ("composition.analyze", {"formula": "NotAnElement"}, "DOMAIN_ERROR"),
+        ("structure.analyze_cif", {"cif_text": 123}, "INVALID_INPUT"),
         ("missing.tool", {}, "UNKNOWN_TOOL"),
     ]
+    if HAS_ASE:
+        cases.append(("structure.analyze_cif", {"cif_text": "not a CIF"}, "DOMAIN_ERROR"))
+    else:
+        cases.append(("structure.analyze_cif", {"cif_text": AL_CIF}, "MISSING_DEPENDENCY"))
 
     async def exercise():
         async with initialized_session() as session:

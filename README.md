@@ -2,7 +2,7 @@
 
 A Python library and JSON CLI for materials science and engineering calculations that AI agents can discover, validate and invoke automatically.
 
-The toolkit supplies eight bounded calculations through a Python library, JSON CLI and optional MCP server. Advanced simulation, structure analysis and trained models are tracked in [ROADMAP.md](ROADMAP.md). Every tool declares its assumptions and exposes input/output JSON schemas. Results carry input hashes, software versions and scientific references. Invalid inputs produce structured errors.
+The toolkit supplies nine bounded scientific operations through a Python library, JSON CLI and optional MCP server. Additional structure analysis, simulation and trained models are tracked in [ROADMAP.md](ROADMAP.md). Every tool declares its assumptions and exposes input/output JSON schemas. Results carry input hashes, software versions and scientific references. Invalid inputs produce structured errors.
 
 ## Install and run
 
@@ -80,10 +80,20 @@ Responses retain input order, per-item errors and provenance. Requests run seque
 | `mixtures.scalar_bounds` | Scalar arithmetic/harmonic mixture estimates using volume fractions |
 | `thermal.linear_expansion` | Constant-coefficient, small-strain linear thermal expansion |
 | `kinetics.arrhenius_diffusivity` | Diffusivity from an Arrhenius prefactor and activation energy |
+| `structure.analyze_cif` | Validate an ordered CIF crystal, expand symmetry and calculate cell density (requires `structures` extra) |
 
 Discover the installed schemas instead of guessing argument names. Tool versions are independent of the package version. Requests may set `tool_version` to reject an incompatible implementation. Formula syntax is deliberately bounded; descriptors list the accepted syntax. Elastic stiffness uses the engineering Voigt ordering `xx, yy, zz, yz, xz, xy` with doubled shear strains. Calculation units are explicit in inputs and outputs.
 
 Alloys can use an explicit elemental fraction map and basis instead of a formula. For example, `{"tool":"composition.from_fractions","input":{"fractions":{"Ni":0.5,"Ti":0.5},"basis":"atomic"}}` describes equiatomic NiTi. Fractions must sum to one within the documented tolerance by default; `"normalization":"normalize"` explicitly accepts relative weights or percentages. See [fractional composition conventions and examples](docs/COMPOSITION.md).
+
+For ordered crystal structures, install the optional ASE adapter and provide CIF contents:
+
+```sh
+uv sync --locked --extra structures
+uv run --no-sync matkit run < examples/structures/al-fcc.json
+```
+
+With pip, install `materials-agent-toolkit[structures]` (or `-e '.[structures]'` from this checkout). `structure.analyze_cif` returns the symmetry-expanded supplied cell, atomic coordinates, volume and density. Its descriptor remains available without ASE; execution then returns `MISSING_DEPENDENCY`. See [CIF conventions, resource bounds and reference fixtures](docs/STRUCTURES.md).
 
 Input hashes identify canonical validated inputs, including defaults. Record the tool name/version and software versions alongside the hash for reproducibility. Timestamps identify execution time; they are not part of the input hash. Scientific references explain the model, while numerical tolerances and assumptions are declared in descriptors or source documentation.
 
@@ -109,17 +119,17 @@ uv sync --locked --extra mcp
 uv run --no-sync matkit-mcp
 ```
 
-Compatible AI clients can discover the eight tools by their names and call them using the input fields shown in their schemas. The server returns the same result/error envelope as the Python and CLI interfaces, with `structuredContent` for machine consumption and equivalent JSON text for other clients. It also exposes the complete catalog and response schema as MCP resources. See [MCP setup and protocol details](docs/MCP.md) for a client configuration and a runnable example.
+Compatible AI clients can discover the nine tools by their names and call them using the input fields shown in their schemas. The server returns the same result/error envelope as the Python and CLI interfaces, with `structuredContent` for machine consumption and equivalent JSON text for other clients. It also exposes the complete catalog and response schema as MCP resources. See [MCP setup and protocol details](docs/MCP.md) for a client configuration and a runnable example.
 
 ## Contributing and hourly development
 
 [AGENTS.md](AGENTS.md) specifies the completion criteria for AI contributors. [BACKLOG.md](BACKLOG.md) is the persistent queue, and [RUN_LOG.md](RUN_LOG.md) records verified work. [The hourly task specification](docs/HOURLY_TASK.md) contains a schedule and prompt ready for a ChatGPT automation with GitHub and execution access. The specification is a setup artifact; it does not itself schedule any job.
 
 ```sh
-uv sync --locked --extra dev --extra mcp
+uv sync --locked --extra dev --extra mcp --extra structures
 uv run --no-sync pytest
 uv run --no-sync ruff check .
 uv run --no-sync ruff format --check .
 ```
 
-The exact dependency resolution is committed in `uv.lock`. CI checks Python 3.11–3.13 with MCP enabled and separately checks that the base installation works without it. MCP-specific tests skip when the optional extra is absent. Add scientific reference cases and explicit domain limits alongside each calculation.
+The exact dependency resolution is committed in `uv.lock`. CI checks Python 3.11–3.13 with MCP and structures enabled and separately checks the base installation without either extra. Optional scientific and MCP tests skip when their extras are absent; discovery and structured missing-dependency errors remain covered. Add scientific reference cases and explicit domain limits alongside each calculation.

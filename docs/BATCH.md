@@ -1,6 +1,6 @@
 # Batch execution
 
-Batch format version `1` executes 1–100 independent scientific requests through the Python registry or JSON CLI. The eight scientific tool contracts and their versions are unchanged. Each item uses the same request wrapper as a single CLI invocation.
+Batch format version `1` executes 1–100 independent scientific requests through the Python registry or JSON CLI. Each scientific tool retains its own contract and version; optional dependencies are checked per call. Each item uses the same request wrapper as a single CLI invocation.
 
 ## Request and discovery
 

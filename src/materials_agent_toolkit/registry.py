@@ -10,7 +10,7 @@ from typing import Any, Literal
 from pydantic import Field, ValidationError
 
 from materials_agent_toolkit import __version__
-from materials_agent_toolkit.contracts import StrictModel, ToolSpec
+from materials_agent_toolkit.contracts import MissingOptionalDependencyError, StrictModel, ToolSpec
 
 MAX_BATCH_SIZE = 100
 BATCH_VERSION = "1"
@@ -108,9 +108,9 @@ class BatchResponse(StrictModel):
 
 
 def _tools() -> dict[str, ToolSpec]:
-    from materials_agent_toolkit.tools import composition, engineering, mechanics
+    from materials_agent_toolkit.tools import composition, engineering, mechanics, structures
 
-    specs = [*composition.TOOLS, *engineering.TOOLS, *mechanics.TOOLS]
+    specs = [*composition.TOOLS, *engineering.TOOLS, *mechanics.TOOLS, *structures.TOOLS]
     registry = {spec.name: spec for spec in specs}
     if len(registry) != len(specs):
         raise RuntimeError("Duplicate tool names in registry")
@@ -230,6 +230,10 @@ def run_request(request: dict[str, Any]) -> ToolResponse:
             result=result.model_dump(mode="json"),
             warnings=calculation.warnings,
             provenance=provenance,
+        )
+    except MissingOptionalDependencyError as exc:
+        return error_response(
+            "MISSING_DEPENDENCY", str(exc), tool=name, spec=spec, provenance=provenance
         )
     except ValidationError:
         return error_response(

@@ -1,0 +1,25 @@
+# SPDX-License-Identifier: CC0-1.0
+# Authored analytical fixture; no third-party coordinate dataset is copied.
+# FCC aluminium, ideal conventional cell at approximately room temperature.
+# a = 4.05 Angstrom is rounded; not a measured precision lattice parameter.
+# Reference crystal prototype: https://aflow.org/p/A_cF4_225_a-001/
+# Density reference: 4 * 26.9815384 g/mol / (N_A * a^3)
+# gives 2697.806069499423 kg/m^3, using exact SI N_A = 6.02214076e23/mol.
+# Test tolerances: relative 1e-12 for volume and 1e-10 for density.
+data_al_fcc
+_cell_length_a 4.05
+_cell_length_b 4.05
+_cell_length_c 4.05
+_cell_angle_alpha 90
+_cell_angle_beta 90
+_cell_angle_gamma 90
+_space_group_IT_number 225
+_space_group_name_H-M_alt 'F m -3 m'
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+Al1 Al 0 0 0 1

@@ -1,6 +1,6 @@
 # Roadmap
 
-The aim is a broad, agent-callable materials science and engineering platform. Capability grows through completed, validated tools. The toolkit implements formula and fractional composition, density, selected engineering calculations and an optional MCP stdio interface. Later capabilities remain planned; publication status is recorded in RUN_LOG.md.
+The aim is a broad, agent-callable materials science and engineering platform. Capability grows through completed, validated tools. The toolkit implements formula and fractional composition, density, selected engineering calculations, bounded CIF structure analysis and an optional MCP stdio interface. Later capabilities remain planned; publication status is recorded in RUN_LOG.md.
 
 | Stage | Deliverables | Evidence required |
 | --- | --- | --- |
@@ -15,6 +15,6 @@ The aim is a broad, agent-callable materials science and engineering platform. C
 
 Stage 1 progress: package 0.2.0 introduced the optional MCP stdio server, native tool discovery, structured errors, catalog/schema resources and runnable client example. Package 0.4.0 adds versioned Python/CLI batches with 1–100 sequential calls, stable ordering, independent item errors and schema discovery. Package 0.5.0 adds deterministic standalone catalog/schema exports, tracked artifacts, example schema validation and CI drift checks on supported Python versions.
 
-Stage 2 progress in package 0.3.0: `composition.from_fractions` supports explicit atomic or mass fractions, optional normalization of relative weights, conversion between bases and mean atomic mass. Formula-unit counts are not inferred. Structure parsing and analysis remain in the backlog.
+Stage 2 progress: package 0.3.0 introduced `composition.from_fractions` with explicit atomic or mass fractions, optional normalization of relative weights, conversion between bases and mean atomic mass. Formula-unit counts are not inferred. Package 0.6.0 adds the optional ASE-backed `structure.analyze_cif`: bounded ordered CIF 1.x parsing, supplied-cell and symmetry validation, expanded coordinates, volume and crystallographic density. Other formats, writing, neighbors and broader symmetry analysis remain planned; Stage 2 is partial.
 
 Scope and ordering can be adjusted by the owner. Open tasks, acceptance criteria and dependencies belong in BACKLOG.md; completed work belongs in RUN_LOG.md.

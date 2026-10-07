@@ -40,7 +40,7 @@
             "type": "object"
           },
           "toolkit_version": {
-            "default": "0.5.0",
+            "default": "0.6.0",
             "title": "Toolkit Version",
             "type": "string"
           }
@@ -855,6 +855,190 @@
       "references": [
         "Voigt, W. Lehrbuch der Kristallphysik (1910).",
         "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "CIF 1.x only; exactly one atom-site data block, with optional nonstructural metadata blocks.",
+        "Only canonical natural-element symbols are accepted; D/T, isotope labels, charged type symbols and disordered sites are unsupported.",
+        "Absent occupancy means one; explicit occupancies within absolute tolerance 1e-8 of one are normalized to one. Partial or unknown occupancy is rejected.",
+        "At most 100000 CIF characters, 256 input sites, and 2048 expanded atoms; input sites times symmetry-operation count must also be at most 2048, including redundant operations.",
+        "Cell lengths must be 1e-6 to 1e6 Å inclusive; angles strictly between 0 and 180 degrees and positive-definite geometry; cell singular-value condition number at most 1e8.",
+        "ASE applies supplied symmetry in the supplied cell; no primitive-cell conversion, symmetry inference or phase identification is performed. Absent symmetry means identity P1.",
+        "Symmetry rotations must be unimodular and preserve the cell metric within absolute tolerance 1e-8 times its largest entry; the identity operation must be present.",
+        "Explicit symmetry operations must form a complete closed group modulo lattice translations, with componentwise periodic translation tolerance 1e-8 and exact integer rotations.",
+        "Exact duplicate operations are ignored for group comparison but counted against the resource bound; distinct operations with the same rotation and periodic translations within 1e-8 are rejected.",
+        "Declared space-group number/name aliases must agree. Supplied operation lists with declared group metadata must match ASE's standard setting and origin; alternative origins are rejected rather than inferred. Supplied operation lists without group metadata are supported without assigning a space-group identity.",
+        "Supplied operations matching a declared group within periodic componentwise translation tolerance 1e-8 are normalized to that group's canonical ASE operations before expansion, preserving canonical special positions; the normalization is reported in warnings.",
+        "Symmetry-equivalent repeated input sites and mixed sites are rejected using ASE's dimensionless componentwise site tolerance 1e-8.",
+        "Cell vectors are rows in Å; positions are wrapped to [0,1), and Cartesian row = fractional row @ cell rows. Angles are interpreted in degrees.",
+        "If both fractional and Cartesian input coordinate columns are present, they must agree modulo lattice translations within dimensionless component tolerance 1e-8; fractional coordinates are used for expansion.",
+        "Density uses expanded elemental counts and periodictable masses, consistent with crystal.density; 1 Å³ = 1e-30 m³ and N_A = 6.02214076e23 mol^-1 exactly.",
+        "Atomic weights use conventional terrestrial isotope abundances where available; library representative isotope masses are retained for other elements.",
+        "CIF numeric uncertainty notation is parsed by ASE to its central value; measurement uncertainty, oxidation states, bonding and porosity are not inferred.",
+        "Input is parsed in memory; no user-supplied paths are opened, no data is fetched and no external jobs are executed. ASE parser warnings are returned in the response envelope."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [
+        "ase",
+        "numpy",
+        "periodictable",
+        "scipy"
+      ],
+      "description": "Parse one bounded CIF 1.x structure in memory, expand supplied symmetry with ASE, validate the full-occupancy three-dimensional cell, and return wrapped coordinates, elemental counts, volume and crystallographic density. Requires the optional structures installation extra.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "cif_text": {
+            "description": "CIF 1.x text containing exactly one structural data block; nonstructural metadata blocks are allowed. At most 100000 characters, 256 asymmetric sites and 2048 expanded atoms. No file paths or network fetching. A complete three-dimensional cell and full natural-element occupancy are required; partial, mixed, unknown and isotope occupancies are unsupported.",
+            "maxLength": 100000,
+            "minLength": 1,
+            "title": "Cif Text",
+            "type": "string"
+          }
+        },
+        "required": [
+          "cif_text"
+        ],
+        "title": "CifStructureInput",
+        "type": "object"
+      },
+      "name": "structure.analyze_cif",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "atom_count": {
+            "description": "Number of atoms in the symmetry-expanded supplied cell.",
+            "exclusiveMinimum": 0,
+            "maximum": 2048,
+            "title": "Atom Count",
+            "type": "integer"
+          },
+          "atomic_counts": {
+            "description": "Full-cell elemental counts, ordered by atomic number.",
+            "maxProperties": 118,
+            "minProperties": 1,
+            "patternProperties": {
+              "^[A-Z][a-z]?$": {
+                "exclusiveMinimum": 0,
+                "maximum": 2048,
+                "type": "integer"
+              }
+            },
+            "propertyNames": {
+              "maxLength": 2,
+              "minLength": 1
+            },
+            "title": "Atomic Counts",
+            "type": "object"
+          },
+          "atomic_weights_source": {
+            "description": "Atomic-weight library and installed version used.",
+            "title": "Atomic Weights Source",
+            "type": "string"
+          },
+          "cartesian_positions_angstrom": {
+            "description": "Wrapped Cartesian site coordinates in angstroms: fractional row @ cell rows.",
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            },
+            "maxItems": 2048,
+            "minItems": 1,
+            "title": "Cartesian Positions Angstrom",
+            "type": "array"
+          },
+          "cell_vectors_angstrom": {
+            "description": "Three lattice vectors a, b, c as rows, in angstroms, in ASE's cell orientation.",
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            },
+            "maxItems": 3,
+            "minItems": 3,
+            "title": "Cell Vectors Angstrom",
+            "type": "array"
+          },
+          "cell_volume_angstrom3": {
+            "description": "Positive supplied-cell volume in Å³.",
+            "exclusiveMinimum": 0,
+            "title": "Cell Volume Angstrom3",
+            "type": "number"
+          },
+          "density_kg_m3": {
+            "description": "Ideal full-occupancy crystallographic density in kg/m³, using periodictable masses.",
+            "exclusiveMinimum": 0,
+            "title": "Density Kg M3",
+            "type": "number"
+          },
+          "fractional_positions": {
+            "description": "Dimensionless coordinates in output symbol order, wrapped to [0,1).",
+            "items": {
+              "items": {
+                "exclusiveMaximum": 1,
+                "minimum": 0,
+                "type": "number"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array"
+            },
+            "maxItems": 2048,
+            "minItems": 1,
+            "title": "Fractional Positions",
+            "type": "array"
+          },
+          "source_block": {
+            "description": "CIF data block name, without the data_ prefix.",
+            "title": "Source Block",
+            "type": "string"
+          },
+          "symbols": {
+            "description": "Canonical natural-element symbol for each output site, in ASE expansion order.",
+            "items": {
+              "maxLength": 2,
+              "minLength": 1,
+              "pattern": "^[A-Z][a-z]?$",
+              "type": "string"
+            },
+            "maxItems": 2048,
+            "minItems": 1,
+            "title": "Symbols",
+            "type": "array"
+          }
+        },
+        "required": [
+          "atom_count",
+          "atomic_counts",
+          "symbols",
+          "cell_vectors_angstrom",
+          "fractional_positions",
+          "cartesian_positions_angstrom",
+          "cell_volume_angstrom3",
+          "density_kg_m3",
+          "atomic_weights_source",
+          "source_block"
+        ],
+        "title": "CifStructureOutput",
+        "type": "object"
+      },
+      "references": [
+        "https://wiki.fysik.dtu.dk/ase/ase/io/formatoptions.html#cif",
+        "https://wiki.fysik.dtu.dk/ase/ase/spacegroup/spacegroup.html",
+        "https://www.iucr.org/resources/cif/spec/version1.1",
+        "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+        "https://www.bipm.org/en/si-base-units/mole"
       ],
       "side_effects": [],
       "version": "1"

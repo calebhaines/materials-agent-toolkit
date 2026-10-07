@@ -33,6 +33,7 @@ TOOL_NAMES = {
     "mechanics.elastic_vrh",
     "mechanics.isotropic_moduli",
     "mixtures.scalar_bounds",
+    "structure.analyze_cif",
     "thermal.linear_expansion",
 }
 
@@ -220,7 +221,14 @@ print(json.dumps({"catalog": exported, "schema": schema, "versions": [first, sec
 
 
 @pytest.mark.parametrize(
-    "example", sorted((ROOT / "examples").glob("*.json")), ids=lambda p: p.name
+    "example",
+    sorted(
+        [
+            *(ROOT / "examples").glob("*.json"),
+            *(ROOT / "examples" / "structures").glob("*.json"),
+        ]
+    ),
+    ids=lambda p: p.name,
 )
 def test_single_request_examples_validate_the_wrapper_and_exported_raw_input_schema(example):
     request = json.loads(example.read_text(encoding="utf-8"))

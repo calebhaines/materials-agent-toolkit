@@ -3,6 +3,7 @@
 import asyncio
 import builtins
 import json
+from pathlib import Path
 
 import pytest
 from jsonschema import Draft202012Validator
@@ -26,6 +27,7 @@ def test_tools_preserve_raw_schemas_and_publish_complete_response_contract(serve
     result = invoke(server, types.ListToolsRequest())
     descriptors = registry.list_tools()
     assert [tool.name for tool in result.tools] == [item["name"] for item in descriptors]
+    assert "structure.analyze_cif" in {tool.name for tool in result.tools}
     for tool, descriptor in zip(result.tools, descriptors, strict=True):
         assert tool.inputSchema == descriptor["input_schema"]
         assert tool.inputSchema["additionalProperties"] is False
@@ -55,6 +57,7 @@ def test_tools_preserve_raw_schemas_and_publish_complete_response_contract(serve
             {"young_modulus": "210", "poisson_ratio": 0.3},
             "INVALID_INPUT",
         ),
+        ("structure.analyze_cif", {"cif_text": 123}, "INVALID_INPUT"),
         ("unknown.tool", {}, "UNKNOWN_TOOL"),
     ],
 )
@@ -104,6 +107,48 @@ def test_registry_internal_failures_use_the_same_envelope(server, monkeypatch):
     assert result.isError is True
     assert result.structuredContent == response.model_dump(mode="json")
     assert json.loads(result.content[0].text) == result.structuredContent
+
+
+def test_cif_missing_extra_preserves_discovery_and_adapter_recovery(server, monkeypatch):
+    original_import = builtins.__import__
+
+    def without_ase(name, *args, **kwargs):
+        if name == "ase" or name.startswith("ase."):
+            raise ModuleNotFoundError("ASE unavailable", name=name)
+        return original_import(name, *args, **kwargs)
+
+    monkeypatch.setattr(builtins, "__import__", without_ase)
+    tools = invoke(server, types.ListToolsRequest()).tools
+    descriptor = next(tool for tool in tools if tool.name == "structure.analyze_cif")
+    cif_text = (Path(__file__).parent / "fixtures" / "structures" / "al_fcc.cif").read_text(
+        encoding="utf-8"
+    )
+    result = invoke(
+        server,
+        types.CallToolRequest(
+            params=types.CallToolRequestParams(
+                name="structure.analyze_cif", arguments={"cif_text": cif_text}
+            )
+        ),
+    )
+    assert result.isError is True
+    envelope = result.structuredContent
+    assert envelope["error"]["code"] == "MISSING_DEPENDENCY"
+    assert "materials-agent-toolkit[structures]" in envelope["error"]["message"]
+    assert envelope["provenance"]["input_sha256"]
+    assert envelope["result"] is None
+    assert json.loads(result.content[0].text) == envelope
+    Draft202012Validator(descriptor.outputSchema).validate(envelope)
+    recovered = invoke(
+        server,
+        types.CallToolRequest(
+            params=types.CallToolRequestParams(
+                name="composition.analyze", arguments={"formula": "H2O"}
+            )
+        ),
+    )
+    assert recovered.isError is False
+    assert recovered.structuredContent["status"] == "ok"
 
 
 def test_resources_are_versioned_complete_json_catalog_and_response_schema(server):

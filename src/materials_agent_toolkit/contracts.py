@@ -10,6 +10,10 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", allow_inf_nan=False, strict=True)
 
 
+class MissingOptionalDependencyError(ImportError):
+    """An explicitly optional scientific dependency is unavailable."""
+
+
 @dataclass(frozen=True)
 class CalculationResult:
     result: BaseModel

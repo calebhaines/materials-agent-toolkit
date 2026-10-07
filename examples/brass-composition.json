@@ -1,0 +1,9 @@
+{
+  "tool": "composition.from_fractions",
+  "tool_version": "1",
+  "input": {
+    "fractions": {"Cu": 70, "Zn": 30},
+    "basis": "mass",
+    "normalization": "normalize"
+  }
+}

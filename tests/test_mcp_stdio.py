@@ -26,6 +26,19 @@ COPPER_STIFFNESS = [
 CASES = [
     ("composition.analyze", {"formula": "H2O"}, {"molar_mass_g_mol": 18.015}),
     (
+        "composition.from_fractions",
+        {"fractions": {"Ni": 0.5, "Ti": 0.5}, "basis": "atomic"},
+        {
+            "atomic_fractions": {"Ni": 0.5, "Ti": 0.5},
+            "mass_fractions": {
+                "Ni": 58.6934 / (58.6934 + 47.867),
+                "Ti": 47.867 / (58.6934 + 47.867),
+            },
+            "mean_atomic_mass_g_mol": 53.2802,
+            "input_total": 1.0,
+        },
+    ),
+    (
         "crystal.density",
         {"formula": "Al", "formula_units": 4, "cell_volume_angstrom3": 4.05**3},
         {"density_kg_m3": 2697.806069499},
@@ -146,6 +159,12 @@ def test_mcp_error_envelopes_preserve_session_for_following_calls():
     cases = [
         ("composition.analyze", None, "INVALID_INPUT"),
         ("composition.analyze", {"formula": "H2O", "unknown": 1}, "INVALID_INPUT"),
+        (
+            "composition.from_fractions",
+            {"fractions": {"Ni": True, "Ti": 0.5}, "basis": "atomic"},
+            "INVALID_INPUT",
+        ),
+        ("composition.from_fractions", {"fractions": {"Ni": 1.0}}, "INVALID_INPUT"),
         (
             "mechanics.isotropic_moduli",
             {"young_modulus": True, "poisson_ratio": 0.3},

@@ -1,0 +1,8 @@
+{
+  "tool": "composition.from_fractions",
+  "tool_version": "1",
+  "input": {
+    "fractions": {"Ni": 0.5, "Ti": 0.5},
+    "basis": "atomic"
+  }
+}

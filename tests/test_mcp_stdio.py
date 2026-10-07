@@ -5,10 +5,12 @@ import math
 import sys
 from contextlib import asynccontextmanager
 from datetime import datetime, timedelta
+from pathlib import Path
 
 import pytest
 from jsonschema import Draft202012Validator
 
+from materials_agent_toolkit.catalog import catalog_json, get_catalog
 from materials_agent_toolkit.registry import ToolResponse, list_tools, run_tool
 
 mcp = pytest.importorskip("mcp", reason="Install the optional mcp extra for stdio tests")
@@ -143,8 +145,14 @@ def test_mcp_discovery_and_resources_preserve_full_registry_contract():
             catalog_result = await session.read_resource("materials://catalog")
             assert len(catalog_result.contents) == 1
             assert catalog_result.contents[0].mimeType == "application/json"
-            catalog = json.loads(catalog_result.contents[0].text)
-            assert "catalog_version" in catalog
+            catalog_text = catalog_result.contents[0].text
+            assert catalog_text == catalog_json()
+            artifact = Path(__file__).parents[1] / "catalog" / "tool-catalog.json"
+            assert catalog_text.encode("utf-8") == artifact.read_bytes()
+            catalog = json.loads(catalog_text)
+            assert catalog == get_catalog()
+            assert set(catalog) == {"catalog_version", "tools", "response_schema"}
+            assert catalog["catalog_version"] == "1"
             assert catalog["tools"] == list_tools()
             assert catalog["response_schema"] == ToolResponse.model_json_schema()
             schema_result = await session.read_resource("materials://schemas/response")

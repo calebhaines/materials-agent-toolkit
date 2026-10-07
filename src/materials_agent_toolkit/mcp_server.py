@@ -12,6 +12,7 @@ import sys
 from typing import TYPE_CHECKING, Any
 
 from materials_agent_toolkit import __version__, registry
+from materials_agent_toolkit.catalog import catalog_json
 
 if TYPE_CHECKING:
     from mcp.server import Server
@@ -121,18 +122,14 @@ def build_server() -> Server:
     @server.read_resource()
     async def read_resource(uri: Any) -> list[ReadResourceContents]:
         if str(uri) == CATALOG_URI:
-            payload = {
-                "catalog_version": "1",
-                "tools": registry.list_tools(),
-                "response_schema": response_schema,
-            }
+            content = catalog_json()
         elif str(uri) == RESPONSE_SCHEMA_URI:
-            payload = response_schema
+            content = json.dumps(response_schema, allow_nan=False, sort_keys=True)
         else:
             raise ValueError("Unsupported materials resource URI")
         return [
             ReadResourceContents(
-                content=json.dumps(payload, allow_nan=False, sort_keys=True),
+                content=content,
                 mime_type="application/json",
             )
         ]

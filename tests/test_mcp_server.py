@@ -8,6 +8,7 @@ import pytest
 from jsonschema import Draft202012Validator
 
 from materials_agent_toolkit import mcp_server, registry
+from materials_agent_toolkit.catalog import catalog_json, get_catalog
 
 types = pytest.importorskip("mcp.types")
 
@@ -121,7 +122,10 @@ def test_resources_are_versioned_complete_json_catalog_and_response_schema(serve
         assert len(result.contents) == 1
         assert result.contents[0].mimeType == "application/json"
         assert result.contents[0].uri == resource.uri
+        if str(resource.uri) == mcp_server.CATALOG_URI:
+            assert result.contents[0].text == catalog_json()
         contents.append(json.loads(result.contents[0].text))
+    assert contents[0] == get_catalog()
     assert contents[0] == {
         "catalog_version": "1",
         "tools": registry.list_tools(),

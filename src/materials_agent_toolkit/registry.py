@@ -30,7 +30,7 @@ class ToolError(StrictModel):
 
 class Provenance(StrictModel):
     toolkit_version: str = __version__
-    python_version: str = platform.python_version()
+    python_version: str = Field(default_factory=platform.python_version)
     created_at: str
     input_sha256: str | None = None
     software_versions: dict[str, str] = Field(default_factory=dict)

@@ -1,0 +1,926 @@
+{
+  "catalog_version": "1",
+  "response_schema": {
+    "$defs": {
+      "Provenance": {
+        "additionalProperties": false,
+        "properties": {
+          "created_at": {
+            "title": "Created At",
+            "type": "string"
+          },
+          "input_sha256": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Input Sha256"
+          },
+          "python_version": {
+            "title": "Python Version",
+            "type": "string"
+          },
+          "references": {
+            "items": {
+              "type": "string"
+            },
+            "title": "References",
+            "type": "array"
+          },
+          "software_versions": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "title": "Software Versions",
+            "type": "object"
+          },
+          "toolkit_version": {
+            "default": "0.5.0",
+            "title": "Toolkit Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "created_at"
+        ],
+        "title": "Provenance",
+        "type": "object"
+      },
+      "ToolError": {
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "title": "Code",
+            "type": "string"
+          },
+          "details": {
+            "items": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "title": "Details",
+            "type": "array"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ],
+        "title": "ToolError",
+        "type": "object"
+      }
+    },
+    "additionalProperties": false,
+    "properties": {
+      "error": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/ToolError"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null
+      },
+      "provenance": {
+        "$ref": "#/$defs/Provenance"
+      },
+      "result": {
+        "anyOf": [
+          {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "title": "Result"
+      },
+      "status": {
+        "enum": [
+          "ok",
+          "error"
+        ],
+        "title": "Status",
+        "type": "string"
+      },
+      "tool": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Tool"
+      },
+      "tool_version": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "title": "Tool Version"
+      },
+      "warnings": {
+        "items": {
+          "type": "string"
+        },
+        "title": "Warnings",
+        "type": "array"
+      }
+    },
+    "required": [
+      "status",
+      "tool",
+      "tool_version",
+      "provenance"
+    ],
+    "title": "ToolResponse",
+    "type": "object"
+  },
+  "tools": [
+    {
+      "assumptions": [
+        "Neutral elemental formula using case-sensitive element symbols, positive integer counts, and parentheses, e.g. H2O or Ca(OH)2. Surrounding whitespace is allowed. No isotope labels, charges, mixtures, hydrate dots, or decimal counts. Each resulting elemental atom count must be at most 2^53-1 for exact JSON/binary64 integer interoperability.",
+        "Atomic weights come from the installed periodictable package; its version is returned.",
+        "Conventional terrestrial isotope abundances are assumed where standard atomic weights exist.",
+        "Elements without a standard atomic weight use the mass provided by periodictable."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [
+        "periodictable"
+      ],
+      "description": "Parse a neutral elemental formula and calculate atom counts, atom/mass fractions, and molar mass.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "formula": {
+            "description": "Neutral elemental formula using case-sensitive element symbols, positive integer counts, and parentheses, e.g. H2O or Ca(OH)2. Surrounding whitespace is allowed. No isotope labels, charges, mixtures, hydrate dots, or decimal counts. Each resulting elemental atom count must be at most 2^53-1 for exact JSON/binary64 integer interoperability.",
+            "maxLength": 512,
+            "minLength": 1,
+            "title": "Formula",
+            "type": "string"
+          }
+        },
+        "required": [
+          "formula"
+        ],
+        "title": "CompositionInput",
+        "type": "object"
+      },
+      "name": "composition.analyze",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "atomic_counts": {
+            "additionalProperties": {
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            },
+            "description": "Number of atoms of each element per formula unit.",
+            "title": "Atomic Counts",
+            "type": "object"
+          },
+          "atomic_fractions": {
+            "additionalProperties": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "description": "Dimensionless elemental atom fractions; sum is one.",
+            "title": "Atomic Fractions",
+            "type": "object"
+          },
+          "atomic_weights_source": {
+            "description": "Atomic-weight library and installed version used.",
+            "title": "Atomic Weights Source",
+            "type": "string"
+          },
+          "mass_fractions": {
+            "additionalProperties": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "description": "Dimensionless elemental mass fractions; sum is one.",
+            "title": "Mass Fractions",
+            "type": "object"
+          },
+          "molar_mass_g_mol": {
+            "description": "Formula-unit molar mass in grams per mole.",
+            "exclusiveMinimum": 0,
+            "title": "Molar Mass G Mol",
+            "type": "number"
+          }
+        },
+        "required": [
+          "atomic_counts",
+          "atomic_fractions",
+          "mass_fractions",
+          "molar_mass_g_mol",
+          "atomic_weights_source"
+        ],
+        "title": "CompositionOutput",
+        "type": "object"
+      },
+      "references": [
+        "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+        "https://ciaaw.org/atomic-weights.htm"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "Keys are exact case-sensitive elemental symbols; isotope labels and D/T aliases are unsupported.",
+        "Atomic weights come from the installed periodictable package; its version is returned.",
+        "Conventional terrestrial isotope abundances are assumed where standard atomic weights exist.",
+        "Elements without a standard atomic weight use the mass provided by periodictable.",
+        "require_unity uses absolute tolerance 1e-8 with zero relative tolerance; accepted inputs are divided by their actual total.",
+        "normalize accepts weights or percentages only when their sum is positive and finite, then divides every value by that sum.",
+        "Zero components are omitted from results; keys are ordered by increasing atomic number.",
+        "For atom fractions x_i, Mbar=sum(x_i*M_i) and mass fractions w_i=x_i*M_i/Mbar.",
+        "For mass fractions w_i, Mbar=1/sum(w_i/M_i) and atom fractions x_i=w_i*Mbar/M_i.",
+        "Mean atomic mass is in g/mol of atoms; formula-unit molar mass and integer stoichiometry are not inferred.",
+        "Binary64 rounding applies. Overflowing input totals and normalization/conversion that loses a positive component to zero or nonfinite values are rejected.",
+        "Fractions exceeding one by at most four binary64 ulps are rounded to one; mean atomic masses outside elemental mass extrema by at most four ulps are rounded to that endpoint. Larger excursions are rejected.",
+        "Elemental fractions specify composition only; phases, site occupancy, charge, microstructure and uncertainty are not inferred."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [
+        "periodictable"
+      ],
+      "description": "Convert explicit elemental atom or mass fractions/weights into both fraction bases and mean atomic mass per mole of atoms. Require unity within absolute tolerance 1e-8 by default, or explicitly normalize a positive finite weight/percentage total. No formula or atom counts are inferred.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "basis": {
+            "description": "Whether the supplied values represent elemental atom fractions or elemental mass fractions.",
+            "enum": [
+              "atomic",
+              "mass"
+            ],
+            "title": "Basis",
+            "type": "string"
+          },
+          "fractions": {
+            "description": "One to 118 exact, case-sensitive elemental symbols mapped to finite nonnegative fractions or weights. Natural-element symbols only; isotope aliases such as D and T are unsupported. Zero components are allowed and omitted from outputs.",
+            "maxProperties": 118,
+            "minProperties": 1,
+            "patternProperties": {
+              "^[A-Z][a-z]?$": {
+                "minimum": 0,
+                "type": "number"
+              }
+            },
+            "propertyNames": {
+              "maxLength": 2,
+              "minLength": 1
+            },
+            "title": "Fractions",
+            "type": "object"
+          },
+          "normalization": {
+            "default": "require_unity",
+            "description": "require_unity accepts a positive finite total within absolute tolerance 1e-8 of one, then divides by that total. normalize explicitly accepts any positive finite total, including weights or percentages, and divides by it. All-zero inputs and overflowing totals are rejected.",
+            "enum": [
+              "require_unity",
+              "normalize"
+            ],
+            "title": "Normalization",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fractions",
+          "basis"
+        ],
+        "title": "FractionalCompositionInput",
+        "type": "object"
+      },
+      "name": "composition.from_fractions",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "atomic_fractions": {
+            "description": "Positive dimensionless elemental atom fractions in increasing atomic number order; sum is one within floating-point rounding.",
+            "maxProperties": 118,
+            "minProperties": 1,
+            "patternProperties": {
+              "^[A-Z][a-z]?$": {
+                "exclusiveMinimum": 0,
+                "maximum": 1,
+                "type": "number"
+              }
+            },
+            "propertyNames": {
+              "maxLength": 2,
+              "minLength": 1
+            },
+            "title": "Atomic Fractions",
+            "type": "object"
+          },
+          "atomic_weights_source": {
+            "description": "Atomic-weight library and installed version used.",
+            "title": "Atomic Weights Source",
+            "type": "string"
+          },
+          "input_total": {
+            "description": "Dimensionless positive finite sum of the original supplied values.",
+            "exclusiveMinimum": 0,
+            "title": "Input Total",
+            "type": "number"
+          },
+          "mass_fractions": {
+            "description": "Positive dimensionless elemental mass fractions in increasing atomic number order; sum is one within floating-point rounding.",
+            "maxProperties": 118,
+            "minProperties": 1,
+            "patternProperties": {
+              "^[A-Z][a-z]?$": {
+                "exclusiveMinimum": 0,
+                "maximum": 1,
+                "type": "number"
+              }
+            },
+            "propertyNames": {
+              "maxLength": 2,
+              "minLength": 1
+            },
+            "title": "Mass Fractions",
+            "type": "object"
+          },
+          "mean_atomic_mass_g_mol": {
+            "description": "Mean atomic mass in grams per mole of atoms: sum(x_i*M_i), where x_i are atom fractions. This is not formula-unit molar mass.",
+            "exclusiveMinimum": 0,
+            "title": "Mean Atomic Mass G Mol",
+            "type": "number"
+          }
+        },
+        "required": [
+          "atomic_fractions",
+          "mass_fractions",
+          "mean_atomic_mass_g_mol",
+          "input_total",
+          "atomic_weights_source"
+        ],
+        "title": "FractionalCompositionOutput",
+        "type": "object"
+      },
+      "references": [
+        "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+        "https://ciaaw.org/atomic-weights.htm"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "Neutral elemental formula using case-sensitive element symbols, positive integer counts, and parentheses, e.g. H2O or Ca(OH)2. Surrounding whitespace is allowed. No isotope labels, charges, mixtures, hydrate dots, or decimal counts. Each resulting elemental atom count must be at most 2^53-1 for exact JSON/binary64 integer interoperability.",
+        "Atomic weights come from the installed periodictable package; its version is returned.",
+        "Conventional terrestrial isotope abundances are assumed where standard atomic weights exist.",
+        "Elements without a standard atomic weight use the mass provided by periodictable.",
+        "The input Z and cell volume refer to the same unit cell; full stated occupancy is assumed.",
+        "N_A = 6.02214076e23 mol^-1 exactly; 1 Å³ = 1e-30 m³.",
+        "Result is crystallographic density; porosity and thermal expansion are not modeled."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [
+        "periodictable"
+      ],
+      "description": "Calculate ideal crystallographic density from a formula, explicit formula units Z, and unit-cell volume.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "cell_volume_angstrom3": {
+            "description": "Unit-cell volume in cubic angstroms (1 Å³ = 1e-30 m³).",
+            "exclusiveMinimum": 0,
+            "title": "Cell Volume Angstrom3",
+            "type": "number"
+          },
+          "formula": {
+            "description": "Neutral elemental formula using case-sensitive element symbols, positive integer counts, and parentheses, e.g. H2O or Ca(OH)2. Surrounding whitespace is allowed. No isotope labels, charges, mixtures, hydrate dots, or decimal counts. Each resulting elemental atom count must be at most 2^53-1 for exact JSON/binary64 integer interoperability.",
+            "maxLength": 512,
+            "minLength": 1,
+            "title": "Formula",
+            "type": "string"
+          },
+          "formula_units": {
+            "description": "Positive integer Z: formula units in the supplied unit cell, at most 2^53-1 for exact JSON/binary64 integer interoperability.",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991,
+            "title": "Formula Units",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "formula",
+          "formula_units",
+          "cell_volume_angstrom3"
+        ],
+        "title": "CrystalDensityInput",
+        "type": "object"
+      },
+      "name": "crystal.density",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "atomic_weights_source": {
+            "title": "Atomic Weights Source",
+            "type": "string"
+          },
+          "density_kg_m3": {
+            "description": "Ideal crystallographic mass density in kilograms per cubic metre.",
+            "exclusiveMinimum": 0,
+            "title": "Density Kg M3",
+            "type": "number"
+          },
+          "molar_mass_g_mol": {
+            "description": "Formula-unit molar mass in grams per mole.",
+            "exclusiveMinimum": 0,
+            "title": "Molar Mass G Mol",
+            "type": "number"
+          }
+        },
+        "required": [
+          "density_kg_m3",
+          "molar_mass_g_mol",
+          "atomic_weights_source"
+        ],
+        "title": "CrystalDensityOutput",
+        "type": "object"
+      },
+      "references": [
+        "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+        "https://ciaaw.org/atomic-weights.htm",
+        "https://www.bipm.org/en/si-base-units/mole"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "A single thermally activated mechanism with temperature-independent D0 and activation energy.",
+        "Temperature is absolute kelvin and activation energy is J/mol.",
+        "R = k_B * N_A = 8.31446261815324 J/(mol*K), from the exact SI defining constants.",
+        "Binary64 underflow to zero or subnormal results are reported explicitly in warnings."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [],
+      "description": "Calculate D = D0 * exp(-Ea / (R*T)) using molar activation energy and SI units.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "activation_energy_J_mol": {
+            "minimum": 0,
+            "title": "Activation Energy J Mol",
+            "type": "number"
+          },
+          "pre_exponential_m2_s": {
+            "exclusiveMinimum": 0,
+            "title": "Pre Exponential M2 S",
+            "type": "number"
+          },
+          "temperature_K": {
+            "description": "Absolute temperature in kelvin.",
+            "exclusiveMinimum": 0,
+            "title": "Temperature K",
+            "type": "number"
+          }
+        },
+        "required": [
+          "pre_exponential_m2_s",
+          "activation_energy_J_mol",
+          "temperature_K"
+        ],
+        "title": "ArrheniusDiffusivityInput",
+        "type": "object"
+      },
+      "name": "kinetics.arrhenius_diffusivity",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "diffusivity_m2_s": {
+            "minimum": 0,
+            "title": "Diffusivity M2 S",
+            "type": "number"
+          }
+        },
+        "required": [
+          "diffusivity_m2_s"
+        ],
+        "title": "ArrheniusDiffusivityOutput",
+        "type": "object"
+      },
+      "references": [
+        "BIPM SI Brochure, 9th edition: https://www.bipm.org/en/publications/si-brochure"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "Engineering Voigt order is xx, yy, zz, yz, xz, xy; shear strains are twice tensor shear strains.",
+        "The stiffness matrix represents positive-definite small-strain elasticity.",
+        "Hill moduli describe an isotropic polycrystalline aggregate with random orientations.",
+        "Symmetry tolerance is 1e-10 of the largest entry; Kelvin condition number must be below 1e12.",
+        "All output moduli retain the input stiffness stress unit; Poisson ratio and anisotropy are dimensionless."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [
+        "numpy"
+      ],
+      "description": "Compute Voigt, Reuss, and Hill isotropic aggregate elastic moduli and universal anisotropy from a stable 6x6 stiffness matrix.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "stiffness_matrix": {
+            "description": "Symmetric 6x6 stiffness matrix in engineering Voigt order xx, yy, zz, yz, xz, xy. Shear strains are 2*epsilon_yz, 2*epsilon_xz, 2*epsilon_xy. Relative symmetry tolerance: 1e-10 of the largest matrix entry. The Kelvin matrix must be positive definite with condition number below 1e12.",
+            "items": {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 6,
+              "minItems": 6,
+              "type": "array"
+            },
+            "maxItems": 6,
+            "minItems": 6,
+            "title": "Stiffness Matrix",
+            "type": "array"
+          },
+          "stress_unit": {
+            "default": "GPa",
+            "enum": [
+              "Pa",
+              "MPa",
+              "GPa"
+            ],
+            "title": "Stress Unit",
+            "type": "string"
+          }
+        },
+        "required": [
+          "stiffness_matrix"
+        ],
+        "title": "ElasticVRHInput",
+        "type": "object"
+      },
+      "name": "mechanics.elastic_vrh",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "aggregate_assumption": {
+            "const": "isotropic polycrystalline aggregate",
+            "default": "isotropic polycrystalline aggregate",
+            "title": "Aggregate Assumption",
+            "type": "string"
+          },
+          "bulk_modulus_hill": {
+            "exclusiveMinimum": 0,
+            "title": "Bulk Modulus Hill",
+            "type": "number"
+          },
+          "bulk_modulus_reuss": {
+            "exclusiveMinimum": 0,
+            "title": "Bulk Modulus Reuss",
+            "type": "number"
+          },
+          "bulk_modulus_voigt": {
+            "exclusiveMinimum": 0,
+            "title": "Bulk Modulus Voigt",
+            "type": "number"
+          },
+          "poisson_ratio_hill": {
+            "exclusiveMaximum": 0.5,
+            "exclusiveMinimum": -1,
+            "title": "Poisson Ratio Hill",
+            "type": "number"
+          },
+          "shear_modulus_hill": {
+            "exclusiveMinimum": 0,
+            "title": "Shear Modulus Hill",
+            "type": "number"
+          },
+          "shear_modulus_reuss": {
+            "exclusiveMinimum": 0,
+            "title": "Shear Modulus Reuss",
+            "type": "number"
+          },
+          "shear_modulus_voigt": {
+            "exclusiveMinimum": 0,
+            "title": "Shear Modulus Voigt",
+            "type": "number"
+          },
+          "stress_unit": {
+            "enum": [
+              "Pa",
+              "MPa",
+              "GPa"
+            ],
+            "title": "Stress Unit",
+            "type": "string"
+          },
+          "universal_anisotropy_index": {
+            "minimum": 0,
+            "title": "Universal Anisotropy Index",
+            "type": "number"
+          },
+          "young_modulus_hill": {
+            "exclusiveMinimum": 0,
+            "title": "Young Modulus Hill",
+            "type": "number"
+          }
+        },
+        "required": [
+          "bulk_modulus_voigt",
+          "bulk_modulus_reuss",
+          "bulk_modulus_hill",
+          "shear_modulus_voigt",
+          "shear_modulus_reuss",
+          "shear_modulus_hill",
+          "young_modulus_hill",
+          "poisson_ratio_hill",
+          "universal_anisotropy_index",
+          "stress_unit"
+        ],
+        "title": "ElasticVRHOutput",
+        "type": "object"
+      },
+      "references": [
+        "https://doi.org/10.1088/0370-1298/65/5/307",
+        "https://doi.org/10.1103/PhysRevLett.101.055504"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "Homogeneous isotropic, small-strain linear elasticity.",
+        "Young's modulus is positive and -1 < Poisson ratio < 0.5.",
+        "All output moduli have the same explicit stress unit as Young's modulus."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [
+        "numpy"
+      ],
+      "description": "Convert isotropic Young's modulus and Poisson ratio to elastic moduli.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "poisson_ratio": {
+            "exclusiveMaximum": 0.5,
+            "exclusiveMinimum": -1,
+            "title": "Poisson Ratio",
+            "type": "number"
+          },
+          "stress_unit": {
+            "default": "GPa",
+            "enum": [
+              "Pa",
+              "MPa",
+              "GPa"
+            ],
+            "title": "Stress Unit",
+            "type": "string"
+          },
+          "young_modulus": {
+            "exclusiveMinimum": 0,
+            "title": "Young Modulus",
+            "type": "number"
+          }
+        },
+        "required": [
+          "young_modulus",
+          "poisson_ratio"
+        ],
+        "title": "IsotropicModuliInput",
+        "type": "object"
+      },
+      "name": "mechanics.isotropic_moduli",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "bulk_modulus": {
+            "exclusiveMinimum": 0,
+            "title": "Bulk Modulus",
+            "type": "number"
+          },
+          "lame_first_parameter": {
+            "title": "Lame First Parameter",
+            "type": "number"
+          },
+          "poisson_ratio": {
+            "exclusiveMaximum": 0.5,
+            "exclusiveMinimum": -1,
+            "title": "Poisson Ratio",
+            "type": "number"
+          },
+          "shear_modulus": {
+            "exclusiveMinimum": 0,
+            "title": "Shear Modulus",
+            "type": "number"
+          },
+          "stress_unit": {
+            "enum": [
+              "Pa",
+              "MPa",
+              "GPa"
+            ],
+            "title": "Stress Unit",
+            "type": "string"
+          },
+          "young_modulus": {
+            "exclusiveMinimum": 0,
+            "title": "Young Modulus",
+            "type": "number"
+          }
+        },
+        "required": [
+          "young_modulus",
+          "poisson_ratio",
+          "shear_modulus",
+          "bulk_modulus",
+          "lame_first_parameter",
+          "stress_unit"
+        ],
+        "title": "IsotropicModuliOutput",
+        "type": "object"
+      },
+      "references": [
+        "https://en.wikipedia.org/wiki/Lam%C3%A9_parameters"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "Fractions are phase volume fractions; all positive scalar constituent properties share a unit.",
+        "Fractions must sum to 1 within absolute tolerance 1e-12; only rounding within that tolerance is normalized.",
+        "Voigt assumes a uniform driving field; Reuss assumes a uniform conjugate flux.",
+        "Applicability requires a compatible linear scalar constitutive model; these are not universal strength bounds."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [],
+      "description": "Calculate arithmetic (Voigt) and harmonic (Reuss) scalar mixture bounds.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "fractions": {
+            "description": "Phase volume fractions, one per value; sum must be within 1e-12 of 1.",
+            "items": {
+              "minimum": 0,
+              "type": "number"
+            },
+            "minItems": 1,
+            "title": "Fractions",
+            "type": "array"
+          },
+          "property_unit": {
+            "maxLength": 128,
+            "minLength": 1,
+            "title": "Property Unit",
+            "type": "string"
+          },
+          "values": {
+            "description": "Positive scalar constituent properties, all in property_unit.",
+            "items": {
+              "exclusiveMinimum": 0,
+              "type": "number"
+            },
+            "minItems": 1,
+            "title": "Values",
+            "type": "array"
+          }
+        },
+        "required": [
+          "values",
+          "fractions",
+          "property_unit"
+        ],
+        "title": "ScalarBoundsInput",
+        "type": "object"
+      },
+      "name": "mixtures.scalar_bounds",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "property_unit": {
+            "title": "Property Unit",
+            "type": "string"
+          },
+          "reuss_bound": {
+            "description": "Harmonic mean under the uniform-flux assumption.",
+            "exclusiveMinimum": 0,
+            "title": "Reuss Bound",
+            "type": "number"
+          },
+          "voigt_bound": {
+            "description": "Arithmetic mean under the uniform-field assumption.",
+            "exclusiveMinimum": 0,
+            "title": "Voigt Bound",
+            "type": "number"
+          }
+        },
+        "required": [
+          "voigt_bound",
+          "reuss_bound",
+          "property_unit"
+        ],
+        "title": "ScalarBoundsOutput",
+        "type": "object"
+      },
+      "references": [
+        "Voigt, W. Lehrbuch der Kristallphysik (1910).",
+        "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "Constant linear expansion coefficient over the temperature interval; negative coefficients are allowed.",
+        "Small strain, unconstrained expansion, and no phase changes.",
+        "Nonpositive final lengths and outputs outside the finite binary64 range are rejected."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [],
+      "description": "Predict length change using delta_L = L0 * alpha * delta_T in SI units.",
+      "input_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "delta_temperature_K": {
+            "title": "Delta Temperature K",
+            "type": "number"
+          },
+          "expansion_coefficient_per_K": {
+            "description": "Constant linear thermal expansion coefficient; may be negative.",
+            "title": "Expansion Coefficient Per K",
+            "type": "number"
+          },
+          "initial_length_m": {
+            "exclusiveMinimum": 0,
+            "title": "Initial Length M",
+            "type": "number"
+          }
+        },
+        "required": [
+          "initial_length_m",
+          "expansion_coefficient_per_K",
+          "delta_temperature_K"
+        ],
+        "title": "LinearExpansionInput",
+        "type": "object"
+      },
+      "name": "thermal.linear_expansion",
+      "network_access": false,
+      "output_schema": {
+        "additionalProperties": false,
+        "properties": {
+          "delta_length_m": {
+            "title": "Delta Length M",
+            "type": "number"
+          },
+          "final_length_m": {
+            "exclusiveMinimum": 0,
+            "title": "Final Length M",
+            "type": "number"
+          }
+        },
+        "required": [
+          "delta_length_m",
+          "final_length_m"
+        ],
+        "title": "LinearExpansionOutput",
+        "type": "object"
+      },
+      "references": [
+        "Linear thermal expansion relation: delta_L = L0 * alpha * delta_T."
+      ],
+      "side_effects": [],
+      "version": "1"
+    }
+  ]
+}

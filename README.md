@@ -89,6 +89,17 @@ Input hashes identify canonical validated inputs, including defaults. Record the
 
 No tool downloads data or launches external jobs. Predictions and expensive simulation adapters will have separate contracts when implemented. Model assumptions and warnings must be considered before applying outputs to an engineering decision.
 
+## Export the catalog
+
+Save the versioned tool descriptors and complete response schema for offline bot discovery:
+
+```sh
+uv run matkit catalog > tool-catalog.json
+uv run matkit catalog-schema > tool-catalog.schema.json
+```
+
+The [committed catalog](catalog/tool-catalog.json) and [catalog schema](catalog/tool-catalog.schema.json) are generated from the same registry used by Python, CLI and MCP. Exports use deterministic UTF-8 JSON and retain catalog format version `1`. Run `uv run --no-sync python scripts/export_catalog.py --check` to verify that artifacts match the installed source and locked dependencies. See [catalog format, validation and regeneration](docs/CATALOG.md).
+
 ## Connect an MCP client
 
 Install the optional official MCP SDK and launch the stdio server:

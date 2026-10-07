@@ -82,3 +82,22 @@ Verification completed on Python 3.12.14:
 - Independent review of API, CLI, scientific/isolation tests, documentation and the example found no unresolved production correctness issues.
 
 The protected PR workflow and repository access policy remain in force. Batch calls are bounded sequential local execution; cross-item dependency graphs and simulation-job scheduling are separate future contracts. The next P1 item is standalone, reproducible machine-readable catalog export.
+
+## 2026-10-07 — Reproducible catalog export, package 0.5.0
+
+Implemented the next P1 item on `feat/reproducible-catalog-export`: a shared version-1 catalog API, `matkit catalog` and `matkit catalog-schema`, and committed JSON artifacts. The catalog preserves the MCP resource's three-field object and all eight scientific descriptors. Strict catalog/descriptor models publish a Draft 2020-12 outer schema; embedded scientific input/output and common response schemas retain their own roots and local references. The MCP resource now uses the same canonical renderer as standalone export.
+
+Canonical exports use sorted keys, two-space indentation, UTF-8 bytes and one final line feed. The CLI writes bytes directly to preserve encoding under legacy stdout settings. Generation rejects non-finite and non-serializable metadata without null replacement. A runtime factory for Python-version provenance removes host-specific schema defaults while preserving execution-time Python versions in actual responses. No science runs or network calls occur during export, and MCP remains optional. Package/lock metadata is 0.5.0; dependency versions and scientific tool versions are unchanged.
+
+Added `scripts/export_catalog.py` and its read-only `--check` mode. Both artifacts are tracked in `catalog/`; missing or byte-stale files fail checks without overwriting them. CI checks generation on Python 3.11–3.13 with MCP and on the base installation. Contributor instructions and docs/CATALOG.md explain regeneration, strict validation, reproducibility limits and separate batch discovery.
+
+Verification completed on Python 3.12.14:
+
+- `uv sync --locked --extra dev --extra mcp`: passed.
+- `uv run --no-sync pytest -q`: **350 passed**. Includes **29** catalog contract cases and **14** CLI/generator cases. All root and batch example inputs validate against published contracts; outer and 17 embedded schemas pass Draft 2020-12 checks. Actual MCP resource text matches Python canonical JSON and committed UTF-8 bytes.
+- `uv run --no-sync python scripts/export_catalog.py --check`: passed. Catalog SHA-256 is `c3c99498d18b1c845b05c5223738dbb8b907ae1841461ceae9c687c50fc3048f`; schema SHA-256 is `8c3aa03fbbc4a3b595251e38045704f64a21af5728212c9542a3b333263c24c1`.
+- `uv run --no-sync ruff check .`: passed. `uv run --no-sync ruff format --check .`: 36 files already formatted. `git diff --check`: passed.
+- `uv build`: source distribution and wheel for 0.5.0 built successfully; wheel contains the new catalog module.
+- Contract testing exposed Pydantic JSON serialization converting open-schema NaN/infinity values to null. Export now preserves values for explicit finite JSON validation, and both API/rendering rejection cases pass. Independent compatibility, artifact, reference-resolution and interface review found no unresolved correctness issues after the fix.
+
+The protected delivery workflow and repository access controls remain active. All current P1 backlog items are implemented. The next P2 scientific capability is optional structure parsing and validation using an established ASE/pymatgen adapter, with reference structures and density/provenance verification.

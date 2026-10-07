@@ -1,0 +1,121 @@
+{
+  "$defs": {
+    "ToolDescriptor": {
+      "additionalProperties": false,
+      "description": "Discoverable scientific contract, independent of a tool's implementation.",
+      "properties": {
+        "assumptions": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Assumptions",
+          "type": "array"
+        },
+        "cost": {
+          "minLength": 1,
+          "title": "Cost",
+          "type": "string"
+        },
+        "dependencies": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Dependencies",
+          "type": "array"
+        },
+        "description": {
+          "minLength": 1,
+          "title": "Description",
+          "type": "string"
+        },
+        "input_schema": {
+          "additionalProperties": true,
+          "title": "Input Schema",
+          "type": "object"
+        },
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "network_access": {
+          "title": "Network Access",
+          "type": "boolean"
+        },
+        "output_schema": {
+          "additionalProperties": true,
+          "title": "Output Schema",
+          "type": "object"
+        },
+        "references": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "References",
+          "type": "array"
+        },
+        "side_effects": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Side Effects",
+          "type": "array"
+        },
+        "version": {
+          "minLength": 1,
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "description",
+        "input_schema",
+        "output_schema",
+        "assumptions",
+        "references",
+        "dependencies",
+        "side_effects",
+        "network_access",
+        "cost"
+      ],
+      "title": "ToolDescriptor",
+      "type": "object"
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "description": "Version 1 catalog matching the existing MCP catalog resource.",
+  "properties": {
+    "catalog_version": {
+      "const": "1",
+      "description": "Catalog discovery contract version.",
+      "title": "Catalog Version",
+      "type": "string"
+    },
+    "response_schema": {
+      "additionalProperties": true,
+      "title": "Response Schema",
+      "type": "object"
+    },
+    "tools": {
+      "items": {
+        "$ref": "#/$defs/ToolDescriptor"
+      },
+      "title": "Tools",
+      "type": "array"
+    }
+  },
+  "required": [
+    "catalog_version",
+    "tools",
+    "response_schema"
+  ],
+  "title": "ToolCatalog",
+  "type": "object"
+}

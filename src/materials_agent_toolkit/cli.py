@@ -4,6 +4,7 @@ import argparse
 import json
 import sys
 
+from materials_agent_toolkit.catalog import catalog_json, catalog_schema_json
 from materials_agent_toolkit.registry import (
     ToolRequest,
     batch_error_response,
@@ -36,6 +37,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Agent-callable materials calculations")
     commands = parser.add_subparsers(dest="command", required=True)
     commands.add_parser("list", help="Discover tools and their JSON schemas")
+    commands.add_parser("catalog", help="Export the canonical versioned tool catalog")
+    commands.add_parser("catalog-schema", help="Export the canonical catalog JSON schema")
     commands.add_parser("batch-schema", help="Discover batch request and response JSON schemas")
     describe = commands.add_parser("describe", help="Describe a single tool")
     describe.add_argument("tool")
@@ -44,6 +47,14 @@ def main() -> int:
         child.add_argument("--request", help="JSON request; default: read from stdin")
     args = parser.parse_args()
     try:
+        if args.command in ("catalog", "catalog-schema"):
+            canonical = catalog_json() if args.command == "catalog" else catalog_schema_json()
+            buffer = getattr(sys.stdout, "buffer", None)
+            if buffer is not None:
+                buffer.write(canonical.encode("utf-8"))
+            else:
+                sys.stdout.write(canonical)
+            return 0
         if args.command == "list":
             payload = {"tools": list_tools()}
         elif args.command == "batch-schema":

@@ -71,6 +71,8 @@ Result values, validated input hashes, scientific references and software versio
 
 Catalog version `1` describes this resource format. Each descriptor includes its own tool version and the raw scientific output schema, while the native MCP tool output schema describes the containing response envelope.
 
+The `materials://catalog` resource uses the same canonical UTF-8 JSON as `matkit catalog` and the committed [catalog artifact](../catalog/tool-catalog.json). Its version-1 three-field object is unchanged. [Standalone export and validation](CATALOG.md) use the base installation and do not require starting an MCP server.
+
 ## Python client example and validation
 
 The bundled [client example](../examples/mcp_client.py) uses `ClientSession` and the SDK's stdio transport:

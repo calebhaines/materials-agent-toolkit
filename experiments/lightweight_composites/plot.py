@@ -175,7 +175,13 @@ def main():
         fontsize=13,
     )
     figure.savefig(args.results / "tradeoffs.png", dpi=180)
-    figure.savefig(args.results / "tradeoffs.svg", metadata={"Date": None})
+    svg_path = args.results / "tradeoffs.svg"
+    figure.savefig(svg_path, metadata={"Date": None})
+    # Matplotlib emits trailing spaces in path data; normalize generated source
+    # whitespace while retaining the vector geometry and embedded raster data.
+    svg_path.write_text(
+        "\n".join(line.rstrip() for line in svg_path.read_text().splitlines()) + "\n"
+    )
     plt.close(figure)
     print("Wrote tradeoffs.png and tradeoffs.svg")
 

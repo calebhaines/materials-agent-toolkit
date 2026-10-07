@@ -1,0 +1,66 @@
+{
+  "experiment_version": "1",
+  "family": "Li2Mn_(1-t-n)Ti_tNb_nO2F",
+  "grid_denominator": 60,
+  "model": {
+    "lithium_atoms_per_formula": 2,
+    "oxygen_atoms_per_formula": 2,
+    "fluorine_atoms_per_formula": 1,
+    "metal_atoms_per_formula": 1,
+    "spectator_oxidation_states": {"Li": 1, "Ti": 4, "Nb": 5, "O": -2, "F": -1},
+    "manganese_initial_mean_valence_min": 2,
+    "manganese_initial_mean_valence_max": 3,
+    "manganese_final_assumed_valence": 4,
+    "redox_scope": "Mn-only formal electron inventory; no oxygen redox, Ti/Nb redox, kinetics or phase inference"
+  },
+  "screen": {
+    "ideal_capacity_min_mAh_g": 250.0,
+    "nb_mass_fraction_max": 0.15
+  },
+  "scenarios": [
+    {
+      "id": "nominal",
+      "label": "Formal full Mn electron inventory, hypothetical 100% utilization",
+      "utilization_numerator": 1,
+      "utilization_denominator": 1
+    },
+    {
+      "id": "utilization_90pct",
+      "label": "Hypothetical 90% utilization of the formal Mn electron inventory",
+      "utilization_numerator": 9,
+      "utilization_denominator": 10
+    },
+    {
+      "id": "utilization_80pct",
+      "label": "Hypothetical 80% utilization of the formal Mn electron inventory",
+      "utilization_numerator": 4,
+      "utilization_denominator": 5
+    },
+    {
+      "id": "utilization_70pct",
+      "label": "Hypothetical 70% utilization of the formal Mn electron inventory",
+      "utilization_numerator": 7,
+      "utilization_denominator": 10
+    }
+  ],
+  "sources": [
+    {
+      "id": "manganese_double_redox_2018",
+      "url": "https://www.nature.com/articles/s41586-018-0015-4",
+      "doi": "10.1038/s41586-018-0015-4",
+      "scope": "Published precedent for Mn2+/Mn4+ lithium-excess oxyfluoride cathodes; author manuscript https://www.osti.gov/servlets/purl/1461423 contains the Li2Mn2/3Nb1/3O2F and Li2Mn1/2Ti1/2O2F controls. This does not validate interpolated compositions."
+    },
+    {
+      "id": "mixed_manganese_titanium_niobium_prior_art",
+      "url": "https://www.nature.com/articles/s41563-020-00816-0",
+      "doi": "10.1038/s41563-020-00816-0",
+      "scope": "Mixed Mn/Ti/Nb oxyfluoride prior art at different Li/O/F ratios, documented in author manuscript https://www.osti.gov/servlets/purl/1766546. The literature search is not exhaustive; no exact-recipe novelty is established."
+    },
+    {
+      "id": "exact_si_constants",
+      "url": "https://www.bipm.org/en/publications/si-brochure",
+      "doi": "",
+      "scope": "Exact defining SI constants e = 1.602176634e-19 C and N_A = 6.02214076e23 mol^-1; Faraday constant is their product."
+    }
+  ]
+}

@@ -125,6 +125,8 @@ Compatible AI clients can discover the nine tools by their names and call them u
 
 The [aluminum–ceramic heat-spreader experiment](experiments/lightweight_composites/REPORT.md) uses sourced constituent data and the existing tools to screen 8,401 recipes, compare controls and test sensitivity. It produces unvalidated candidate hypotheses with explicit prior-art and model limitations. The scripts, inputs, numerical outputs and plot are committed for reproducibility; these results are separate from the scientific tool catalog.
 
+The [manganese oxyfluoride cathode experiment](experiments/manganese_oxyfluorides/REPORT.md) explores a different material class: 331 lithium-rich battery compositions. Actual composition calls supply masses and fractions for a declared Mn-only redox-reservoir screen with niobium-loading tradeoffs, published controls and hypothetical utilization scenarios. It does not predict voltage, reversible capacity, phase formation, cycle life or novelty.
+
 ## Contributing and hourly development
 
 [AGENTS.md](AGENTS.md) specifies the completion criteria for AI contributors. [BACKLOG.md](BACKLOG.md) is the persistent queue, and [RUN_LOG.md](RUN_LOG.md) records verified work. [The hourly task specification](docs/HOURLY_TASK.md) contains a schedule and prompt ready for a ChatGPT automation with GitHub and execution access. The specification is a setup artifact; it does not itself schedule any job.

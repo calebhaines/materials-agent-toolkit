@@ -19,4 +19,6 @@ Stage 2 progress: package 0.3.0 introduced `composition.from_fractions` with exp
 
 A user-directed discovery experiment now exercises the existing tools on sourced aluminum–ceramic heat-spreader recipes, with controls, provenance, deterministic sensitivity scenarios and a scoped prior-art review. It nominates unvalidated recipes; no calibrated property predictor, verified chemical novelty or fabrication result is claimed. See experiments/lightweight_composites/REPORT.md.
 
+A second user-directed experiment explores lithium-rich manganese oxyfluoride battery cathodes through actual composition calls and formal Mn-only charge bookkeeping. The 331-recipe screen compares niobium-loading/capacity tradeoffs with published controls, preserves all 662 response envelopes and exposes sensitivity to assumed accessible charge. Phase formation, transport, voltage, reversible cycling and exact-recipe novelty are unverified. See experiments/manganese_oxyfluorides/REPORT.md; this remains an experiment rather than a production predictor.
+
 Scope and ordering can be adjusted by the owner. Open tasks, acceptance criteria and dependencies belong in BACKLOG.md; completed work belongs in RUN_LOG.md.

@@ -1,0 +1,322 @@
+{
+  "format_version": 1,
+  "research_date_utc": "2026-10-07",
+  "created_at_utc": "2026-10-07T23:26:54.409921+00:00",
+  "scope": "Family-level and nearby-composition literature review for Li2Mn_(1-t-n)Ti_tNb_nO2F cathode stoichiometry screening. No exhaustive exact-composition full-text or patent search.",
+  "search_providers": [
+    "Crossref",
+    "OpenAlex"
+  ],
+  "search_queries": [
+    "Reversible Mn2+ Mn4+ double redox lithium excess",
+    "manganese titanium niobium oxyfluoride cathode",
+    "Li Mn Ti Nb oxyfluoride cathodes",
+    "high entropy cation disordered rocksalt cathodes",
+    "manganese oxyfluoride short range order fluorination",
+    "Li2Mn Ti Nb O2F"
+  ],
+  "copyright_handling": "Full retrieved articles and abstracts are not committed. This file retains bibliographic metadata, paraphrased evidence notes and only very short attributed excerpts.",
+  "sources": [
+    {
+      "source_id": "lee2018_mn_double_redox",
+      "doi": "10.1038/s41586-018-0015-4",
+      "doi_url": "https://doi.org/10.1038/s41586-018-0015-4",
+      "title": "Reversible Mn2+/Mn4+ double redox in lithium-excess cathode materials",
+      "publication": "Nature",
+      "published_date_parts": [
+        [
+          2018,
+          4
+        ]
+      ],
+      "volume": "556",
+      "pages": "185-190",
+      "first_author": "Lee",
+      "crossref_verification": {
+        "url": "https://api.crossref.org/works/10.1038/s41586-018-0015-4",
+        "status": 200,
+        "retrieved_at_utc": "2026-10-07T23:25:34.480988+00:00",
+        "sha256": "6fdf32c50e350ddfc30a0654788e83fe6c4f5dca0d24256ee8ca89bc4ef9ff8a",
+        "bytes": 27501
+      },
+      "retrieved_evidence": [
+        {
+          "url": "https://www.nature.com/articles/s41586-018-0015-4",
+          "kind": "publisher HTML abstract/subscription preview",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 442401,
+          "sha256": "3754deb23321e2e475f3be58824fbc61db27328438609a0bae64e66676fc135c"
+        },
+        {
+          "url": "https://www.osti.gov/servlets/purl/1461423",
+          "kind": "accessible author-manuscript PDF",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 2252816,
+          "sha256": "3afca46ac0f9170f809c49c635782ebe8239a1dfa8705fddb73b7bee182bb278"
+        },
+        {
+          "url": "https://api.openalex.org/works/https://doi.org/10.1038/s41586-018-0015-4",
+          "kind": "OpenAlex metadata connecting repository manuscript with DOI",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 40306,
+          "sha256": "e18f470ec06d162a695e1b41d5e4a8bbabac415d918b6b1374016fe86b08c17e"
+        }
+      ],
+      "evidence_summary": [
+        "Author manuscript lines 62–64 identify Li2Mn2/3Nb1/3O2F and Li2Mn1/2Ti1/2O2F and theoretical Mn2+/Mn4+ capacities about 270 and 230 mAh/g.",
+        "Publisher abstract establishes a high-valent-cation and fluorination strategy in disordered-rocksalt Mn cathodes.",
+        "Manuscript discusses additional oxygen redox and experimentally characterizes the endpoint materials."
+      ],
+      "limits": [
+        "Endpoint specimens do not establish phase formation or performance for other gridpoints.",
+        "The author manuscript has the working title Reversible Mn2+/Mn4+ double redox in high capacity Li-excess cathode materials. Its association with the published DOI was verified through the OSTI repository record indexed by OpenAlex."
+      ],
+      "brief_attributed_excerpt": {
+        "source_url": "https://www.osti.gov/servlets/purl/1461423",
+        "location": "manuscript lines 62–63",
+        "text": "compositions Li2Mn2/3Nb1/3O2F and Li2Mn1/2Ti1/2O2F"
+      }
+    },
+    {
+      "source_id": "lun2020_online_2021_volume_mixed_cations",
+      "doi": "10.1038/s41563-020-00816-0",
+      "doi_url": "https://doi.org/10.1038/s41563-020-00816-0",
+      "title": "Cation-disordered rocksalt-type high-entropy cathodes for Li-ion batteries",
+      "publication": "Nature Materials",
+      "published_date_parts": [
+        [
+          2020,
+          10,
+          12
+        ]
+      ],
+      "volume": "20",
+      "pages": "214-221",
+      "first_author": "Lun",
+      "crossref_verification": {
+        "url": "https://api.crossref.org/works/10.1038/s41563-020-00816-0",
+        "status": 200,
+        "retrieved_at_utc": "2026-10-07T23:25:34.524893+00:00",
+        "sha256": "a7b138bc6451ec6dc74591735f92b5b213336b0ec77e03f1c13776d0b7b2a2ed",
+        "bytes": 30810
+      },
+      "retrieved_evidence": [
+        {
+          "url": "https://www.nature.com/articles/s41563-020-00816-0",
+          "kind": "publisher HTML abstract/subscription preview",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 412258,
+          "sha256": "ce8ddb1bfe753811bea0a6acfe906cb998a0131e22bd4eef2a80bb679cd4305f"
+        },
+        {
+          "url": "https://www.osti.gov/servlets/purl/1766546",
+          "kind": "accessible author-manuscript PDF",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 30671725,
+          "sha256": "3fad63800250b5a33cae3668540a5f8a185699d763b29c37191c5d0ab2a54332"
+        },
+        {
+          "url": "https://escholarship.org/content/qt83j0h96d/qt83j0h96d.pdf",
+          "kind": "independently retrieved matching repository PDF",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 30671725,
+          "sha256": "3fad63800250b5a33cae3668540a5f8a185699d763b29c37191c5d0ab2a54332"
+        }
+      ],
+      "evidence_summary": [
+        "Author manuscript explicitly gives TM4 as Li1.3Mn(II)0.2Mn(III)0.2Ti0.1Nb0.2O1.7F0.3.",
+        "The paper studies how cation short-range order affects lithium transport and electrochemistry.",
+        "Nature Materials volume 20 pages 214–221 corresponds to 2021; publication was online 2020-10-12."
+      ],
+      "limits": [
+        "TM4 uses different Li/O/F stoichiometry from Li2Mn_(1-t-n)Ti_tNb_nO2F.",
+        "No exact-recipe novelty finding follows from this family-level prior art.",
+        "More components do not by themselves establish a high-entropy or transport advantage."
+      ],
+      "brief_attributed_excerpt": {
+        "source_url": "https://www.osti.gov/servlets/purl/1766546",
+        "location": "main-text prototype composition paragraph, TM4",
+        "text": "Li1.3Mn2+0.2Mn3+0.2Ti0.1Nb0.2O1.7F0.3"
+      }
+    },
+    {
+      "source_id": "chemmater2021_ti_series",
+      "doi": "10.1021/acs.chemmater.1c02334",
+      "doi_url": "https://doi.org/10.1021/acs.chemmater.1c02334",
+      "title": "Toward Better Stability and Reversibility of the Mn 4+ /Mn 2+ Double Redox Activity in Disordered Rocksalt Oxyfluoride Cathode Materials",
+      "publication": "Chemistry of Materials",
+      "published_date_parts": [
+        [
+          2021,
+          10,
+          18
+        ]
+      ],
+      "volume": "33",
+      "pages": "8235-8247",
+      "first_author": "Shirazi Moghadam",
+      "crossref_verification": {
+        "url": "https://api.crossref.org/works/10.1021/acs.chemmater.1c02334",
+        "status": 200,
+        "retrieved_at_utc": "2026-10-07T23:25:34.544136+00:00",
+        "sha256": "2cfe55a4a0adcf5e821334a00dea353d47b10775213898c2d3c7010ab03d061a",
+        "bytes": 9775
+      },
+      "retrieved_evidence": [
+        {
+          "url": "https://api.openalex.org/works/https://doi.org/10.1021/acs.chemmater.1c02334",
+          "kind": "OpenAlex indexed abstract and publication metadata",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 22056,
+          "sha256": "2475855c6c304531c06dc609eb31223e49c55eb98146fd161f53550a0bbdff53"
+        },
+        {
+          "url": "https://pubs.acs.org/doi/10.1021/acs.chemmater.1c02334",
+          "kind": "publisher HTML",
+          "http_status": 403,
+          "retrieved_date_utc": "2026-10-07",
+          "access_status": "forbidden"
+        }
+      ],
+      "evidence_summary": [
+        "OpenAlex indexed abstract describes Li2Mn_(1-x)Ti_xO2F for 0 <= x <= 2/3.",
+        "The indexed abstract reports Ti3+ and oxygen oxidation in Ti-rich compositions."
+      ],
+      "limits": [
+        "Only indexed abstract and bibliographic metadata were retrieved; full text was not verified.",
+        "Fixed Ti4+ spectator behavior is a declared model assumption, not established for all Ti-rich compositions."
+      ]
+    },
+    {
+      "source_id": "aenm2020_fluorination_transport",
+      "doi": "10.1002/aenm.201903240",
+      "doi_url": "https://doi.org/10.1002/aenm.201903240",
+      "title": "Effect of Fluorination on Lithium Transport and Short‐Range Order in Disordered‐Rocksalt‐Type Lithium‐Ion Battery Cathodes",
+      "publication": "Advanced Energy Materials",
+      "published_date_parts": [
+        [
+          2020,
+          2,
+          3
+        ]
+      ],
+      "volume": "10",
+      "pages": null,
+      "first_author": "Ouyang",
+      "crossref_verification": {
+        "url": "https://api.crossref.org/works/10.1002/aenm.201903240",
+        "status": 200,
+        "retrieved_at_utc": "2026-10-07T23:25:34.490886+00:00",
+        "sha256": "48c3c37a0247d2c2a1aa3632b1f4373779fe8daf48057d599a980d01242c876d",
+        "bytes": 12556
+      },
+      "retrieved_evidence": [
+        {
+          "url": "https://api.crossref.org/works/10.1002/aenm.201903240",
+          "kind": "Crossref deposited abstract and metadata",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 12556,
+          "sha256": "48c3c37a0247d2c2a1aa3632b1f4373779fe8daf48057d599a980d01242c876d"
+        }
+      ],
+      "evidence_summary": [
+        "Crossref deposited abstract describes DFT and Monte Carlo modeling of Li-F short-range ordering, lithium percolation and diffusion.",
+        "Abstract discusses tradeoffs among transition-metal capacity, lithium transport and synthetic accessibility."
+      ],
+      "limits": [
+        "Evidence reviewed is a deposited abstract, not a new simulation of these recipes.",
+        "Charge balance and fixed lithium fraction do not establish diffusion pathways or usable capacity."
+      ]
+    },
+    {
+      "source_id": "jacs2020_trapped_oxygen",
+      "doi": "10.1021/jacs.0c10270",
+      "doi_url": "https://doi.org/10.1021/jacs.0c10270",
+      "title": "Redox Chemistry and the Role of Trapped Molecular O2 in Li-Rich Disordered Rocksalt Oxyfluoride Cathodes",
+      "publication": "Journal of the American Chemical Society",
+      "published_date_parts": [
+        [
+          2020,
+          12,
+          15
+        ]
+      ],
+      "volume": "142",
+      "pages": "21799-21809",
+      "first_author": "Sharpe",
+      "crossref_verification": {
+        "url": "https://api.crossref.org/works/10.1021/jacs.0c10270",
+        "status": 200,
+        "retrieved_at_utc": "2026-10-07T23:25:34.518473+00:00",
+        "sha256": "c4e18b2792e592ad376c6274ecce10d76ef7a95261e607304b15ed9cb79b021d",
+        "bytes": 28260
+      },
+      "retrieved_evidence": [
+        {
+          "url": "https://api.crossref.org/works/10.1021/jacs.0c10270",
+          "kind": "Crossref deposited abstract and metadata",
+          "http_status": 200,
+          "retrieved_date_utc": "2026-10-07",
+          "bytes": 28260,
+          "sha256": "c4e18b2792e592ad376c6274ecce10d76ef7a95261e607304b15ed9cb79b021d"
+        }
+      ],
+      "evidence_summary": [
+        "Crossref deposited abstract discusses Li2MnO2F, trapped molecular O2 formed during oxygen redox and overlap with Mn redox.",
+        "The abstract describes Mn3+/Mn4+ redox without evidence of Mn5+ or Mn7+ in that studied material."
+      ],
+      "limits": [
+        "Li2MnO2F is a comparator, not proof of the mechanism or reversibility of oxygen redox in other formulas.",
+        "Mn-only bookkeeping is not a total-capacity ceiling when oxygen redox participates."
+      ]
+    },
+    {
+      "source_id": "acsaem2026_nb_rich_metadata",
+      "doi": "10.1021/acsaem.6c00915",
+      "doi_url": "https://doi.org/10.1021/acsaem.6c00915",
+      "title": "Redox Chemistry of a Lithium-Excess Disordered-Rocksalt Oxyfluoride Cathode: Li 2 Mn 0.625 Nb 0.375 O 2 F",
+      "publication": "ACS Applied Energy Materials",
+      "published_date_parts": [
+        [
+          2026,
+          6,
+          8
+        ]
+      ],
+      "volume": null,
+      "pages": null,
+      "first_author": "Aflakian",
+      "crossref_verification": {
+        "url": "https://api.crossref.org/works/10.1021/acsaem.6c00915",
+        "status": 200,
+        "retrieved_at_utc": "2026-10-07T23:25:34.546612+00:00",
+        "sha256": "76f056713b975816689157950941139e316e203c6bc1f530a6fba3df735fd6f9",
+        "bytes": 7869
+      },
+      "retrieved_evidence": [
+        {
+          "url": "https://pubs.acs.org/doi/10.1021/acsaem.6c00915",
+          "kind": "publisher HTML",
+          "http_status": 403,
+          "retrieved_date_utc": "2026-10-07",
+          "access_status": "forbidden"
+        }
+      ],
+      "evidence_summary": [
+        "Crossref DOI/title/date metadata identifies Li2Mn0.625Nb0.375O2F and publication date 2026-06-08."
+      ],
+      "limits": [
+        "Only title and bibliographic metadata are used as verified evidence here; no performance or mechanism claim is taken from the article.",
+        "Under the screen fixed species charges the title formula implies average Mn +1.8, outside the declared +2 to +3 screen. That is a model bookkeeping observation, not an experimental valence determination."
+      ]
+    }
+  ]
+}

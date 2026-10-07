@@ -1,0 +1,11 @@
+{
+  "batch_version": "1",
+  "requests": [
+    {
+      "tool": "composition.from_fractions",
+      "input": {"fractions": {"Ni": 0.5, "Ti": 0.5}, "basis": "atomic"}
+    },
+    {"tool": "missing.tool", "input": {}},
+    {"tool": "composition.analyze", "input": {"formula": "H2O"}}
+  ]
+}

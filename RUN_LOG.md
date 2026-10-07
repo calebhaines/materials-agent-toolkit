@@ -66,3 +66,19 @@ Verification completed on Python 3.12.14:
 - Independent scientific and interface review found a near-pure Li/Be conversion that rounded a dominant fraction above one. Added a regression for both bases, enforced positive fractions at most one and documented endpoint corrections bounded to four binary64 ulps. Larger excursions and loss of a positive trace remain domain errors. Review found no unresolved correctness issues after the fix.
 
 The owner permitted direct pushes, but protected `main` requires PR delivery and all four existing CI checks. This run preserves those controls and uses the maintainer-authorized merge workflow. CI exercises Python 3.11–3.13 and the base installation. The next P1 agent-interface item is a bounded batch API and CLI with stable ordering and per-item errors.
+
+## 2026-10-07 — Bounded batch API and CLI, package 0.4.0
+
+Implemented the next P1 agent-interface item on `feat/bounded-batch-calls`. `run_batch` accepts batch format version 1 with 1–100 raw request items, validates the strict outer envelope before execution, then dispatches each item sequentially through the existing registry. Results preserve input order and each item's scientific result, warnings, error taxonomy, validated input hash and software/reference provenance. Repeated requests execute independently without deduplication. Mixed outcomes return `partial`; all-item failures remain distinguishable from a structural `INVALID_BATCH` error. Unexpected item exceptions are redacted and isolated, while process interrupts propagate.
+
+Added `matkit batch` with stdin/argument input, consistent JSON envelopes and exit code 0 only for all-success batches. `matkit batch-schema` and `describe_batch` expose the format version, bound, execution mode, envelope schemas and single-item request schema. Machine-readable field descriptions explain how malformed items are handled independently. A mixed NiTi/unknown-tool/water example and docs/BATCH.md document statuses, summary counts, limits and provenance. The eight scientific tool contracts and the MCP interface are unchanged; dependency versions are unchanged and package/lock metadata is 0.4.0.
+
+Verification completed on Python 3.12.14:
+
+- `uv sync --locked --extra dev --extra mcp`: passed.
+- `uv run --no-sync pytest -q`: **307 passed**. Includes **40** batch API cases and **22** batch CLI cases. Analytical water/NiTi/isotropic references and schemas confirm unchanged scientific results; bounds, invalid-envelope no-execution, malformed middle items, stable ordering, repeated calls, hash preservation, unexpected failure redaction, interrupts, finite JSON serialization and Python/CLI parity are covered.
+- `uv run --no-sync ruff check .`: passed. `uv run --no-sync ruff format --check .`: 31 files already formatted. `git diff --check`: passed.
+- `uv build`: source distribution and wheel for 0.4.0 built successfully.
+- Independent review of API, CLI, scientific/isolation tests, documentation and the example found no unresolved production correctness issues.
+
+The protected PR workflow and repository access policy remain in force. Batch calls are bounded sequential local execution; cross-item dependency graphs and simulation-job scheduling are separate future contracts. The next P1 item is standalone, reproducible machine-readable catalog export.

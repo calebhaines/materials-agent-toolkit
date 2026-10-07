@@ -18,3 +18,20 @@ Independent interface review found and resolved incorrect dependency provenance,
 CI is configured for Python 3.11, 3.12 and 3.13; the first GitHub run will verify those environments. The next priority is an MCP interface using the same tool registry and contracts.
 
 No ChatGPT automation has been created: the current session has no callable automation tool. The hourly task specification is prepared for activation with execution and GitHub access.
+
+## 2026-10-07 — Optional MCP integration, package 0.2.0
+
+Implemented the next P1 item on branch `feat/mcp-agent-interface`: an optional stdio MCP server backed by the same scientific registry. All seven tools publish their strict raw input schemas, full result-envelope output schemas, versions, assumptions, references and read-only annotations. Calls preserve structured errors, scientific results and provenance, with equivalent machine-readable and text content. JSON resources expose the catalog and response schema.
+
+Added a runnable official-SDK client example, client configuration and protocol documentation. The MCP extra is separate from the base dependencies. The base package and CLI remain usable without it; server startup then returns exit code 2 with installation guidance on stderr and no traceback or stdout. Updated the lockfile and configured CI to exercise both MCP-enabled and base-only installations. Scientific tool contracts remain version 1.
+
+Verification completed locally:
+
+- Complete MCP-enabled suite on Python 3.11.16, 3.12.14 and 3.13.5: **169 passed on each interpreter**, including 14 adapter tests and nine real stdio integration tests.
+- Base-only environment on Python 3.12.14: **146 passed, two MCP test modules skipped**. Independently verified all tool discovery and missing-extra module/console startup behavior.
+- `ruff check .`: passed. `ruff format --check .`: 24 files already formatted. `git diff --check`: passed.
+- `uv build`: source distribution and wheel for version 0.2.0 built successfully.
+- Client example successfully returned the structured H2O calculation with 18.015 g/mol molar mass.
+- Independent review found no correctness defects and verified real JSON-RPC calls, structured failures followed by successful calls, unsupported resource rejection and clean shutdown without protocol stdout contamination.
+
+GitHub publication is blocked in this session: both available credentials return API 404 for the private repository, and Git fetch returns HTTP 403. No branch or pull request has been published for this change. The local branch, source archive and patch preserve the completed work for publication once repository access is restored. The next scientific priority is structured fractional compositions for alloy inputs; the next agent-interface priority is bounded batch execution.

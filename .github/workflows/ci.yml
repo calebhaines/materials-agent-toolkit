@@ -19,7 +19,35 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - uses: astral-sh/setup-uv@v6
-      - run: uv sync --locked --extra dev
+      - run: uv sync --locked --extra dev --extra mcp
       - run: uv run --no-sync pytest
       - run: uv run --no-sync ruff check .
       - run: uv run --no-sync ruff format --check .
+
+  base-install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked --extra dev
+      - run: uv run --no-sync pytest
+      - name: Verify optional MCP dependency behavior
+        run: |
+          uv run --no-sync python - <<'PY'
+          import importlib.util
+          import json
+          import subprocess
+          import sys
+          assert importlib.util.find_spec("mcp") is None
+          result = subprocess.run([sys.executable, "-m", "materials_agent_toolkit", "list"], capture_output=True, text=True)
+          assert result.returncode == 0, result.stderr
+          assert len(json.loads(result.stdout)["tools"]) == 7
+          result = subprocess.run([sys.executable, "-m", "materials_agent_toolkit.mcp_server"], capture_output=True, text=True)
+          assert result.returncode == 2
+          assert result.stdout == ""
+          assert "mcp" in result.stderr.lower()
+          assert "Traceback" not in result.stderr
+          PY

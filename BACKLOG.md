@@ -12,6 +12,7 @@ Select one bounded item per development run. Update status and link the branch/p
 | P2 | Optional structure module using ASE/pymatgen | Installation extra; single ordered CIF parsing, cell validation, bounded symmetry expansion and density; analytical references, provenance and Python/CLI/MCP parity; base-install missing-extra behavior | Complete in package 0.6.0 on `feat/ase-cif-structures`; 500 tests pass; see RUN_LOG.md |
 | P2 | Scientific benchmark suite | Reference sources and justified tolerances; independently validated anisotropic elastic case | Ready |
 | P2 | Unit-aware property records and screening | Provenance-bearing property schema; explicit constraints/units; no fabricated property values | Ready |
+| User-directed | Try material discovery using existing tools | Sourced phase properties; reproducible composition search and controls; physical model limits; sensitivity and prior-art review; report candidate hypotheses without asserting novelty | Complete on `experiment/lightweight-composite-discovery`; 8401 recipes / 58807 scenario evaluations; 531 tests pass; candidate novelty and performance remain unverified |
 | P3 | Thermodynamics with supplied energies | Compatibility contract and hull reference cases defined before implementation | Planned |
 | P3 | First simulation adapter | Choose engine; define preparation/parsing separately from execution; document integration environment | Planned |
 | P3 | Property prediction baseline | Select licensed dataset, baseline metric, leakage-resistant split and applicability evaluation | Planned |

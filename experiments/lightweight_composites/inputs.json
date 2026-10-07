@@ -1,0 +1,212 @@
+{
+  "experiment_version": "1",
+  "status": "screening_hypothesis",
+  "purpose": "Generate model-ranked lightweight stiff heat-spreader composite recipes for experimental validation; no established chemical novelty or synthesizability.",
+  "screen": {
+    "grid_step_vol_percent": 1,
+    "min_ceramic_vol_percent": 5,
+    "max_ceramic_vol_percent": 35,
+    "density_max_kg_m3": 3000.0,
+    "specific_modulus_min_GPa_per_g_cm3": 32.0,
+    "conductivity_min_W_m_K": 190.0,
+    "cte_proxy_max_per_K": 1.8e-05
+  },
+  "constituents": [
+    {
+      "id": "Al",
+      "role": "matrix",
+      "formula": "Al",
+      "grade": "Pure aluminum, handbook-backed ambient proxy",
+      "density_kg_m3": 2700.0,
+      "young_modulus_GPa": 70.2,
+      "poisson_ratio": 0.345,
+      "cte_per_K": 2.31e-05,
+      "conductivity_W_m_K": 237.0,
+      "source_ids": [
+        "al_matmake"
+      ],
+      "temperature_notes": "E, nu and density are ambient proxies near 20°C; alpha is at 25°C and conductivity at 27°C."
+    },
+    {
+      "id": "SiC",
+      "role": "reinforcement",
+      "formula": "SiC",
+      "grade": "CeramaSil-C consolidated ceramic",
+      "density_kg_m3": 3100.0,
+      "young_modulus_GPa": 350.0,
+      "poisson_ratio": 0.14,
+      "cte_per_K": 4.02e-06,
+      "conductivity_W_m_K": 102.6,
+      "source_ids": [
+        "sic_supplier"
+      ],
+      "elastic_modulus_source_range_GPa": [
+        350.0,
+        400.0
+      ],
+      "temperature_notes": "Mechanical temperature is unspecified. Alpha is a mean over 25–400°C; conductivity at 25°C. Baseline E=350 GPa is the lower listed endpoint, not a measured composite property."
+    },
+    {
+      "id": "AlN",
+      "role": "reinforcement",
+      "formula": "AlN",
+      "grade": "CeramAlum PCAN1000S consolidated substrate",
+      "density_kg_m3": 3300.0,
+      "young_modulus_GPa": 320.0,
+      "poisson_ratio": 0.22,
+      "cte_per_K": 4.6e-06,
+      "conductivity_W_m_K": 170.0,
+      "source_ids": [
+        "aln_pdf",
+        "aln_html"
+      ],
+      "temperature_notes": "Mechanical temperature is unspecified. Alpha is a mean over 25–400°C. Conductivity temperature is unspecified in the PDF; same-grade HTML states 25°C. E differs between PDF 320 GPa and HTML 350 GPa."
+    },
+    {
+      "id": "Al2O3",
+      "role": "reinforcement",
+      "formula": "Al2O3",
+      "grade": "CeramAlox99.7% consolidated alumina",
+      "density_kg_m3": 3950.0,
+      "young_modulus_GPa": 370.0,
+      "poisson_ratio": 0.23,
+      "cte_per_K": 6.5e-06,
+      "conductivity_W_m_K": 33.0,
+      "source_ids": [
+        "alumina_pdf",
+        "alumina_html"
+      ],
+      "temperature_notes": "Mechanical temperature is unspecified. PDF alpha is a mean over 25–400°C; HTML gives 25–300°C. Conductivity temperature is unspecified in the PDF; same-grade HTML states 25°C."
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "nominal",
+      "kind": "baseline_typical_bulk_grade_inputs",
+      "property_scales": {},
+      "property_overrides": {}
+    },
+    {
+      "id": "source_high_moduli",
+      "kind": "source_disagreement_and_listed_endpoint_comparison",
+      "property_scales": {},
+      "property_overrides": {
+        "SiC": {
+          "young_modulus_GPa": 400.0
+        },
+        "AlN": {
+          "young_modulus_GPa": 350.0
+        }
+      }
+    },
+    {
+      "id": "matrix_5pct_softer",
+      "kind": "hypothetical_nonprobabilistic_stress",
+      "property_scales": {},
+      "property_overrides": {
+        "Al": {
+          "young_modulus_GPa": 66.69
+        }
+      }
+    },
+    {
+      "id": "conductivity_10pct_lower",
+      "kind": "hypothetical_nonprobabilistic_stress_not_interface_model",
+      "property_scales": {
+        "conductivity_W_m_K": 0.9
+      },
+      "property_overrides": {}
+    },
+    {
+      "id": "density_2pct_higher",
+      "kind": "hypothetical_nonprobabilistic_stress",
+      "property_scales": {
+        "density_kg_m3": 1.02
+      },
+      "property_overrides": {}
+    },
+    {
+      "id": "cte_proxies_10pct_higher",
+      "kind": "hypothetical_nonprobabilistic_stress",
+      "property_scales": {
+        "cte_per_K": 1.1
+      },
+      "property_overrides": {}
+    },
+    {
+      "id": "combined_stress",
+      "kind": "joint_hypothetical_stress_not_probability_or_validated_microstructure_model",
+      "property_scales": {
+        "conductivity_W_m_K": 0.9,
+        "density_kg_m3": 1.02,
+        "cte_per_K": 1.1
+      },
+      "property_overrides": {
+        "Al": {
+          "young_modulus_GPa": 66.69
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "al_matmake",
+      "title": "Table of Aluminum Properties",
+      "publisher": "Matmake",
+      "url": "https://matmake.com/materials-data/aluminum-properties.html",
+      "accessed_date": "2026-10-07",
+      "evidence": "Handbook-backed secondary table; ambient approximately 20°C unless stated, CTE at 25°C and conductivity at 27°C. Independently listed K/G values are omitted because they are inconsistent with the selected E and nu."
+    },
+    {
+      "id": "sic_supplier",
+      "title": "Silicon Carbide Properties, CeramaSil-C",
+      "publisher": "Precision Ceramics",
+      "url": "https://precision-ceramics.com/materials/silicon-carbide/",
+      "accessed_date": "2026-10-07",
+      "evidence": "Typical consolidated-grade properties. E is 350–400 GPa; baseline uses the lower listed endpoint 350 and source-high scenario 400. CTE is the mean over 25–400°C; conductivity is at 25°C. Mechanical-property temperature is unspecified."
+    },
+    {
+      "id": "aln_pdf",
+      "title": "Material Datasheet, Aluminum Nitride, CeramAlum PCAN1000S Substrate",
+      "publisher": "Precision Ceramics",
+      "url": "https://precision-ceramics.com/wp-content/uploads/Aluminum-Nitride-PCAN1000S-Technical-Data-Sheet.pdf",
+      "accessed_date": "2026-10-07",
+      "content_sha256": "b0adcbe9a5ba814900f76223bab1a36e9077bae280513a80b5b7905695c98fa5",
+      "evidence": "PDF E=320 GPa is the baseline; same-grade HTML says 350 GPa. Selected PDF values are rho=3300 kg/m3, nu=0.22, k=170 W/(m K), alpha=4.6e-6/K (25–400°C mean). Mechanical and conductivity temperatures are unspecified in the PDF."
+    },
+    {
+      "id": "aln_html",
+      "title": "Aluminum Nitride Properties, PCAN1000S",
+      "publisher": "Precision Ceramics",
+      "url": "https://precision-ceramics.com/materials/aluminum-nitride/",
+      "accessed_date": "2026-10-07",
+      "evidence": "Same-grade HTML lists E=350 GPa, used only in the source-high comparison, and specifies conductivity at 25°C."
+    },
+    {
+      "id": "alumina_pdf",
+      "title": "Material Datasheet, Alumina (Al2O3),99.7% CeramAlox",
+      "publisher": "Precision Ceramics",
+      "url": "https://precision-ceramics.com/wp-content/uploads/Alumina-99.7-Technical-Data-Sheet.pdf",
+      "accessed_date": "2026-10-07",
+      "content_sha256": "7914e37b4936dadc0309a97200ee0a312ded847427640994ab5ec0900056df9c",
+      "evidence": "Typical bulk-grade properties: rho=3950 kg/m3, E=370 GPa, nu=0.23, k=33 W/(m K), alpha=6.5e-6/K (25–400°C mean). Mechanical and conductivity temperatures are unspecified in the PDF."
+    },
+    {
+      "id": "alumina_html",
+      "title": "Alumina Properties,99.7%",
+      "publisher": "Precision Ceramics",
+      "url": "https://precision-ceramics.com/materials/alumina/",
+      "accessed_date": "2026-10-07",
+      "evidence": "Same-grade HTML specifies conductivity at 25°C; alpha=6.5e-6/K is labeled 25–300°C, differing from the PDF interval 25–400°C. This screen uses the PDF thermal interval."
+    }
+  ],
+  "assumptions": [
+    "Linear isotropic consolidated-phase proxies, perfect elastic bonding, zero porosity, retained supplied phases and no residual stress.",
+    "Thermal conductivity bounds assume perfect Fourier contact; interfaces can invalidate their use as lower bounds on fabricated specimens.",
+    "Volume-average and Turner CTE are alternative proxies, not rigorous bounds; source temperature intervals differ.",
+    "Consolidated-grade and substrate data are not verified powder or composite properties; additives/impurities ignored in formula-based elemental estimates.",
+    "Source and stress scenarios are deterministic comparisons, not statistical confidence intervals or calibrated prediction uncertainty.",
+    "No phase stability, reaction kinetics, strength, toughness, fatigue, cost, fabrication feasibility, or chemical novelty is predicted."
+  ],
+  "data_reuse": "Small factual property subset with source attribution; no open redistribution license asserted and full supplier tables/PDFs are not redistributed."
+}

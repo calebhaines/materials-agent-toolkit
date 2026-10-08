@@ -21,4 +21,6 @@ A research discovery experiment now exercises the existing tools on sourced alum
 
 A second research experiment explores lithium-rich manganese oxyfluoride battery cathodes through actual composition calls and formal Mn-only charge bookkeeping. The 331-recipe screen compares niobium-loading/capacity tradeoffs with published controls, preserves all 662 response envelopes and exposes sensitivity to assumed accessible charge. Phase formation, transport, voltage, reversible cycling and exact-recipe novelty are unverified. See experiments/manganese_oxyfluorides/REPORT.md; this remains an experiment rather than a production predictor.
 
+A third investigation plans home-processable biopolymers: plain purchased PCL, exploratory native-starch/PCL feeds and alginate/wax films. It records 13 ideal feed budgets, 20 complete composition responses and 39 blank empirical trial records, with manufacturer-supported PCL forming guidance and bounded water tests. No property prediction, fabricated observation, new polymer or home-compost claim is supplied. Actual matched specimens and grade-specific environmental-conversion evidence are the next research steps. See experiments/home_biopolymers/REPORT.md.
+
 Open tasks, acceptance criteria and dependencies belong in BACKLOG.md; completed work belongs in RUN_LOG.md.

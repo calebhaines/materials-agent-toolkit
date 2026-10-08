@@ -127,6 +127,8 @@ The [aluminum–ceramic heat-spreader experiment](experiments/lightweight_compos
 
 The [manganese oxyfluoride cathode experiment](experiments/manganese_oxyfluorides/REPORT.md) explores a different material class: 331 lithium-rich battery compositions. Actual composition calls supply masses and fractions for a declared Mn-only redox-reservoir screen with niobium-loading tradeoffs, published controls and hypothetical utilization scenarios. It does not predict voltage, reversible capacity, phase formation, cycle life or novelty.
 
+The [home-processable biopolymer investigation](experiments/home_biopolymers/REPORT.md) supplies sourced PCL forming guidance, 13 formulation plans, 20 actual composition responses and a practical water-testing protocol. Plain purchased PCL is the first benchmark; native-starch additions and alginate/wax films are unvalidated comparisons. No physical specimens, waterproof results, novel polymer or home-compost outcome are established.
+
 ## Development
 
 [AGENTS.md](AGENTS.md) describes scientific completion criteria. [BACKLOG.md](BACKLOG.md) tracks planned work, and [RUN_LOG.md](RUN_LOG.md) records implemented behavior and validation.

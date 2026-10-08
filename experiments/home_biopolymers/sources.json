@@ -1,0 +1,523 @@
+{
+  "source_record_version": 1,
+  "retrieved_on": "2026-10-08",
+  "scope": "Bounded evidence review for small, solvent-free home prototypes: purchased PCL remolding and an aqueous alginate/wax comparator. No experiment has measured waterproofness, compostability, toxicity, mechanical performance or novelty.",
+  "redistribution": "Only citation metadata, short paraphrased factual subsets and retrieval fingerprints are committed. Source articles, manufacturer PDFs, photographs and full page captures are not redistributed.",
+  "evidence_rules": [
+    "Keep verified primary measurements, review explanations, publisher-abstract facts and manufacturer claims separate.",
+    "Water insolubility, contact angle, water-vapor permeability, swelling, leak resistance and continuous-immersion durability are different endpoints.",
+    "Mass loss and fragmentation are not proof of complete microbial conversion to carbon dioxide, water and biomass.",
+    "Certification scope belongs to the tested grade, formulation and article geometry; it is not inherited by a new blend.",
+    "Native starch is not thermoplastic starch; a published high-shear/high-temperature blend method does not validate low-temperature hand mixing."
+  ],
+  "search_limits": "Scoped searches through Crossref and Europe PMC and direct source retrieval. Not an exhaustive literature, patent, certificate or exact-recipe novelty review. No verified primary home-compost mineralization assay for the specific craft grade or proposed 5/10 wt% native-starch blends was found.",
+  "sources": [
+    {
+      "id": "instamorph_sds",
+      "kind": "manufacturer",
+      "title": "InstaMorph Moldable Plastic: Material Safety Data Sheet, Version 2",
+      "url": "https://cdn.shopify.com/s/files/1/0615/5901/3537/files/20220814_InstaMorph_MSDS_updated.pdf?v=1671634714",
+      "evidence_level": "manufacturer product information; not independent performance validation",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://cdn.shopify.com/s/files/1/0615/5901/3537/files/20220814_InstaMorph_MSDS_updated.pdf?v=1671634714",
+        "representation": "manufacturer PDF",
+        "sha256": "b3f9071ba446108d3faae22fa8b15b98acbf383d79b26e23871bf20b3395c47b",
+        "bytes": 421151
+      },
+      "verified_factual_subset": [
+        "Reviewed internally on 2015-06-22; the 2022 upload filename is not an updated internal review date.",
+        "Section 3 identifies greater than 99% 2-oxepanone homopolymer, CAS 24980-41-4 (polycaprolactone).",
+        "Section 9 lists a melting range of 58–60 degrees Celsius and insolubility in water.",
+        "Section 2 says not classified according to GHS; sections 4 and 8 still address hot-product contact and eye protection.",
+        "Sections 9–10 place decomposition at approximately 200 degrees Celsius; this is not a recommended processing temperature.",
+        "Section 12 gives no persistence/degradability information while also asserting readily biodegradable without a test method or result."
+      ],
+      "transfer_limits": [
+        "Water insolubility does not establish a pore-free or leak-free home-molded article.",
+        "Not GHS classified does not mean hot water or softened polymer cannot burn.",
+        "The ecological assertion is not independent biodegradation data, a home-compost certificate, or evidence for an arbitrary filled article.",
+        "Do not transfer product claims to pigments, fillers, other suppliers or applications without their own evidence."
+      ],
+      "sections_checked": [
+        "1–4",
+        "8–10",
+        "12"
+      ],
+      "internally_reviewed": "2015-06-22"
+    },
+    {
+      "id": "instamorph_instructions",
+      "kind": "manufacturer",
+      "title": "InstaMorph: How to use InstaMorph instruction image",
+      "url": "https://www.instamorph.com/images/581/22940586/howtouse-small-Q7o4Md43Hj3UqBKjE3tWvg.jpg",
+      "evidence_level": "manufacturer product information; not independent performance validation",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.instamorph.com/images/581/22940586/howtouse-small-Q7o4Md43Hj3UqBKjE3tWvg.jpg",
+        "representation": "visually inspected manufacturer JPEG",
+        "sha256": "33b7ee0cda8310ebe4acf57d726534ac709f2c2c5825536f334c307f211f5601",
+        "bytes": 46950
+      },
+      "verified_factual_subset": [
+        "Instruction graphic specifies heating water to approximately 150 degrees Fahrenheit / 66 degrees Celsius.",
+        "Add pellets, wait approximately two minutes until clear, remove using a tool, and mold."
+      ],
+      "transfer_limits": [
+        "This is vendor processing guidance for its unfilled product, not an experimentally validated recipe for native-starch blends.",
+        "Two minutes is the depicted vendor guidance, not proof that every specimen thickness or quantity reaches a uniform temperature.",
+        "Use tools to remove material and allow comfortable cooling before handling; avoid trapped hot water."
+      ],
+      "landing_url": "https://www.instamorph.com/using-instamorph/"
+    },
+    {
+      "id": "instamorph_faq",
+      "kind": "manufacturer",
+      "title": "InstaMorph frequently asked questions",
+      "url": "https://www.instamorph.com/faq/",
+      "evidence_level": "manufacturer product information; not independent performance validation",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.instamorph.com/faq/",
+        "representation": "HTML",
+        "sha256": "736de7bbc6d39d28794cfded7de8d26d2bdc9863734b05f354822214c34bc270",
+        "bytes": 26151
+      },
+      "verified_factual_subset": [
+        "The vendor says the material has not been formally certified as food safe by the FDA.",
+        "The vendor says it is not dishwasher safe because water above 140 degrees Fahrenheit can soften it.",
+        "The vendor describes pressing the softened material into molds rather than pouring it.",
+        "The vendor gives watertight perfume bottles and flower vases as possible uses."
+      ],
+      "transfer_limits": [
+        "The watertight-container statement is a vendor example, with no retrieved leak-test method, specimen dimensions or measured result.",
+        "No food-contact, potable-water or medical claim is established by the craft product information.",
+        "Do not use the FAQ room-temperature density of 1.55 g/cm3 as a generic PCL input; it was not independently resolved."
+      ]
+    },
+    {
+      "id": "plastimake_instructions",
+      "kind": "manufacturer",
+      "title": "Plastimake: How to use Plastimake",
+      "url": "https://www.plastimake.com/instructions/",
+      "evidence_level": "manufacturer product information; not independent performance validation",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.plastimake.com/instructions/",
+        "representation": "HTML",
+        "sha256": "dd4c22adf3c073b1e5647e9d799430955dbacebcf3341ae871397a7c80f87c3c",
+        "bytes": 17776
+      },
+      "verified_factual_subset": [
+        "The manufacturer describes hot-water softening at about 60 degrees Celsius.",
+        "It instructs users to wait until comfortable to touch before shaping and warns that pockets of hot water may remain.",
+        "It recommends keeping the finished item away from heat."
+      ],
+      "transfer_limits": [
+        "Instructions for a different craft product are supporting handling context, not a grade-equivalent specification for InstaMorph.",
+        "The page recommends boiling water, but the selected experiment instead follows the lower-temperature InstaMorph guidance with measured water temperature."
+      ]
+    },
+    {
+      "id": "pcl_soil_composites_2023",
+      "kind": "literature",
+      "title": "Sustainable Cotton Gin Waste/Polycaprolactone Bio-Plastic with Adjustable Biodegradation Rate: Scale-Up Production through Compression Moulding",
+      "authors": [
+        "Zengxiao Cai",
+        "Abu Naser Md Ahsanul Haque",
+        "Renuka Dhandapani",
+        "Maryam Naebe"
+      ],
+      "journal": "Polymers",
+      "doi": "10.3390/polym15091992",
+      "url": "https://doi.org/10.3390/polym15091992",
+      "evidence_level": "primary research; accessible full text",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10180961/fullTextXML",
+        "sha256": "bb7eb557a013320448e93102dc03b22d3f977d1997d25b25eca07e05455f1f07",
+        "bytes": 102287,
+        "representation": "Europe PMC JATS full-text XML"
+      },
+      "sections_checked": [
+        "2.1–2.4 materials, extrusion and pressing",
+        "2.5.6 soil test",
+        "3.7 biodegradation results; Figures 8–10"
+      ],
+      "verified_factual_subset": [
+        "PCL grade Capa 6800 (reported molecular weight 80000) was compared with cotton-gin-trash/PCL and cotton-gin-trash/PEG/PCL composites.",
+        "Composite extrusion used zones 88–101 degrees Celsius and a reported melt temperature of 105 degrees Celsius; pressing used 80–105 degrees Celsius and 6.3 tonne force.",
+        "One-centimeter-square film pieces were buried in premium potting mix at 30 degrees Celsius for two months, with periodic watering and triplicate specimens.",
+        "The reported pure-PCL weight loss was approximately 4% after one month and 16% after two months; the 40% cotton-gin-trash / 60% PCL film reached approximately 100% weight loss after two months."
+      ],
+      "transfer_limits": [
+        "Soil specimen mass loss and disappearance are not a carbon-dioxide mineralization balance, ecotoxicity assessment or home-compost certification.",
+        "Controlled 30-degree-Celsius soil and thin films do not establish the fate or timescale of a thick household part or an arbitrary compost heap.",
+        "Cotton-gin-trash composites are not native-starch composites. Their dry powder preparation, extrusion, and forceful pressing are not reproduced by low-temperature hand kneading.",
+        "No recipe-specific room-temperature leak or long-immersion result transfers to the present home prototypes."
+      ],
+      "pmcid": "PMC10180961"
+    },
+    {
+      "id": "pcl_tps_blends_2022",
+      "kind": "literature",
+      "title": "Biodegradable Thermoplastic Starch/Polycaprolactone Blends with Co-Continuous Morphology Suitable for Local Release of Antibiotics",
+      "authors": [
+        "Veronika Gajdosova",
+        "Beata Strachota",
+        "Adam Strachota",
+        "Danuse Michalkova",
+        "Sabina Krejcikova",
+        "Petr Fulin",
+        "Otakar Nyc",
+        "Adam Brinek",
+        "Marek Zemek",
+        "Miroslav Slouf"
+      ],
+      "journal": "Materials",
+      "doi": "10.3390/ma15031101",
+      "url": "https://doi.org/10.3390/ma15031101",
+      "evidence_level": "primary research; accessible full text",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC8840403/fullTextXML",
+        "sha256": "2eb04125789239d281a2a7c5f585a1199728b738e79ed1a4161b34889a637020",
+        "bytes": 153970,
+        "representation": "Europe PMC JATS full-text XML"
+      },
+      "sections_checked": [
+        "2.1–2.2 materials and preparation; Table 1",
+        "3.1 morphology/process relationships"
+      ],
+      "verified_factual_subset": [
+        "The composition grid includes TPS/PCL mass ratios 10/90 and 20/80 as well as other ratios.",
+        "TPS was made from 70 wt% wheat starch / 30 wt% glycerol with six parts water per part starch; gelatinization was at 65–75 degrees Celsius and drying at 25 degrees Celsius for three days.",
+        "TPS and PCL were subsequently mixed at 120 degrees Celsius, 60 rpm for eight minutes and pressed at 130 degrees Celsius under 50–100 kN."
+      ],
+      "transfer_limits": [
+        "TPS is pre-gelatinized and glycerol-plasticized starch, not dry native cornstarch.",
+        "This is evidence for established PCL/starch blend prior art and processing complexity, not evidence that 5% or 10% native starch can be homogeneously dispersed by hand at 66 degrees Celsius.",
+        "The biomedical target and material processing do not establish household food-contact safety, waterproofness, or environmental mineralization."
+      ],
+      "pmcid": "PMC8840403"
+    },
+    {
+      "id": "pcl_powders_iso_2007",
+      "kind": "literature",
+      "title": "Biodegradation of Polycaprolactone Powders Proposed as Reference Test Materials for International Standard of Biodegradation Evaluation Method",
+      "authors": [
+        "Masahiro Funabashi",
+        "Fumi Ninomiya",
+        "Masao Kunioka"
+      ],
+      "journal": "Journal of Polymers and the Environment",
+      "doi": "10.1007/s10924-006-0041-4",
+      "url": "https://doi.org/10.1007/s10924-006-0041-4",
+      "evidence_level": "primary research; publisher abstract only; full article not retrieved",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://api.crossref.org/works/10.1007%2Fs10924-006-0041-4",
+        "sha256": "b35552b3778973c86411459eb3a43ad35ddf3c3ae231aa38820794e83bbf4730",
+        "bytes": 6106,
+        "representation": "Crossref metadata JSON"
+      },
+      "sections_checked": [
+        "publisher abstract"
+      ],
+      "verified_factual_subset": [
+        "The publisher abstract reports PCL powders tested in aqueous medium at 25 degrees Celsius by ISO 14851 oxygen-demand methods.",
+        "It also reports controlled-compost tests at 58 degrees Celsius by ISO 14855-1 and ISO/DIS 14855-2 carbon-dioxide methods.",
+        "Powder particle classes included 0–125, 125–250, 0–250 and 250–500 micrometers; the abstract reports reproducible biodegradation."
+      ],
+      "transfer_limits": [
+        "The 58-degree-Celsius controlled-compost test is not a home-compost test.",
+        "Powders have much higher specific surface area than thick household objects.",
+        "No numerical conversion percentage or duration is taken from inaccessible full text.",
+        "Supports PCL biodegradability under stated assay conditions, not the claim that the present article will rapidly and fully biodegrade at home."
+      ],
+      "publisher_abstract_retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://link.springer.com/article/10.1007/s10924-006-0041-4",
+        "representation": "publisher HTML abstract"
+      },
+      "citation_year": 2007,
+      "online_publication_date": "2006-12-27"
+    },
+    {
+      "id": "pcl_marine_2024",
+      "kind": "literature",
+      "title": "Enhanced Marine Biodegradation of Polycaprolactone through Incorporation of Mucus Bubble Powder from Violet Sea Snail as Protein Fillers",
+      "authors": [
+        "Koh Yoshida",
+        "Sayaka Teramoto",
+        "Jin Gong",
+        "Yutaka Kobayashi",
+        "Hiroshi Ito"
+      ],
+      "journal": "Polymers",
+      "doi": "10.3390/polym16131830",
+      "url": "https://doi.org/10.3390/polym16131830",
+      "evidence_level": "primary research; accessible full text",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11243821/fullTextXML",
+        "sha256": "e2656144440df27b6b3144a6b2c70291e44f3824755985b5f9a86fe8cfae8770",
+        "bytes": 103749,
+        "representation": "Europe PMC JATS full-text XML"
+      },
+      "sections_checked": [
+        "2.1 sample preparation",
+        "2.2.5 BOD and weight-loss methods",
+        "3.3 biodegradation; Figures 5–7; Table 4",
+        "4 conclusions"
+      ],
+      "verified_factual_subset": [
+        "Pure PCL and 95/5 PCL/marine protein filler sheets were studied; the PCL material was reported as number-average molecular weight 8000.",
+        "Sample preparation used tetrahydrofuran solution casting and cryomilling before 70-degree-Celsius, 10-MPa pressing; this is outside the proposed home protocol.",
+        "BOD tests used sediment-enriched extracted seawater at 20 degrees Celsius for 56 days with added nitrogen/phosphorus nutrients.",
+        "The paper reports maximum BOD biodegradation approximately 55% for pure PCL and 96% for the 5% protein-filled PCL; corresponding endpoint sheet mass losses were about 33.4% and 34.1%.",
+        "The reported initial pure-PCL water contact angle was 94.3 degrees."
+      ],
+      "transfer_limits": [
+        "BOD, mass loss and contact angle are distinct endpoints and must not be substituted for one another.",
+        "Enriched/nutrient-supplemented seawater, low-molecular-weight PCL and thin pressed sheets do not establish home-compost behavior or thick craft-part fate.",
+        "Contact angle does not prove leak-free containment or resistance to continuous immersion.",
+        "The marine-protein formulation and organic-solvent processing are not recommended for home reproduction."
+      ],
+      "pmcid": "PMC11243821"
+    },
+    {
+      "id": "alginate_review_2018",
+      "kind": "literature",
+      "title": "Alginate-Based Edible Films and Coatings for Food Packaging Applications",
+      "authors": [
+        "Tugce Senturk Parreidt",
+        "Kajetan Müller",
+        "Markus Schmid"
+      ],
+      "journal": "Foods",
+      "doi": "10.3390/foods7100170",
+      "url": "https://doi.org/10.3390/foods7100170",
+      "evidence_level": "review; accessible full text; source comparison rather than direct experiment",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC6211027/fullTextXML",
+        "sha256": "81bc68ec9906210de99b998cae37cd9d9ae4c483b0a234b363cb2954fcfa1584",
+        "bytes": 390771,
+        "representation": "Europe PMC JATS full-text XML"
+      },
+      "sections_checked": [
+        "4 crosslinking",
+        "5.1 plasticizers",
+        "review references 58, 69–70"
+      ],
+      "verified_factual_subset": [
+        "Alginate film crosslinking uses divalent calcium ions, and the review discusses calcium chloride, calcium lactate and calcium gluconate as different calcium sources.",
+        "The review reports source-dependent solubility and gelation kinetics; calcium lactate and gluconate are alternatives where taste is important.",
+        "The review discusses the plasticization/water-barrier tradeoff: glycerol can improve flexibility while increasing water-vapor permeability."
+      ],
+      "transfer_limits": [
+        "Review statements do not validate the present alginate/glycerol/calcium-lactate/beeswax recipe.",
+        "Calcium salts differ in formula mass, hydration state and calcium fraction; equal gram doses are not equivalent calcium-ion doses.",
+        "An ionically crosslinked alginate network may remain intact yet absorb and swell in water; that is not waterproof performance.",
+        "Ingredient biodegradability and edible-coating use do not certify the fabricated article as home-compostable or suitable for food contact."
+      ],
+      "pmcid": "PMC6211027"
+    },
+    {
+      "id": "alginate_carnauba_2023",
+      "kind": "literature",
+      "title": "A Novel Sodium Alginate-Carnauba Wax Film Containing Calcium Ascorbate: Structural Properties and Preservative Effect on Fresh-Cut Apples",
+      "authors": [
+        "Ximeng Lin",
+        "Hanyu Zhang",
+        "Xi Guo",
+        "Yimin Qin",
+        "Peili Shen",
+        "Qiang Peng"
+      ],
+      "journal": "Molecules",
+      "doi": "10.3390/molecules28010367",
+      "url": "https://doi.org/10.3390/molecules28010367",
+      "evidence_level": "primary research; accessible full text",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9823535/fullTextXML",
+        "sha256": "685deac069f8601567d32cc423f84203286c01ffe5b0903eb8a5cb06b9653b2f",
+        "bytes": 108223,
+        "representation": "Europe PMC JATS full-text XML"
+      },
+      "sections_checked": [
+        "2.1 film performance",
+        "3.2 film preparation",
+        "3.3.1 vapor permeability",
+        "3.3.3 water solubility",
+        "4 conclusion"
+      ],
+      "verified_factual_subset": [
+        "Methods report 1 g sodium alginate in 100 mL water, 0.3 g carnauba wax, 0.2 mL glycerol and 0.4 g calcium ascorbate; the casting solution was dried at 50 degrees Celsius.",
+        "Water-vapor testing used calcium-chloride-filled cups at 25 degrees Celsius and 75% relative humidity over two days.",
+        "The water-solubility method exposed film to 20 mL distilled water for 24 hours and recovered/dried insoluble material.",
+        "The authors report a 31% decrease in film water solubility with 0.3% carnauba wax, rather than zero solubility; wax without glycerol introduced brittleness and cracks."
+      ],
+      "transfer_limits": [
+        "This formulation uses calcium ascorbate and dispersed carnauba wax, not a calcium-lactate-crosslinked film with a surface beeswax coating.",
+        "The source does not give a numerical processing temperature for wax dispersion; 50 degrees Celsius is the drying temperature.",
+        "Solubility reduction, water-vapor barrier and apple preservation do not demonstrate long-term waterproof containment.",
+        "Temperature, drying and solvent-free ingredient similarity do not validate a new recipe or establish food-contact safety."
+      ],
+      "pmcid": "PMC9823535"
+    },
+    {
+      "id": "alginate_beeswax_oleogel_2024",
+      "kind": "literature",
+      "title": "Preparation of Novel Flaxseed Oil/Beeswax Oleogel Systems and Its Application in the Improvement of Sodium Alginate Films",
+      "authors": [
+        "Shan Xue",
+        "Qun Huang"
+      ],
+      "journal": "Gels",
+      "doi": "10.3390/gels10010078",
+      "url": "https://doi.org/10.3390/gels10010078",
+      "evidence_level": "primary research; accessible full text",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC10815861/fullTextXML",
+        "sha256": "7c0150f2891fc65dfecfc48771dc4b56f04174aaf019dda3ee26729ed9b26f7a",
+        "bytes": 184951,
+        "representation": "Europe PMC JATS full-text XML"
+      },
+      "sections_checked": [
+        "2.4 optimized-film verification",
+        "4.2–4.3 oleogel and film preparation"
+      ],
+      "verified_factual_subset": [
+        "Beeswax/flaxseed-oil oleogel was prepared in an 80-degree-Celsius water bath for 20 minutes.",
+        "Film preparation used 1.5% sodium alginate, hydrated at 80 degrees Celsius for 30 minutes; oleogel was stirred into the aqueous phase at 60 degrees Celsius, with ultrasonic degassing and 30-degree-Celsius drying for 24 hours.",
+        "The optimized film reported tensile strength 25.11 +/- 1.24 MPa, elongation 58.21 +/- 1.58%, and water-vapor permeability (0.82 +/- 0.04) x 10^-5 g cm/(cm2 kPa h)."
+      ],
+      "transfer_limits": [
+        "Beeswax/oil oleogel dispersion is not the proposed calcium-crosslinked alginate core plus pure-beeswax surface layer.",
+        "The methods state glycerol percentages with an ambiguous film-weight basis; they should not be silently converted into a precise home formula.",
+        "No retrieved water-immersion leakage test or environmental mineralization/compost certification validates this film.",
+        "Analytical organic reagents listed elsewhere in the paper are not needed or recommended for the proposed home preparation."
+      ],
+      "pmcid": "PMC10815861"
+    },
+    {
+      "id": "alginate_lactate_spray_2025",
+      "kind": "literature",
+      "title": "Development and Characterization of Calcium Lactate-Activated Sodium Alginate-Gum Arabic Edible Films",
+      "authors": [
+        "Sri Mulyani",
+        "Mohamad Rizky Dharmawan",
+        "Inish Chris Mesias",
+        "Yoga Pratama"
+      ],
+      "journal": "Journal of Applied Food Technology",
+      "doi": "10.17728/jaft.30001",
+      "url": "https://doi.org/10.17728/jaft.30001",
+      "evidence_level": "primary research; accessible publisher PDF; protocol inconsistencies noted",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://api.crossref.org/works/10.17728%2Fjaft.30001",
+        "sha256": "c250252b9a0af7ee753d254e18a3784a66f7386551428df170b0d0a82008edc7",
+        "bytes": 9478,
+        "representation": "Crossref metadata JSON"
+      },
+      "sections_checked": [
+        "methods and Tables 1–3"
+      ],
+      "verified_factual_subset": [
+        "The methods report a 2.87% w/v calcium-lactate spray applied at five positions about 20 cm from cast alginate/gum-arabic films.",
+        "Alginate/gum-arabic dissolution used 80 degrees Celsius for 15 minutes; drying used 35 degrees Celsius for 24 hours.",
+        "Reported WVTR values span 69–94 g/(m2 day), measured over 24 hours at approximately 55% relative humidity."
+      ],
+      "transfer_limits": [
+        "The paper does not specify calcium-lactate hydrate form or spray volume; the calcium dose is not reproducible from concentration alone.",
+        "The formulation table and methods differ in glycerol/peppermint-oil quantities, and abstract/table tensile-strength assignments differ.",
+        "The peppermint-oil/gum-arabic/spray formulation is not the proposed alginate/glycerol/beeswax film with a lactate immersion bath.",
+        "WVTR is a vapor transport endpoint, not a continuous-immersion or leak test; no measured biodegradation assay is supplied."
+      ],
+      "full_text_retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://ejournal2.undip.ac.id/index.php/jaft/article/viewFile/30001/13461",
+        "representation": "publisher PDF",
+        "sha256": "0fa346956faa186fed7bf21b21eb3998058ef7ae5f954ef525e51b9674c01cd8",
+        "bytes": 316834
+      }
+    },
+    {
+      "id": "starch_beeswax_2023",
+      "kind": "literature",
+      "title": "Scalable production of hydrophobic starch/beeswax films by continuous solution casting",
+      "authors": [
+        "Bruno Ribeiro Luchesi",
+        "Francys Kley Vieira Moreira",
+        "José Manoel Marconcini"
+      ],
+      "journal": "Journal of Applied Polymer Science",
+      "doi": "10.1002/app.54730",
+      "url": "https://doi.org/10.1002/app.54730",
+      "evidence_level": "primary research; Crossref-deposited abstract only",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://api.crossref.org/works/10.1002%2Fapp.54730",
+        "sha256": "c464a9d6998dd3967f74a7213af7a88684fca854d793d154dea85069a8d9a923",
+        "bytes": 8926,
+        "representation": "Crossref metadata JSON"
+      },
+      "sections_checked": [
+        "Crossref deposited abstract"
+      ],
+      "verified_factual_subset": [
+        "The deposited abstract reports surfactant-free starch/beeswax films made by pilot-scale continuous solution casting.",
+        "The study explored beeswax/starch mass ratios 0.3–0.7 and reports contact-angle and water-vapor permeability improvements."
+      ],
+      "transfer_limits": [
+        "No exact home mixing temperature, immersion swelling, leakage or mineralization results were verified from full text.",
+        "Contact-angle and WVP improvements alone do not demonstrate waterproofness.",
+        "This establishes starch/wax prior art, not the novelty or performance of the present candidate."
+      ]
+    },
+    {
+      "id": "ingevity_capa_portfolio",
+      "kind": "manufacturer",
+      "title": "Ingevity: Bioplastics and Capa thermoplastic certification claims",
+      "url": "https://www.ingevity.com/markets/bioplastics/",
+      "evidence_level": "manufacturer product information; not independent performance validation",
+      "retrieval": {
+        "date": "2026-10-08",
+        "http_status": 200,
+        "url": "https://www.ingevity.com/markets/bioplastics/",
+        "representation": "HTML",
+        "sha256": "9645229f0d38103f6527bc1948b236191b6dd93fe61ce8fd41760e1b12fb699b",
+        "bytes": 36839
+      },
+      "verified_factual_subset": [
+        "The manufacturer lists OK compost HOME, OK compost INDUSTRIAL, OK biodegradable SOIL, MARINE and WATER among certifications for its Capa portfolio.",
+        "It identifies Capa 6250, 6400, 6500, 6500D and 6800 among offered thermoplastic grades."
+      ],
+      "transfer_limits": [
+        "The retrieved portfolio page does not supply independently checked certificate identifiers, covered geometries, thickness limits or test reports.",
+        "A claim for specified commercial grades must not be transferred to an unspecified craft grade or to a novel native-starch-filled article.",
+        "No arbitrary home-compost schedule, landfill behavior or permission to discard plastics into water follows from a portfolio claim."
+      ]
+    }
+  ]
+}

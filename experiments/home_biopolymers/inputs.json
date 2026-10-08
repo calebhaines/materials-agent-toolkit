@@ -1,0 +1,86 @@
+{
+  "experiment_version": "1",
+  "purpose": "Plan empirical comparisons of home-processable polymer candidates; compute ideal pre-treatment feed budgets without predicting waterproofing or biodegradation.",
+  "components": {
+    "pcl_repeat": {
+      "formula": "C6H10O2",
+      "scope": "Ideal polycaprolactone repeat unit; excludes chain ends, commercial-grade additives and moisture. Purchased PCL is reshaped, not synthesized at home."
+    },
+    "starch_repeat": {
+      "formula": "C6H10O5",
+      "scope": "Ideal anhydroglucose repeat unit. Nominal dry-feed bookkeeping only; as-received starch moisture and impurities must be measured."
+    },
+    "sodium_alginate_repeat": {
+      "formula": "C6H7NaO6",
+      "scope": "Ideal sodium-alginate repeat unit with one initial carboxylate site; excludes chain ends, additives and moisture. Final ion exchange and retained composition are unknown."
+    },
+    "glycerol": {
+      "formula": "C3H8O3",
+      "scope": "Ideal glycerol feed; commercial concentration and actual retention must be recorded."
+    },
+    "calcium_lactate_pentahydrate": {
+      "formula": "Ca(C3H5O3)2(H2O)5",
+      "scope": "Explicit pentahydrate bath feed, represented without hydrate-dot notation. Availability is not uptake or crosslink density."
+    },
+    "calcium_lactate_anhydrous_diagnostic": {
+      "formula": "Ca(C3H5O3)2",
+      "scope": "Same-mass hydration-state diagnostic only; not the salt used in the planned baths."
+    },
+    "water": {
+      "formula": "H2O",
+      "scope": "Casting and bath feed solvent; excluded from ideal modeled nonwater elemental feed."
+    }
+  },
+  "design": {
+    "pcl_nominal_dry_feed_g": 50.0,
+    "starch_nominal_mass_fractions": [0.0, 0.05, 0.10],
+    "sodium_alginate_feed_g": 2.0,
+    "glycerol_per_alginate_mass_ratios": [0.10, 0.20, 0.30],
+    "beeswax_topcoat_feed_g": [0.0, 0.2, 0.4],
+    "wax_coating_area_cm2": 100.0,
+    "casting_water_feed_g": 100.0,
+    "fresh_bath_pentahydrate_feed_g": 2.0,
+    "fresh_bath_water_feed_g": 98.0,
+    "untreated_control_glycerol_per_alginate_mass_ratio": 0.20
+  },
+  "test_plan": {
+    "replicates_per_formulation": 3,
+    "water_head_cm": 5.0,
+    "duration_h": 24.0,
+    "temperature_min_C": 20.0,
+    "temperature_max_C": 25.0,
+    "thickness_measurement_count": 5
+  },
+  "sources": [
+    {
+      "id": "instamorph_forming",
+      "url": "https://www.instamorph.com/using-instamorph/",
+      "scope": "Manufacturer forming directions for purchased PCL; plain-PCL reshaping evidence does not establish starch-blend processing or wet performance."
+    },
+    {
+      "id": "instamorph_faq",
+      "url": "https://www.instamorph.com/faq/",
+      "scope": "Manufacturer limitations including hot softening and uncertified food contact; not a waterproofing or biodegradation certification."
+    },
+    {
+      "id": "instamorph_msds",
+      "url": "https://cdn.shopify.com/s/files/1/0615/5901/3537/files/20220814_InstaMorph_MSDS_updated.pdf?v=1671634714",
+      "scope": "Manufacturer-linked PCL safety data and water insolubility; PDF internally reviewed in 2015. Insolubility does not prove leak-free objects."
+    },
+    {
+      "id": "alginate_wax_lab",
+      "url": "https://doi.org/10.3390/gels10010078",
+      "scope": "Laboratory alginate/wax film water-vapor permeability evidence; not a validation of the proposed home-applied topcoat or liquid-water resistance."
+    },
+    {
+      "id": "calcium_lactate_review",
+      "url": "https://doi.org/10.3390/foods7100170",
+      "scope": "Alginate/calcium-lactate film literature review; exact planned bath duration and resulting calcium uptake are unvalidated."
+    },
+    {
+      "id": "pcl_soil_degradation",
+      "url": "https://doi.org/10.3390/polym15091992",
+      "scope": "Condition-dependent PCL soil mass-loss evidence; not mineralization evidence or home-compost certification for these formulations."
+    }
+  ]
+}

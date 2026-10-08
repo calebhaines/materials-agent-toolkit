@@ -1,6 +1,6 @@
 # Manganese oxyfluoride battery-cathode screening
 
-This user-directed discovery attempt explores lithium-ion cathode compositions in `Li2Mn_(1-t-n)Ti_tNb_nO2F`. It uses the toolkit to calculate elemental compositions and masses, then performs explicitly declared charge bookkeeping. It nominates composition hypotheses in an established research family; no new material, phase, property predictor or experimentally improved battery is claimed.
+This offline discovery experiment explores lithium-ion cathode compositions in `Li2Mn_(1-t-n)Ti_tNb_nO2F`. It uses the toolkit to calculate elemental compositions and masses, then performs explicitly declared charge bookkeeping. It nominates composition hypotheses in an established research family; no new material, phase, property predictor or experimentally improved battery is claimed.
 
 ## Reproduce the experiment
 

@@ -127,9 +127,9 @@ The [aluminum–ceramic heat-spreader experiment](experiments/lightweight_compos
 
 The [manganese oxyfluoride cathode experiment](experiments/manganese_oxyfluorides/REPORT.md) explores a different material class: 331 lithium-rich battery compositions. Actual composition calls supply masses and fractions for a declared Mn-only redox-reservoir screen with niobium-loading tradeoffs, published controls and hypothetical utilization scenarios. It does not predict voltage, reversible capacity, phase formation, cycle life or novelty.
 
-## Contributing and hourly development
+## Development
 
-[AGENTS.md](AGENTS.md) specifies the completion criteria for AI contributors. [BACKLOG.md](BACKLOG.md) is the persistent queue, and [RUN_LOG.md](RUN_LOG.md) records verified work. [The hourly task specification](docs/HOURLY_TASK.md) contains a schedule and prompt ready for a ChatGPT automation with GitHub and execution access. The specification is a setup artifact; it does not itself schedule any job.
+[AGENTS.md](AGENTS.md) describes scientific completion criteria. [BACKLOG.md](BACKLOG.md) tracks planned work, and [RUN_LOG.md](RUN_LOG.md) records implemented behavior and validation.
 
 ```sh
 uv sync --locked --extra dev --extra mcp --extra structures

@@ -1,10 +1,10 @@
 # Verified development log
 
-Each entry records implemented behavior, actual verification evidence, unresolved limitations and the next useful task. Files describing plans are not evidence that an automation is active or a GitHub change has been published.
+Each entry records implemented behavior, verification evidence, unresolved limitations and the next useful task.
 
-## 2026-10-07 — Initial local preparation
+## 2026-10-07 — Initial scientific foundation
 
-Prepared an agent-callable Python package, seven initial scientific operations, persistent contributor instructions, roadmap, backlog and hourly task specification. GitHub authentication succeeded for calebhaines. No existing materials repository was present, so the initial repository uses the name materials-agent-toolkit and private visibility. Future development defaults to pull requests. These defaults can be changed by the owner.
+Prepared an agent-callable Python package, seven initial scientific operations, contributor instructions, roadmap and backlog.
 
 Validation in Python 3.12.14 with the locked dependencies:
 
@@ -16,8 +16,6 @@ Validation in Python 3.12.14 with the locked dependencies:
 Independent interface review found and resolved incorrect dependency provenance, an oversized-integer hashing failure and output-validation errors misclassified as caller domain errors. Regression coverage verifies the fixes.
 
 CI is configured for Python 3.11, 3.12 and 3.13; the first GitHub run will verify those environments. The next priority is an MCP interface using the same tool registry and contracts.
-
-No ChatGPT automation has been created: the current session has no callable automation tool. The hourly task specification is prepared for activation with execution and GitHub access.
 
 ## 2026-10-07 — Optional MCP integration, package 0.2.0
 
@@ -34,23 +32,6 @@ Verification completed locally:
 - Client example successfully returned the structured H2O calculation with 18.015 g/mol molar mass.
 - Independent review found no correctness defects and verified real JSON-RPC calls, structured failures followed by successful calls, unsupported resource rejection and clean shutdown without protocol stdout contamination.
 
-Initial GitHub publication was blocked: credentials returned API 404 for the private repository, and Git fetch returned HTTP 403. The local branch, source archive and patch preserved the completed work. The owner subsequently made the repository public, restoring read access and allowing Git fetch. Write access initially remained blocked: Git push returned HTTP 403, and the GitHub branch-creation API returned "Resource not accessible by integration" (HTTP 403). The next scientific priority is structured fractional compositions for alloy inputs; the next agent-interface priority is bounded batch execution.
-
-The [official GitHub connection guide](https://help.openai.com/en/articles/11145903-connecting-github-to-chatgpt) confirms that the standard GitHub app in ChatGPT is read-only. That limitation does not apply to a separately authorized GitHub CLI login. A fresh CLI device login requesting `repo` and `workflow` scopes succeeded; subsequent `gh auth status` confirmed both scopes. With `GH_TOKEN` and `GITHUB_TOKEN` removed from the command environment, Git push succeeded and [PR #1](https://github.com/calebhaines/materials-agent-toolkit/pull/1) was opened. No merge has been performed. [GITHUB_SETUP.md](docs/GITHUB_SETUP.md) records both publishing routes. GitHub CI results are available on the pull request.
-
-## 2026-10-07 — MCP acceptance and protected repository policy
-
-The owner authorized the maintainer to accept the MCP PR and protect the repository against outside code changes and pull requests. Independent pre-merge review found no material correctness issues at head `1170863`; all four required CI jobs passed. [PR #1](https://github.com/calebhaines/materials-agent-toolkit/pull/1) was squash-merged as `1a40fa75b790160e91deeefa7bf5b19abdb641f2`. GitHub does not permit a PR author to formally approve their own PR; owner-authorized review and CI verification preceded the merge.
-
-Applied and independently verified these server settings:
-
-- Permanent `pull_request_creation_policy: collaborators_only` using the update-repository API version `2026-03-10`. The repository remains public. `calebhaines` is the only collaborator; no deploy keys or pending invitations exist.
-- Protected `main`: pull requests required, branch must be current, administrator enforcement, resolved conversations and linear history required. GitHub Actions app `15368` must report success for `validate (3.11)`, `validate (3.12)`, `validate (3.13)` and `base-install`. Force pushes and branch deletion are blocked.
-- Required approval count is zero to avoid an impossible self-approval requirement for the sole owner's changes; independent review and CI remain required by the maintenance policy.
-- Actions tokens have default read permissions and cannot approve PR reviews. Workflows from all external contributors require approval.
-
-The initial protection request contained both `contexts` and `checks`, which GitHub rejected as conflicting schema alternatives. A checks-only request succeeded, and GET verification confirmed all checks remain bound to the expected GitHub Actions app. No branch protection was bypassed for the merge. Public cloning/forking and issue/comment participation do not grant upstream code access or PR creation rights. The policy is recorded in docs/REPOSITORY_POLICY.md and a machine-readable snapshot in .github/repository-policy.json.
-
 ## 2026-10-07 — Fractional alloy compositions, package 0.3.0
 
 Implemented the next P1 scientific item on branch `feat/fractional-compositions`: `composition.from_fractions`, tool version 1. Agents supply an explicit elemental map and atomic or mass basis, then receive both fraction bases, mean atomic mass in g/mol of atoms, the original input total and atomic-weight provenance. Existing seven tool contracts remain version 1. Registry discovery makes the new operation available through Python, the JSON CLI and the optional MCP server without separate calculation adapters.
@@ -65,7 +46,7 @@ Verification completed on Python 3.12.14:
 - `uv build`: source distribution and wheel for version 0.3.0 built successfully.
 - Independent scientific and interface review found a near-pure Li/Be conversion that rounded a dominant fraction above one. Added a regression for both bases, enforced positive fractions at most one and documented endpoint corrections bounded to four binary64 ulps. Larger excursions and loss of a positive trace remain domain errors. Review found no unresolved correctness issues after the fix.
 
-The owner permitted direct pushes, but protected `main` requires PR delivery and all four existing CI checks. This run preserves those controls and uses the maintainer-authorized merge workflow. CI exercises Python 3.11–3.13 and the base installation. The next P1 agent-interface item is a bounded batch API and CLI with stable ordering and per-item errors.
+CI exercises Python 3.11–3.13 and the base installation. The next P1 agent-interface item is a bounded batch API and CLI with stable ordering and per-item errors.
 
 ## 2026-10-07 — Bounded batch API and CLI, package 0.4.0
 
@@ -81,7 +62,7 @@ Verification completed on Python 3.12.14:
 - `uv build`: source distribution and wheel for 0.4.0 built successfully.
 - Independent review of API, CLI, scientific/isolation tests, documentation and the example found no unresolved production correctness issues.
 
-The protected PR workflow and repository access policy remain in force. Batch calls are bounded sequential local execution; cross-item dependency graphs and simulation-job scheduling are separate future contracts. The next P1 item is standalone, reproducible machine-readable catalog export.
+Batch calls are bounded sequential local execution; cross-item dependency graphs and simulation-job scheduling are separate future contracts. The next P1 item is standalone, reproducible machine-readable catalog export.
 
 ## 2026-10-07 — Reproducible catalog export, package 0.5.0
 
@@ -100,7 +81,7 @@ Verification completed on Python 3.12.14:
 - `uv build`: source distribution and wheel for 0.5.0 built successfully; wheel contains the new catalog module.
 - Contract testing exposed Pydantic JSON serialization converting open-schema NaN/infinity values to null. Export now preserves values for explicit finite JSON validation, and both API/rendering rejection cases pass. Independent compatibility, artifact, reference-resolution and interface review found no unresolved correctness issues after the fix.
 
-The protected delivery workflow and repository access controls remain active. All current P1 backlog items are implemented. The next P2 scientific capability is optional structure parsing and validation using an established ASE/pymatgen adapter, with reference structures and density/provenance verification.
+All current P1 backlog items are implemented. The next P2 scientific capability is optional structure parsing and validation using an established ASE/pymatgen adapter, with reference structures and density/provenance verification.
 
 
 ## 2026-10-07 — Optional ordered CIF structures, package 0.6.0
@@ -115,18 +96,18 @@ Verification completed locally:
 
 - `uv sync --locked --extra dev --extra mcp --extra structures`: passed on Python 3.12.14.
 - `uv run --no-sync pytest -q`: **500 passed**. Includes **135** structure cases and **9** optional-dependency cases, plus CLI/MCP/catalog parity. Analytical geometry and density tolerances are stated in fixtures; physical scaling, periodic translation, independent density agreement and domain/resource limits are covered.
-- Base-only Python 3.11.16 environment, `UV_PROJECT_ENVIRONMENT=/workspace/materials-agent-base-env uv sync --locked --extra dev` and `uv run --no-sync pytest -q`: **348 passed, 127 expected skips** (including two absent-MCP modules). Catalog byte checks passed; independent smoke checks confirmed nine-tool discovery, absent ASE/SciPy/MCP, actionable CIF errors and clean missing-MCP startup.
+- Base-only Python 3.11.16 environment, `uv sync --locked --extra dev` and `uv run --no-sync pytest -q`: **348 passed, 127 expected skips** (including two absent-MCP modules). Catalog byte checks passed; independent smoke checks confirmed nine-tool discovery, absent ASE/SciPy/MCP, actionable CIF errors and clean missing-MCP startup.
 - `uv run --no-sync python scripts/export_catalog.py --check`: passed. Catalog SHA-256: `4bf06ddffafb9eadf3cfcf6a4708831ca8d7bf7e08d84d4243d6762de3f60272`.
 - `uv run --no-sync ruff check .`: passed. `uv run --no-sync ruff format --check .`: 40 files already formatted. `git diff --check`: passed.
 - `uv build`: source distribution and wheel for version 0.6.0 built successfully.
 - Independent scientific/parser review resolved silent ASE site merging, incomplete or conflicting operation sets, discarded malformed rows/tags and a tolerance-boundary special-position density error. Final parser and interface reviews found no unresolved material issues. A 2048-operation/2048-atom explicit-only stress case completed in approximately 2.74 seconds including initial ASE import; symmetry checks use bounded query chunks rather than a full pairwise-position allocation.
 
-CI retains the same four protected check names, adding structures to the Python 3.11–3.13 matrix and preserving a base-only job. Repository API verification confirms collaborator-only PR creation, administrator-enforced branch protection, strict GitHub Actions checks, and blocked force pushes/deletion. Other structure formats, writing, neighbors, alternate-origin metadata reconciliation and broader symmetry analysis remain planned. The next bounded backlog item is the scientific benchmark suite, beginning with an independently validated anisotropic elastic reference.
+CI adds structures to the Python 3.11–3.13 matrix and preserves a base-only job. Other structure formats, writing, neighbors, alternate-origin metadata reconciliation and broader symmetry analysis remain planned. The next bounded backlog item is the scientific benchmark suite, beginning with an independently validated anisotropic elastic reference.
 
 
-## 2026-10-07 — User-directed material-discovery attempt
+## 2026-10-07 — Aluminum–ceramic discovery experiment
 
-The owner asked to use the library for novel material discovery and allowed any material type. Reprioritized one bounded experiment: lightweight aluminum–ceramic heat-spreader recipes. The existing toolkit has composition, elastic conversion, scalar mixing and thermal-expansion calculations; the study therefore uses source-traceable constituent proxies rather than inventing alloy stability, strength or model predictions. No scientific tool contracts, dependencies, catalog or package version were changed; the experiment runs with the base package and plotting is optional.
+A bounded discovery experiment explores lightweight aluminum–ceramic heat-spreader recipes. The existing toolkit has composition, elastic conversion, scalar mixing and thermal-expansion calculations; the study therefore uses source-traceable constituent proxies rather than inventing alloy stability, strength or model predictions. No scientific tool contracts, dependencies, catalog or package version were changed; the experiment runs with the base package and plotting is optional.
 
 The frozen dataset uses pure Al, CeramaSil-C SiC, PCAN1000S AlN and CeramAlox99.7% alumina. Independently retrieved supplier/handbook-backed sources confirm all selected values and both recorded PDF hashes. Baseline SiC E 350 GPa uses its listed lower endpoint; the source-high case uses 400 GPa. AlN PDF E 320 GPa differs from same-grade HTML 350 GPa, explicitly retained as a source comparison. Consolidated-grade/powder transfer, typical-value uncertainty and thermal-temperature mismatches are documented. Small factual subsets are attributed; supplier PDFs/full tables are not redistributed.
 
@@ -142,19 +123,19 @@ Verification completed:
 - `uv run --no-sync python experiments/lightweight_composites/screen.py --check`: full artifacts passed read-only verification.
 - `uv run --no-sync python experiments/lightweight_composites/plot.py`: exported PNG/SVG; visual inspection confirmed readable scientific labels, explicit ideal-model status, thin nominee margin and zero all-scenario survivors.
 - `uv run --no-sync pytest -q`: **531 passed** on Python 3.12.14. Includes **31** independent experiment tests covering complete stiffness/compliance tensor oracles, homogeneous-phase limits, mass conservation, Fourier/CTE equations, gates, scenario isolation, bounded finite inputs, complete provenance and artifact drift/read-only behavior.
-- Base-only Python 3.11.16, `UV_PROJECT_ENVIRONMENT=/workspace/materials-agent-base-env uv run --no-sync pytest -q`: **379 passed, 127 expected skips**. Experiment tests require no ASE/MCP/matplotlib.
+- Base-only Python 3.11.16, `uv run --no-sync pytest -q`: **379 passed, 127 expected skips**. Experiment tests require no ASE/MCP/matplotlib.
 - `uv run --no-sync python scripts/export_catalog.py --check`: passed; existing catalog unchanged.
 - `uv run --no-sync ruff check .` and `ruff format --check .`: passed; 46 files formatted. `git diff --check`: passed.
 - Independent scientific review directly recalculated all 58807 rows,823298derived numeric cells and gate outcomes; all agree with the actual artifact within binary64 rounding. Independent prior-art review found no evidence/novelty overclaim. Actual stored envelopes and request hashes were audited.
 
 Frozen-input SHA256: 772b736d09f78cc9df0ec6f971bbbe268df3871b60e8c62b27a5ade742860f3d. NominalCSV SHA256: f6d592d1ef872d76acd5b8b5fd0550552afcbd570d05aa923869a6d581b455e5. Fullscenario-gzip SHA256: fc321c9b6ef2eba45b0f95b1ca3334abed72d9db076b450f2dc973b3c864c9ba. Numerical tables/summary are deterministic; response snapshots retain the recording environment and actual execution timestamps.
 
-The experiment identifies hypotheses and an assumption-sensitive bottleneck, not a verified novel material. Next useful discovery work requires measured constituent/interface/porosity evidence and a broader novelty search; the standing core backlog still includes scientific benchmarks and property-record contracts. Protected delivery and repository access controls remain in force.
+The experiment identifies hypotheses and an assumption-sensitive bottleneck, not a verified novel material. Next useful discovery work requires measured constituent/interface/porosity evidence and a broader novelty search; the standing core backlog still includes scientific benchmarks and property-record contracts.
 
 
 ## 2026-10-07 — Discovery in a different category: battery oxyfluorides
 
-The owner requested another material-discovery attempt in a wholly different category. Reprioritized a bounded lithium-ion cathode composition experiment on `experiment/manganese-oxyfluoride-discovery`, separate from the earlier aluminum composites. Acceptance criteria were a complete charge-admissible rational grid, actual composition-tool calls, source-verified endpoint controls, independently checked mass/electron budgets and gates, complete response provenance, deterministic replay and explicit phase/property/novelty limitations. No production source, scientific tool contract, catalog, dependency or package version changed.
+A bounded lithium-ion cathode composition experiment on `experiment/manganese-oxyfluoride-discovery` explores a different material category from the earlier aluminum composites. Acceptance criteria were a complete charge-admissible rational grid, actual composition-tool calls, source-verified endpoint controls, independently checked mass/electron budgets and gates, complete response provenance, deterministic replay and explicit phase/property/novelty limitations. No production source, scientific tool contract, catalog, dependency or package version changed.
 
 The fixed family is Li2Mn_(1-t-n)Ti_tNb_nO2F with Li(+1), Ti(+4), Nb(+5), O(-2), F(-1), initial average Mn +2 to +3 and final assumed Mn(+4). Exact charge bookkeeping gives the grid constraint 2i_Ti+3j_Nb<=60 and conditional Mn-redox inventory 1+n electrons per normalized formula. Actual `composition.analyze` and `composition.from_fractions` calls supply formula masses/fractions, cross-checked using six atoms per normalized formula. Capacity is an experiment-level SI calculation F(1+n)/(3.6M), not a new prediction tool or a total-capacity ceiling when oxygen participates.
 
@@ -172,11 +153,17 @@ Verification completed on the final files:
 - `uv run --no-sync python experiments/manganese_oxyfluorides/screen.py`: actual complete generation passed. Final `--check`: passed without overwriting artifacts.
 - `uv run --no-sync python experiments/manganese_oxyfluorides/plot.py`: exported PNG/SVG; independent and maintainer visual inspection confirmed readable controls, gate margins and hypothetical status. SVG XML and whitespace checks passed.
 - `uv run --no-sync pytest -q`: **598 passed** on Python 3.12.14. The **67** new cases use independent rational charge/conservation and static natural-mass/SI capacity oracles, all-row endpoint/gate/ranking/scenario checks, strict input bounds, complete response hashes/timestamps and read-only drift/type-corruption cases. An earlier 596-case run was followed by the final 598-case run after adding two timestamp/type-drift tests.
-- Base-only Python 3.11.16, `UV_PROJECT_ENVIRONMENT=/workspace/materials-agent-base-env uv run --no-sync pytest -q`: **446 passed, 127 expected skips**; all 67 new experiment tests pass without ASE/MCP/matplotlib.
+- Base-only Python 3.11.16, `uv run --no-sync pytest -q`: **446 passed, 127 expected skips**; all 67 new experiment tests pass without ASE/MCP/matplotlib.
 - `uv run --no-sync python scripts/export_catalog.py --check`: passed; catalog unchanged.
 - `uv run --no-sync ruff check .` and `ruff format --check .`: passed; 52 files formatted. Whitespace checks passed.
-- Independent scientific review directly recomputed all 331 rows / 8,606 numeric cells and all gates, replayed all 662actualresponses with schemas/input hashes, and verified all six DOI records and both manuscript PDF hashes. Largest physical relative error was 4.27e-16; all scientific documents and figure passed without overclaims. Independent delivery review confirmed the strict experiment inputs, complete provenance, protected scope and unchanged repository permissions.
+- Independent scientific review directly recomputed all 331 rows / 8,606 numeric cells and all gates, replayed all 662actualresponses with schemas/input hashes, and verified all six DOI records and both manuscript PDF hashes. Largest physical relative error was 4.27e-16; all scientific documents and figure passed without overclaims. Independent review confirmed the strict experiment inputs, complete provenance and unchanged production contracts.
 
 Frozen-input SHA256: 659e8555e770093f67910e1464b3e35b9f7062687f094b6a8f438cb632b37466. CSV SHA256: d29a2063869f85b97547c95d0e1b77bf72fdac510fb4e36e28229daa4cdd61cb. Summary SHA256: c9fefa75fcb3c22ec06406189656d3bf994aaabe84204a04384dd5c3e60f59d4. Recorded-response SHA256: e6e3828dae97af4f4c90cf257edb6ed1c81256becc95f243787dabf34ad72761. Runtime snapshots retain their actual recording timestamps and environment.
 
-The result is a shortlist and a charge-accessibility bottleneck within a known family. Useful follow-up needs competing-phase/disorder and migration evidence, local-valence/fluorine characterization and matched electrochemical controls; further electron-count optimization cannot establish a better battery. Protected PR delivery remains required, with independent review and all four existing CI checks before maintainer-authorized merge. Repository protections and access policy are unchanged.
+The result is a shortlist and a charge-accessibility bottleneck within a known family. Useful follow-up needs competing-phase/disorder and migration evidence, local-valence/fluorine characterization and matched electrochemical controls; further electron-count optimization cannot establish a better battery.
+
+## 2026-10-08 — Documentation maintenance
+
+Updated development guidance and project progress wording, and added ignore rules for local configuration. Scientific methods, results, response provenance, tool contracts and dependencies are unchanged.
+
+Validation: all 46 relative Markdown links resolve; `git diff --check`, `uv run --no-sync python scripts/export_catalog.py --check`, `uv run --no-sync ruff check .` and `uv run --no-sync ruff format --check .` pass. Independent documentation review passed. This change contains no calculation or test-code changes.

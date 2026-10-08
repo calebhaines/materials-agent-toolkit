@@ -1,0 +1,1113 @@
+{
+  "entries": [
+    {
+      "label": "pcl_repeat",
+      "request": {
+        "input": {
+          "formula": "C6H10O2"
+        },
+        "tool": "composition.analyze",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.493031+00:00",
+          "input_sha256": "a3f21c043eda370c102bb4e881771e7abad0d852835deb82313a6fdab5e73005",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_counts": {
+            "C": 6,
+            "H": 10,
+            "O": 2
+          },
+          "atomic_fractions": {
+            "C": 0.3333333333333333,
+            "H": 0.5555555555555556,
+            "O": 0.1111111111111111
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "mass_fractions": {
+            "C": 0.6313603868797308,
+            "H": 0.08830950378469302,
+            "O": 0.2803301093355761
+          },
+          "molar_mass_g_mol": 114.144
+        },
+        "status": "ok",
+        "tool": "composition.analyze",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "starch_repeat",
+      "request": {
+        "input": {
+          "formula": "C6H10O5"
+        },
+        "tool": "composition.analyze",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.500826+00:00",
+          "input_sha256": "0a56449340c4241b5257dbf957cc9c28cfe0032353e097d463ac42bccd9d5b99",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_counts": {
+            "C": 6,
+            "H": 10,
+            "O": 5
+          },
+          "atomic_fractions": {
+            "C": 0.2857142857142857,
+            "H": 0.47619047619047616,
+            "O": 0.23809523809523808
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "mass_fractions": {
+            "C": 0.44446500268285005,
+            "H": 0.0621681129387385,
+            "O": 0.49336688437841136
+          },
+          "molar_mass_g_mol": 162.14100000000002
+        },
+        "status": "ok",
+        "tool": "composition.analyze",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "sodium_alginate_repeat",
+      "request": {
+        "input": {
+          "formula": "C6H7NaO6"
+        },
+        "tool": "composition.analyze",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.502551+00:00",
+          "input_sha256": "2707ee758c8dd88ffd2580cf57a673cc913e415a7033cf894f6495845cf529bb",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_counts": {
+            "C": 6,
+            "H": 7,
+            "Na": 1,
+            "O": 6
+          },
+          "atomic_fractions": {
+            "C": 0.3,
+            "H": 0.35,
+            "Na": 0.05,
+            "O": 0.3
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "mass_fractions": {
+            "C": 0.3637753724281644,
+            "H": 0.03561733727212732,
+            "Na": 0.11604795440109861,
+            "O": 0.4845593358986097
+          },
+          "molar_mass_g_mol": 198.10576928
+        },
+        "status": "ok",
+        "tool": "composition.analyze",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "glycerol",
+      "request": {
+        "input": {
+          "formula": "C3H8O3"
+        },
+        "tool": "composition.analyze",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.504252+00:00",
+          "input_sha256": "25c8386ac1281d7979abbf29ce137c50ffd8651c578522ef15656ce6546ce4b6",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_counts": {
+            "C": 3,
+            "H": 8,
+            "O": 3
+          },
+          "atomic_fractions": {
+            "C": 0.21428571428571427,
+            "H": 0.5714285714285714,
+            "O": 0.21428571428571427
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "mass_fractions": {
+            "C": 0.3912632744804222,
+            "H": 0.08756270766825201,
+            "O": 0.5211740178513259
+          },
+          "molar_mass_g_mol": 92.094
+        },
+        "status": "ok",
+        "tool": "composition.analyze",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "calcium_lactate_pentahydrate",
+      "request": {
+        "input": {
+          "formula": "Ca(C3H5O3)2(H2O)5"
+        },
+        "tool": "composition.analyze",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.505857+00:00",
+          "input_sha256": "85f62f948d89a2a14ff6762ee5bb29074a2907f3a0b18bba7b4c742f5b982378",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_counts": {
+            "C": 6,
+            "Ca": 1,
+            "H": 20,
+            "O": 11
+          },
+          "atomic_fractions": {
+            "C": 0.15789473684210525,
+            "Ca": 0.02631578947368421,
+            "H": 0.5263157894736842,
+            "O": 0.2894736842105263
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "mass_fractions": {
+            "C": 0.233758145660135,
+            "Ca": 0.1299997080699205,
+            "H": 0.06539233780851333,
+            "O": 0.5708498084614312
+          },
+          "molar_mass_g_mol": 308.293
+        },
+        "status": "ok",
+        "tool": "composition.analyze",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "calcium_lactate_anhydrous_diagnostic",
+      "request": {
+        "input": {
+          "formula": "Ca(C3H5O3)2"
+        },
+        "tool": "composition.analyze",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.508057+00:00",
+          "input_sha256": "461e7a6e46e127ad1656e07db86f8979b95e53daab173b827d38e12e7fffec8f",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_counts": {
+            "C": 6,
+            "Ca": 1,
+            "H": 10,
+            "O": 6
+          },
+          "atomic_fractions": {
+            "C": 0.2608695652173913,
+            "Ca": 0.043478260869565216,
+            "H": 0.43478260869565216,
+            "O": 0.2608695652173913
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "mass_fractions": {
+            "C": 0.33024773391745865,
+            "Ca": 0.18366037632092677,
+            "H": 0.04619233977032142,
+            "O": 0.43989954999129305
+          },
+          "molar_mass_g_mol": 218.21800000000002
+        },
+        "status": "ok",
+        "tool": "composition.analyze",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "water",
+      "request": {
+        "input": {
+          "formula": "H2O"
+        },
+        "tool": "composition.analyze",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.509917+00:00",
+          "input_sha256": "cd19e476cbf4f4e674486f7bd89f34dab26db2a352df82b7927b8df01ca5f326",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_counts": {
+            "H": 2,
+            "O": 1
+          },
+          "atomic_fractions": {
+            "H": 0.6666666666666666,
+            "O": 0.3333333333333333
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "mass_fractions": {
+            "H": 0.11190674437968359,
+            "O": 0.8880932556203164
+          },
+          "molar_mass_g_mol": 18.015
+        },
+        "status": "ok",
+        "tool": "composition.analyze",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "PCL_S00",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 31.568019343986542,
+            "H": 4.415475189234651,
+            "Na": 0.0,
+            "O": 14.016505466778806
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.512614+00:00",
+          "input_sha256": "d262f1376bd31121216e6678d584f2079107a24b9f57d6e845da5d9a142b0a28",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.3333333333333333,
+            "H": 0.5555555555555555,
+            "O": 0.1111111111111111
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 50.0,
+          "mass_fractions": {
+            "C": 0.6313603868797308,
+            "H": 0.08830950378469302,
+            "O": 0.2803301093355761
+          },
+          "mean_atomic_mass_g_mol": 6.341333333333333
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "PCL_S05",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 31.100780883494338,
+            "H": 4.350121712119764,
+            "Na": 0.0,
+            "O": 14.549097404385893
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.514026+00:00",
+          "input_sha256": "795459479c7664955307b330a94a9ba2fea3d974f6ddca82d462829ab2b4e517",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.33136020476394806,
+            "H": 0.5522670079399133,
+            "O": 0.11637278729613867
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 49.99999999999999,
+          "mass_fractions": {
+            "C": 0.6220156176698869,
+            "H": 0.08700243424239529,
+            "O": 0.29098194808771793
+          },
+          "mean_atomic_mass_g_mol": 6.398500787374134
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "PCL_S10",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 30.633542423002137,
+            "H": 4.284768235004878,
+            "Na": 0.0,
+            "O": 15.08168934199298
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.515361+00:00",
+          "input_sha256": "3a0c1340b1f560b39158c631477e5e823e1f71171d86948f69f245c3ae25f205",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.3293511768440447,
+            "H": 0.5489186280734079,
+            "O": 0.12173019508254747
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 49.99999999999999,
+          "mass_fractions": {
+            "C": 0.6126708484600428,
+            "H": 0.08569536470009757,
+            "O": 0.30163378683985964
+          },
+          "mean_atomic_mass_g_mol": 6.4567083532974925
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G10_W00",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.8058033997524132,
+            "H": 0.08874721607790505,
+            "Na": 0.23209590880219721,
+            "O": 1.0733534753674847
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.516473+00:00",
+          "input_sha256": "8d1cdc123fa113f2bdd1ab4a93cbd125ae3e892e8409bcd965a8cb472fd501b6",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.2887823813908022,
+            "H": 0.37897884807376103,
+            "Na": 0.043456389144634594,
+            "O": 0.2887823813908022
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.2,
+          "mass_fractions": {
+            "C": 0.3662742726147333,
+            "H": 0.04033964367177502,
+            "Na": 0.10549814036463509,
+            "O": 0.48788794334885666
+          },
+          "mean_atomic_mass_g_mol": 9.469857541791766
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G10_W02",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.8058033997524132,
+            "H": 0.08874721607790505,
+            "Na": 0.23209590880219721,
+            "O": 1.0733534753674847
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.517503+00:00",
+          "input_sha256": "8d1cdc123fa113f2bdd1ab4a93cbd125ae3e892e8409bcd965a8cb472fd501b6",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.2887823813908022,
+            "H": 0.37897884807376103,
+            "Na": 0.043456389144634594,
+            "O": 0.2887823813908022
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.2,
+          "mass_fractions": {
+            "C": 0.3662742726147333,
+            "H": 0.04033964367177502,
+            "Na": 0.10549814036463509,
+            "O": 0.48788794334885666
+          },
+          "mean_atomic_mass_g_mol": 9.469857541791766
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G10_W04",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.8058033997524132,
+            "H": 0.08874721607790505,
+            "Na": 0.23209590880219721,
+            "O": 1.0733534753674847
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.518512+00:00",
+          "input_sha256": "8d1cdc123fa113f2bdd1ab4a93cbd125ae3e892e8409bcd965a8cb472fd501b6",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.2887823813908022,
+            "H": 0.37897884807376103,
+            "Na": 0.043456389144634594,
+            "O": 0.2887823813908022
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.2,
+          "mass_fractions": {
+            "C": 0.3662742726147333,
+            "H": 0.04033964367177502,
+            "Na": 0.10549814036463509,
+            "O": 0.48788794334885666
+          },
+          "mean_atomic_mass_g_mol": 9.469857541791766
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G20_W00",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.8840560546484977,
+            "H": 0.10625975761155546,
+            "Na": 0.23209590880219721,
+            "O": 1.1775882789377499
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.519548+00:00",
+          "input_sha256": "49364562a62b4dbe397ce2be93dabb56b73ac271c8dc89da7094bd758cf842f5",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.28016112087731415,
+            "H": 0.4012504377336052,
+            "Na": 0.03842732051176657,
+            "O": 0.2801611208773141
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.4000000000000004,
+          "mass_fractions": {
+            "C": 0.368356689436874,
+            "H": 0.044274899004814766,
+            "Na": 0.09670662866758216,
+            "O": 0.49066178289072904
+          },
+          "mean_atomic_mass_g_mol": 9.135208669623168
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G20_W02",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.8840560546484977,
+            "H": 0.10625975761155546,
+            "Na": 0.23209590880219721,
+            "O": 1.1775882789377499
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.520677+00:00",
+          "input_sha256": "49364562a62b4dbe397ce2be93dabb56b73ac271c8dc89da7094bd758cf842f5",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.28016112087731415,
+            "H": 0.4012504377336052,
+            "Na": 0.03842732051176657,
+            "O": 0.2801611208773141
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.4000000000000004,
+          "mass_fractions": {
+            "C": 0.368356689436874,
+            "H": 0.044274899004814766,
+            "Na": 0.09670662866758216,
+            "O": 0.49066178289072904
+          },
+          "mean_atomic_mass_g_mol": 9.135208669623168
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G20_W04",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.8840560546484977,
+            "H": 0.10625975761155546,
+            "Na": 0.23209590880219721,
+            "O": 1.1775882789377499
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.521936+00:00",
+          "input_sha256": "49364562a62b4dbe397ce2be93dabb56b73ac271c8dc89da7094bd758cf842f5",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.28016112087731415,
+            "H": 0.4012504377336052,
+            "Na": 0.03842732051176657,
+            "O": 0.2801611208773141
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.4000000000000004,
+          "mass_fractions": {
+            "C": 0.368356689436874,
+            "H": 0.044274899004814766,
+            "Na": 0.09670662866758216,
+            "O": 0.49066178289072904
+          },
+          "mean_atomic_mass_g_mol": 9.135208669623168
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G30_W00",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.962308709544582,
+            "H": 0.12377229914520585,
+            "Na": 0.23209590880219721,
+            "O": 1.281823082508015
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.523079+00:00",
+          "input_sha256": "fb50e2071b2497f89c4ef6d7a665acfaedf0a295b6d87c2e9686c85d156c7b38",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.2733283104604769,
+            "H": 0.4189018646437681,
+            "Na": 0.034441514435278174,
+            "O": 0.2733283104604769
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.6,
+          "mass_fractions": {
+            "C": 0.37011873444022386,
+            "H": 0.04760473044046379,
+            "Na": 0.08926765723161431,
+            "O": 0.4930088778876981
+          },
+          "mean_atomic_mass_g_mol": 8.86998152607971
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G30_W02",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.962308709544582,
+            "H": 0.12377229914520585,
+            "Na": 0.23209590880219721,
+            "O": 1.281823082508015
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.524220+00:00",
+          "input_sha256": "fb50e2071b2497f89c4ef6d7a665acfaedf0a295b6d87c2e9686c85d156c7b38",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.2733283104604769,
+            "H": 0.4189018646437681,
+            "Na": 0.034441514435278174,
+            "O": 0.2733283104604769
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.6,
+          "mass_fractions": {
+            "C": 0.37011873444022386,
+            "H": 0.04760473044046379,
+            "Na": 0.08926765723161431,
+            "O": 0.4930088778876981
+          },
+          "mean_atomic_mass_g_mol": 8.86998152607971
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_G30_W04",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.962308709544582,
+            "H": 0.12377229914520585,
+            "Na": 0.23209590880219721,
+            "O": 1.281823082508015
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.525506+00:00",
+          "input_sha256": "fb50e2071b2497f89c4ef6d7a665acfaedf0a295b6d87c2e9686c85d156c7b38",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.2733283104604769,
+            "H": 0.4189018646437681,
+            "Na": 0.034441514435278174,
+            "O": 0.2733283104604769
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.6,
+          "mass_fractions": {
+            "C": 0.37011873444022386,
+            "H": 0.04760473044046379,
+            "Na": 0.08926765723161431,
+            "O": 0.4930088778876981
+          },
+          "mean_atomic_mass_g_mol": 8.86998152607971
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    },
+    {
+      "label": "ALG_UNTREATED",
+      "request": {
+        "input": {
+          "basis": "mass",
+          "fractions": {
+            "C": 0.8840560546484977,
+            "H": 0.10625975761155546,
+            "Na": 0.23209590880219721,
+            "O": 1.1775882789377499
+          },
+          "normalization": "normalize"
+        },
+        "tool": "composition.from_fractions",
+        "tool_version": "1"
+      },
+      "response": {
+        "error": null,
+        "provenance": {
+          "created_at": "2026-10-08T01:22:13.526535+00:00",
+          "input_sha256": "49364562a62b4dbe397ce2be93dabb56b73ac271c8dc89da7094bd758cf842f5",
+          "python_version": "3.12.14",
+          "references": [
+            "https://periodictable.readthedocs.io/en/latest/api/mass.html",
+            "https://ciaaw.org/atomic-weights.htm"
+          ],
+          "software_versions": {
+            "periodictable": "2.1.0",
+            "pydantic": "2.13.5"
+          },
+          "toolkit_version": "0.6.0"
+        },
+        "result": {
+          "atomic_fractions": {
+            "C": 0.28016112087731415,
+            "H": 0.4012504377336052,
+            "Na": 0.03842732051176657,
+            "O": 0.2801611208773141
+          },
+          "atomic_weights_source": "periodictable 2.1.0 atomic-weight table",
+          "input_total": 2.4000000000000004,
+          "mass_fractions": {
+            "C": 0.368356689436874,
+            "H": 0.044274899004814766,
+            "Na": 0.09670662866758216,
+            "O": 0.49066178289072904
+          },
+          "mean_atomic_mass_g_mol": 9.135208669623168
+        },
+        "status": "ok",
+        "tool": "composition.from_fractions",
+        "tool_version": "1",
+        "warnings": [
+          "Atomic weights use the periodictable table and conventional terrestrial isotope abundances where available; isotopically enriched material needs different masses. Elements without a standard atomic weight may use a representative isotope mass from the library."
+        ]
+      }
+    }
+  ],
+  "experiment_version": "1",
+  "inputs_sha256": "f431e353cede3992e91355fc3c7d65c9c12f3c3d51f3a8bdc84012de0f418581",
+  "snapshot_policy": "Complete actual successful responses. --check validates schemas, timestamps and request hashes, then compares scientific content while retaining recorded runtime provenance.",
+  "status": "unmeasured_empirical_trial_plan"
+}

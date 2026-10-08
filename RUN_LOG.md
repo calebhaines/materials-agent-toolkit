@@ -167,3 +167,29 @@ The result is a shortlist and a charge-accessibility bottleneck within a known f
 Updated development guidance and project progress wording, and added ignore rules for local configuration. Scientific methods, results, response provenance, tool contracts and dependencies are unchanged.
 
 Validation: all 46 relative Markdown links resolve; `git diff --check`, `uv run --no-sync python scripts/export_catalog.py --check`, `uv run --no-sync ruff check .` and `uv run --no-sync ruff format --check .` pass. Independent documentation review passed. This change contains no calculation or test-code changes.
+
+## 2026-10-08 — Home-processable biopolymer investigation
+
+Added a bounded formulation study on `experiment/home-biopolymer-discovery` for cool-water containment and simple home processing. Acceptance criteria were sourced process guidance, matched controls, strict and reproducible feed calculations, actual tool-response provenance, blank empirical records, and separate conclusions for water performance and environmental biodegradation. No production tool contract, catalog, dependency or package version changed.
+
+Plain purchased PCL is the first supported forming benchmark, using the selected manufacturer's approximately 66°C water-bath instructions, tool-assisted removal and cooling. It is an existing polymer reshaped at home. Optional 5%/10% native-starch feeds are unvalidated hand-incorporation experiments, not thermoplastic starch. Nine calcium-treated alginate/glycerol/wax plans and one untreated alginate control provide an ingredients-based comparison. The whole-batch alginate casting geometry needs a retaining mold and may dry slowly; wax heating follows supplier guidance with an explicit proposed bath limit. Modified-process feasibility, water performance and environmental conversion remain unmeasured.
+
+Actual execution covers **13 formulations**, **20 successful composition calls** and **39 blank trial rows**. Seven formula analyses and thirteen elemental-fraction conversions retain their complete response envelopes. Elemental budgets are ideal initial polymer/glycerol feed only: repeat formulas omit chain ends, grade additives and moisture; unknown beeswax composition, casting water and treatment baths are excluded. A 2 g calcium-lactate-pentahydrate bath feed provides approximately 6.4873 mmol available calcium against 10.0956 mmol initial alginate sites. The 1.28518 inventory ratio is not calcium uptake, crosslink fraction or reaction completion. Anhydrous salt is not interchangeable gram-for-gram.
+
+Fourteen source records distinguish manufacturer information, accessible primary full texts, reviews and abstract-only evidence. The practical report treats PCL biodegradation as dependent on environment, grade and geometry, and distinguishes recovered mass loss from whole-polymer biological conversion. Manufacturer assets are fingerprinted without redistributing them. No verified waterproof material, novel polymer, food-contact approval, rapid home-compost timeline or numerical property prediction is claimed. Zero verified-result counts mean no empirical verification has occurred.
+
+Artifacts in experiments/home_biopolymers include frozen inputs, study.py, formulation CSV, summary, all actual responses, a blank measurement template, source records and methods/prior-art/process/protocol/report documents. The water protocol specifies 20–25°C, 5 cm head and 24 hours, matched geometries, independent preparations, leakage/evaporation controls, wet and redried mass observations, and handling damage. Physical specimens have not been manufactured or tested.
+
+Verification completed:
+
+- `uv sync --locked --extra dev --extra mcp --extra structures`: passed on Python 3.12.14.
+- `uv run --no-sync python experiments/home_biopolymers/study.py`: actual generation passed. Final `--check` passed without overwriting stored responses or observations; the base-only environment also reproduces it.
+- `uv run --no-sync pytest -q`: **626 passed**. The **28** new cases use independent static elemental-mass/formula oracles, complete-grid controls, hydrate-specific inventory, mass closure, blank-record checks, strict finite input validation, complete provenance and read-only drift checks.
+- Base-only Python 3.11.16, `python -m pytest -q`: **474 passed, 127 expected skips**. All new study tests require only the base package.
+- `uv run --no-sync python scripts/export_catalog.py --check`: passed; catalog unchanged. `uv run --no-sync ruff check .` and `ruff format --check .`: passed; 56 files formatted. All **67** relative Markdown links resolve.
+- Independent process review passed after clarifying alginate casting depth and wax handling limits; supported plain-PCL instructions remain separate from unvalidated blends and coatings.
+- Independent numerical review recomputed all seven formula inventories, all thirteen rows and 334 numeric row cells with separately written atom counts and static elemental masses. Across 1002 comparisons, maximum relative error was 2.13e-16 and maximum mass-closure error 7.11e-15 g. All twenty response envelopes were validated and replayed, and all 1404 empirical observation cells in the 39-row template remain blank. Scientific and process documents passed without performance or novelty overclaims.
+
+Frozen-input SHA256: f431e353cede3992e91355fc3c7d65c9c12f3c3d51f3a8bdc84012de0f418581. Formulation-CSV SHA256: 13b8037745a8af87efa9093647bd3b56b144884a8ea5ebac3df4fab935cf3115. Summary SHA256: e572fa5465afea8655265814594a321e20d9572c4eeed10e3a1c0fc97d80bfa7. Response-record SHA256: e30c096b03d4cf8c44c7ace3fe9b84605afdd70d124b2eea9ac8cf25dc6bba18.
+
+The next decisive research step is measured matched-process specimens, followed separately by grade- and geometry-specific biodegradation evidence. Composition arithmetic alone cannot establish the requested combination of properties.

@@ -529,16 +529,29 @@ def _csv(rows: tuple[dict[str, Any], ...]) -> str:
     return stream.getvalue()
 
 
-def _scientific_projection(value: Any) -> Any:
+def _scientific_projection(value: Any, *, provenance: bool = False) -> Any:
     if isinstance(value, list):
         return [_scientific_projection(item) for item in value]
     if isinstance(value, dict):
         return {
-            key: _scientific_projection(item)
+            key: _scientific_projection(item, provenance=key == "provenance")
             for key, item in value.items()
             if key not in {"created_at", "python_version", "software_versions"}
+            and not (provenance and key == "toolkit_version")
         }
     return value
+
+
+def _summary_matches(actual: bytes, current: dict[str, Any]) -> bool:
+    """Allow a recorded package release while preserving all other summary bytes."""
+    recorded = json.loads(actual, object_pairs_hook=_reject_duplicates)
+    if not isinstance(recorded, dict):
+        raise ValueError("Recorded summary must be an object")
+    _string(recorded["toolkit_version"], "recorded toolkit_version")
+    if actual != _canonical(recorded).encode("utf-8"):
+        return False
+    recorded["toolkit_version"] = current["toolkit_version"]
+    return _canonical(recorded) == _canonical(current)
 
 
 def _validate_record_responses(records: Any) -> None:
@@ -566,6 +579,7 @@ def _validate_record_responses(records: Any) -> None:
             timestamp = datetime.fromisoformat(provenance["created_at"])
             if timestamp.utcoffset() is None:
                 raise ValueError("Recorded timestamps must include a timezone")
+            _string(provenance["toolkit_version"], "recorded toolkit_version")
             _string(provenance["python_version"], "recorded python_version")
             if set(provenance["software_versions"]) != {"pydantic", "periodictable"}:
                 raise ValueError("Recorded composition calls must retain package versions")
@@ -608,7 +622,12 @@ def emit_artifacts(
                 stale.append(name)
                 continue
             actual = path.read_bytes()
-            if name == "tool-records.json":
+            if name == "summary.json":
+                try:
+                    matches = _summary_matches(actual, study.summary)
+                except (ValueError, KeyError, TypeError):
+                    matches = False
+            elif name == "tool-records.json":
                 try:
                     recorded = json.loads(actual, object_pairs_hook=_reject_duplicates)
                     _validate_record_responses(recorded)

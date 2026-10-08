@@ -33,6 +33,7 @@ TOOL_NAMES = {
     "mechanics.elastic_vrh",
     "mechanics.isotropic_moduli",
     "mixtures.scalar_bounds",
+    "screening.evaluate",
     "structure.analyze_cif",
     "thermal.linear_expansion",
 }
@@ -226,6 +227,7 @@ print(json.dumps({"catalog": exported, "schema": schema, "versions": [first, sec
         [
             *(ROOT / "examples").glob("*.json"),
             *(ROOT / "examples" / "structures").glob("*.json"),
+            *(ROOT / "examples" / "screening").glob("*.json"),
         ]
     ),
     ids=lambda p: p.name,

@@ -31,6 +31,34 @@ COPPER_STIFFNESS = [
     [0, 0, 0, 0, 75.4, 0],
     [0, 0, 0, 0, 0, 75.4],
 ]
+SCREENING_INPUT = {
+    "candidates": [
+        {
+            "candidate_id": "supplied_measurement",
+            "properties": {
+                "thickness": {
+                    "quantity": "length",
+                    "value": 2,
+                    "unit": "mm",
+                    "evidence_kind": "measurement",
+                    "source": {"citation": "Synthetic supplied data; not measured material."},
+                    "conditions": {"temperature": "25 degC"},
+                }
+            },
+        },
+        {"candidate_id": "missing_data", "properties": {}},
+    ],
+    "constraints": [
+        {
+            "constraint_id": "thin_sheet",
+            "property_id": "thickness",
+            "quantity": "length",
+            "unit": "cm",
+            "maximum": 0.3,
+            "required_conditions": {"temperature": "25 degC"},
+        }
+    ],
+}
 CASES = [
     ("composition.analyze", {"formula": "H2O"}, {"molar_mass_g_mol": 18.015}),
     (
@@ -75,6 +103,11 @@ CASES = [
         "kinetics.arrhenius_diffusivity",
         {"pre_exponential_m2_s": 1e-5, "activation_energy_J_mol": 50000, "temperature_K": 1000},
         {"diffusivity_m2_s": 1e-5 * math.exp(-50000 / (8.31446261815324 * 1000))},
+    ),
+    (
+        "screening.evaluate",
+        SCREENING_INPUT,
+        {"summary": {"total": 2, "passed": 1, "failed": 0, "unknown": 1}},
     ),
     pytest.param(
         "structure.analyze_cif",
@@ -133,6 +166,13 @@ def test_mcp_scientific_results_schemas_and_provenance_match_python(name, inputs
             assert envelope["status"] == "ok", envelope["error"]
             for field, expected in reference.items():
                 assert envelope["result"][field] == pytest.approx(expected, rel=1e-8)
+            if name == "screening.evaluate":
+                measured, missing = envelope["result"]["candidates"]
+                assert [measured["status"], missing["status"]] == ["pass", "unknown"]
+                assert measured["properties"]["thickness"]["normalized_value"] == 0.002
+                assert measured["properties"]["thickness"]["si_unit"] == "m"
+                assert missing["checks"][0]["reason"] == "missing_property"
+                assert missing["properties"] == {}
             expected = run_tool(name, inputs).model_dump(mode="json")
             # Executions have separate timestamps; all scientific content and
             # input hashes, references and dependency versions must agree.
@@ -210,6 +250,7 @@ def test_mcp_error_envelopes_preserve_session_for_following_calls():
         ),
         ("composition.analyze", {"formula": "NotAnElement"}, "DOMAIN_ERROR"),
         ("structure.analyze_cif", {"cif_text": 123}, "INVALID_INPUT"),
+        ("screening.evaluate", {"candidates": [], "constraints": []}, "INVALID_INPUT"),
         ("missing.tool", {}, "UNKNOWN_TOOL"),
     ]
     if HAS_ASE:

@@ -35,6 +35,34 @@ STIFFNESS = [
     [0, 0, 0, 0, 75.4, 0],
     [0, 0, 0, 0, 0, 75.4],
 ]
+SCREENING_INPUT = {
+    "candidates": [
+        {
+            "candidate_id": "supplied_measurement",
+            "properties": {
+                "thickness": {
+                    "quantity": "length",
+                    "value": 2,
+                    "unit": "mm",
+                    "evidence_kind": "measurement",
+                    "source": {"citation": "Synthetic supplied data; not measured material."},
+                    "conditions": {"temperature": "25 degC"},
+                }
+            },
+        },
+        {"candidate_id": "missing_data", "properties": {}},
+    ],
+    "constraints": [
+        {
+            "constraint_id": "thin_sheet",
+            "property_id": "thickness",
+            "quantity": "length",
+            "unit": "cm",
+            "maximum": 0.3,
+            "required_conditions": {"temperature": "25 degC"},
+        }
+    ],
+}
 CASES = [
     ("composition.analyze", {"formula": "H2O"}),
     ("composition.from_fractions", {"fractions": {"Ni": 0.5, "Ti": 0.5}, "basis": "atomic"}),
@@ -53,6 +81,7 @@ CASES = [
         "kinetics.arrhenius_diffusivity",
         {"pre_exponential_m2_s": 1e-5, "activation_energy_J_mol": 50000, "temperature_K": 1000},
     ),
+    ("screening.evaluate", SCREENING_INPUT),
     pytest.param(
         "structure.analyze_cif",
         {"cif_text": AL_CIF},
@@ -102,6 +131,22 @@ def test_hash_is_stable_across_default_and_explicit_unit():
     )
     assert first.result == second.result
     assert first.provenance.input_sha256 == second.provenance.input_sha256
+
+
+def test_screening_keeps_missing_evidence_unknown_and_converts_declared_units():
+    response = run_tool("screening.evaluate", SCREENING_INPUT)
+    assert response.status == "ok", response.error
+    result = response.result
+    assert result["summary"] == {"total": 2, "passed": 1, "failed": 0, "unknown": 1}
+    assert [candidate["status"] for candidate in result["candidates"]] == ["pass", "unknown"]
+    measured, missing = result["candidates"]
+    assert measured["properties"]["thickness"]["normalized_value"] == pytest.approx(0.002)
+    assert measured["properties"]["thickness"]["si_unit"] == "m"
+    assert result["normalized_constraints"][0]["normalized_maximum"] == pytest.approx(0.003)
+    assert result["normalized_constraints"][0]["si_unit"] == "m"
+    assert measured["checks"][0]["reason"] == "within_bounds"
+    assert missing["checks"][0]["reason"] == "missing_property"
+    assert missing["properties"] == {}
 
 
 @pytest.mark.parametrize(
@@ -179,7 +224,7 @@ def invoke(command, stdin=None):
     )
 
 
-@pytest.mark.parametrize("name,inputs", [*CASES[:2], CASES[-1]])
+@pytest.mark.parametrize("name,inputs", [*CASES[:2], CASES[-2], CASES[-1]])
 def test_cli_and_python_return_same_scientific_result(name, inputs):
     process = invoke(["run"], json.dumps({"tool": name, "input": inputs}))
     assert process.returncode == 0
@@ -189,7 +234,7 @@ def test_cli_and_python_return_same_scientific_result(name, inputs):
 
 def test_examples_are_executable_and_validate():
     directory = Path(__file__).parents[1] / "examples"
-    for example in directory.glob("*.json"):
+    for example in [*directory.glob("*.json"), *(directory / "screening").glob("*.json")]:
         text = example.read_text()
         for command in ("run", "validate"):
             process = invoke([command], text)

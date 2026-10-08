@@ -1,0 +1,86 @@
+{
+  "tool": "screening.evaluate",
+  "tool_version": "1",
+  "input": {
+    "candidates": [
+      {
+        "candidate_id": "synthetic_calculated_pass",
+        "properties": {
+          "theoretical_capacity": {
+            "quantity": "specific_capacity",
+            "value": 240,
+            "unit": "mAh/g",
+            "evidence_kind": "calculation",
+            "source": {
+              "citation": "Synthetic example fixture; supplied numbers are not predictions or measurements of actual materials.",
+              "locator": "Invented model point A"
+            },
+            "conditions": {
+              "model": "declared_model_v1",
+              "utilization": "1.0"
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "synthetic_calculated_fail",
+        "properties": {
+          "theoretical_capacity": {
+            "quantity": "specific_capacity",
+            "value": 180,
+            "unit": "Ah/kg",
+            "evidence_kind": "calculation",
+            "source": {
+              "citation": "Synthetic example fixture; supplied numbers are not predictions or measurements of actual materials.",
+              "locator": "Invented model point B"
+            },
+            "conditions": {
+              "model": "declared_model_v1",
+              "utilization": "1.0"
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "synthetic_calculated_unknown",
+        "properties": {
+          "theoretical_capacity": {
+            "quantity": "specific_capacity",
+            "value": 220,
+            "unit": "mAh/g",
+            "evidence_kind": "calculation",
+            "source": {
+              "citation": "Synthetic example fixture; supplied numbers are not predictions or measurements of actual materials.",
+              "locator": "Invented model point C and declared range"
+            },
+            "conditions": {
+              "model": "declared_model_v1",
+              "utilization": "1.0"
+            },
+            "interval": {
+              "lower": 190,
+              "upper": 250,
+              "basis": "Synthetic model possibility range; no probability or experimental performance inferred."
+            }
+          }
+        }
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_id": "declared_theoretical_capacity_target",
+        "property_id": "theoretical_capacity",
+        "quantity": "specific_capacity",
+        "unit": "C/kg",
+        "minimum": 720000,
+        "allowed_evidence": [
+          "calculation"
+        ],
+        "required_conditions": {
+          "model": "declared_model_v1",
+          "utilization": "1.0"
+        }
+      }
+    ]
+  }
+}

@@ -28,6 +28,8 @@ Copy the measurement template before recording results; regeneration writes the 
 
 `--check` never overwrites files. It checks deterministic numerical/template bytes, validates stored response completeness and request hashes, and compares scientific snapshots while retaining their original runtime timestamps and host versions. No network retrieval or physical testing occurs during either command.
 
+Historical package versions remain recorded in response provenance and summary metadata. Read-only replay accepts a different installed package version while still checking scientific content, tool contract versions and hashes; it does not rewrite earlier recordings.
+
 ## Scientific basis
 
 PCL uses the ideal repeat formula `C6H10O2`, starch `C6H10O5`, and sodium alginate `C6H7NaO6`. They are repeat inventories, not full polymer molar masses or descriptions of molecular weight, crystallinity, chain ends, additives, moisture or structure. Glycerol is `C3H8O3`. Natural-element masses come from the locked periodictable table.

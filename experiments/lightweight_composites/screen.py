@@ -624,16 +624,34 @@ def _csv(rows: list[dict[str, Any]]) -> str:
     return stream.getvalue()
 
 
-def _scientific_projection(value: Any) -> Any:
+def _scientific_projection(value: Any, *, provenance: bool = False) -> Any:
     if isinstance(value, list):
         return [_scientific_projection(item) for item in value]
     if isinstance(value, dict):
         return {
-            key: _scientific_projection(item)
+            key: _scientific_projection(item, provenance=key == "provenance")
             for key, item in value.items()
             if key not in {"created_at", "python_version", "software_versions"}
+            and not (provenance and key == "toolkit_version")
         }
     return value
+
+
+def _recorded_toolkit_version(value: Any) -> None:
+    if not isinstance(value, str) or not value.strip():
+        raise ValueError("Recorded toolkit_version must be a nonempty string")
+
+
+def _summary_matches(actual: bytes, current: dict[str, Any]) -> bool:
+    """Allow a recorded package release while preserving all other summary bytes."""
+    recorded = json.loads(actual, object_pairs_hook=_reject_duplicates)
+    if not isinstance(recorded, dict):
+        raise ValueError("Recorded summary must be an object")
+    _recorded_toolkit_version(recorded["toolkit_version"])
+    if actual != _canonical(recorded).encode("utf-8"):
+        return False
+    recorded["toolkit_version"] = current["toolkit_version"]
+    return _canonical(recorded) == _canonical(current)
 
 
 def _validate_record_responses(value: Any) -> None:
@@ -647,6 +665,7 @@ def _validate_record_responses(value: Any) -> None:
                 if not isinstance(item, list):
                     raise ValueError("Recorded responses must be a list")
                 for response in item:
+                    _recorded_toolkit_version(response["provenance"]["toolkit_version"])
                     ToolResponse.model_validate(response)
             else:
                 _validate_record_responses(item)
@@ -686,12 +705,19 @@ def write_results(
                 stale.append(name)
                 continue
             actual = path.read_bytes()
-            if name == "tool-records.json":
+            if name == "summary.json":
+                try:
+                    matches = _summary_matches(actual, summary)
+                except (ValueError, KeyError, TypeError):
+                    matches = False
+            elif name == "tool-records.json":
                 try:
                     recorded = json.loads(actual)
                     _validate_record_responses(recorded)
-                    matches = _scientific_projection(recorded) == _scientific_projection(records)
-                except (json.JSONDecodeError, ValueError):
+                    matches = _canonical(_scientific_projection(recorded)) == _canonical(
+                        _scientific_projection(records)
+                    )
+                except (ValueError, KeyError, TypeError):
                     matches = False
             else:
                 matches = actual == expected

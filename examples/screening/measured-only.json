@@ -1,0 +1,84 @@
+{
+  "tool": "screening.evaluate",
+  "tool_version": "1",
+  "input": {
+    "candidates": [
+      {
+        "candidate_id": "synthetic_missing_measurement",
+        "properties": {
+          "bulk_density": {
+            "quantity": "density",
+            "value": 2.7,
+            "unit": "g/cm3",
+            "evidence_kind": "manufacturer",
+            "source": {
+              "citation": "Synthetic example fixture; no actual manufacturer or measured material.",
+              "locator": "Invented supplier-density record"
+            },
+            "conditions": {
+              "temperature": "20 degC"
+            }
+          }
+        }
+      },
+      {
+        "candidate_id": "synthetic_range",
+        "properties": {
+          "bulk_density": {
+            "quantity": "density",
+            "value": 2700,
+            "unit": "kg/m3",
+            "evidence_kind": "measurement",
+            "source": {
+              "citation": "Synthetic example fixture; this measurement label is not an actual observation.",
+              "locator": "Invented density record"
+            },
+            "conditions": {
+              "temperature": "20 degC"
+            }
+          },
+          "bulk_thermal_conductivity": {
+            "quantity": "thermal_conductivity",
+            "value": 1.85,
+            "unit": "W/(cm*K)",
+            "evidence_kind": "measurement",
+            "source": {
+              "citation": "Synthetic example fixture; this measurement label is not an actual observation.",
+              "locator": "Invented conductivity record and supplied range"
+            },
+            "conditions": {
+              "temperature": "20 degC"
+            },
+            "interval": {
+              "lower": 1.7,
+              "upper": 2.0,
+              "basis": "Synthetic supplied possibility range; no experiment or statistical confidence level."
+            }
+          }
+        }
+      }
+    ],
+    "constraints": [
+      {
+        "constraint_id": "density_limit",
+        "property_id": "bulk_density",
+        "quantity": "density",
+        "unit": "kg/m3",
+        "maximum": 3000,
+        "required_conditions": {
+          "temperature": "20 degC"
+        }
+      },
+      {
+        "constraint_id": "conductivity_target",
+        "property_id": "bulk_thermal_conductivity",
+        "quantity": "thermal_conductivity",
+        "unit": "W/(m*K)",
+        "minimum": 175,
+        "required_conditions": {
+          "temperature": "20 degC"
+        }
+      }
+    ]
+  }
+}

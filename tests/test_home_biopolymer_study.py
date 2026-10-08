@@ -477,3 +477,66 @@ def test_readonly_check_preserves_valid_recorded_runtime(study_module, generated
     before = {path.name: path.read_bytes() for path in output_dir.iterdir()}
     study_module.emit_artifacts(inputs_path, output_dir, check=True)
     assert {path.name: path.read_bytes() for path in output_dir.iterdir()} == before
+
+
+def test_readonly_check_preserves_older_package_recording(study_module, generated_results):
+    inputs_path, _, output_dir, current = generated_results
+    summary_path = output_dir / "summary.json"
+    summary = json.loads(summary_path.read_bytes())
+    summary["toolkit_version"] = "0.0.1"
+    summary_path.write_text(study_module._canonical(summary), encoding="utf-8")
+    records_path = output_dir / "tool-records.json"
+    records = json.loads(records_path.read_bytes())
+    for entry in records["entries"]:
+        entry["response"]["provenance"]["toolkit_version"] = "0.0.1"
+    records_path.write_text(study_module._canonical(records), encoding="utf-8")
+    before = {path.name: path.read_bytes() for path in output_dir.iterdir()}
+    assert study_module.emit_artifacts(inputs_path, output_dir, check=True) == current
+    assert {path.name: path.read_bytes() for path in output_dir.iterdir()} == before
+
+
+@pytest.mark.parametrize("location", ["summary", "response"])
+@pytest.mark.parametrize("version", [None, "", " \t", 6.0])
+def test_readonly_check_rejects_invalid_recorded_package_version(
+    study_module, generated_results, location, version
+):
+    inputs_path, _, output_dir, _ = generated_results
+    path = output_dir / ("summary.json" if location == "summary" else "tool-records.json")
+    recorded = json.loads(path.read_bytes())
+    metadata = (
+        recorded if location == "summary" else recorded["entries"][0]["response"]["provenance"]
+    )
+    if version is None:
+        del metadata["toolkit_version"]
+    else:
+        metadata["toolkit_version"] = version
+    path.write_text(study_module._canonical(recorded), encoding="utf-8")
+    before = {item.name: item.read_bytes() for item in output_dir.iterdir()}
+    with pytest.raises(ValueError, match="Missing or stale experiment artifacts"):
+        study_module.emit_artifacts(inputs_path, output_dir, check=True)
+    assert {item.name: item.read_bytes() for item in output_dir.iterdir()} == before
+
+
+@pytest.mark.parametrize(
+    "drift", ["summary_science", "summary_format", "tool_version", "extra_version"]
+)
+def test_release_compatibility_retains_scientific_and_schema_checks(
+    study_module, generated_results, drift
+):
+    inputs_path, _, output_dir, _ = generated_results
+    path = output_dir / ("summary.json" if drift.startswith("summary") else "tool-records.json")
+    recorded = json.loads(path.read_bytes())
+    if drift == "summary_science":
+        recorded["verified_waterproof_formulation_count"] = True
+    elif drift == "tool_version":
+        recorded["entries"][0]["response"]["tool_version"] = "different tool contract"
+    elif drift == "extra_version":
+        recorded["entries"][0]["response"]["result"]["toolkit_version"] = "unrelated science"
+    path.write_text(
+        json.dumps(recorded) if drift == "summary_format" else study_module._canonical(recorded),
+        encoding="utf-8",
+    )
+    before = {item.name: item.read_bytes() for item in output_dir.iterdir()}
+    with pytest.raises(ValueError, match="Missing or stale experiment artifacts"):
+        study_module.emit_artifacts(inputs_path, output_dir, check=True)
+    assert {item.name: item.read_bytes() for item in output_dir.iterdir()} == before

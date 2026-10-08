@@ -40,7 +40,7 @@
             "type": "object"
           },
           "toolkit_version": {
-            "default": "0.6.0",
+            "default": "0.7.0",
             "title": "Toolkit Version",
             "type": "string"
           }
@@ -855,6 +855,1301 @@
       "references": [
         "Voigt, W. Lehrbuch der Kristallphysik (1910).",
         "Reuss, A. ZAMM 9 (1929), 49-58. https://doi.org/10.1002/zamm.19290090104"
+      ],
+      "side_effects": [],
+      "version": "1"
+    },
+    {
+      "assumptions": [
+        "Property IDs identify exact semantic properties; dimensional equivalence does not equate different IDs.",
+        "Supplied sources and evidence types are retained but their authenticity is not verified.",
+        "Context eligibility checks only exact required condition tags; additional tags are not validated for applicability.",
+        "A supplied interval is a possibility range containing the point value, without assigned confidence or probability.",
+        "Bounds are inclusive; the full interval must be inside to pass or fully outside a bound to fail, otherwise the check is unknown.",
+        "Missing, disallowed, or context-mismatched evidence is unknown; any failed check takes candidate-level precedence.",
+        "Conversions and comparisons use finite binary64 arithmetic with no tolerance; nonzero conversion underflow to zero and overflow are rejected.",
+        "A pass only matches supplied evidence to declared criteria; it is not material qualification, a prediction, a ranking, or a discovery claim."
+      ],
+      "cost": "small, in-process calculation",
+      "dependencies": [],
+      "description": "Evaluate traceable supplied material-property records against explicit inclusive constraints, normalizing compatible units and returning pass, fail, or unknown.",
+      "input_schema": {
+        "$defs": {
+          "EvidenceSource": {
+            "additionalProperties": false,
+            "properties": {
+              "citation": {
+                "description": "Required supplied citation; authenticity is not checked.",
+                "maxLength": 2000,
+                "minLength": 1,
+                "title": "Citation",
+                "type": "string"
+              },
+              "locator": {
+                "anyOf": [
+                  {
+                    "maxLength": 2000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Optional supplied page, table, URL fragment, or other precise source locator.",
+                "title": "Locator"
+              }
+            },
+            "required": [
+              "citation"
+            ],
+            "title": "EvidenceSource",
+            "type": "object"
+          },
+          "PropertyInterval": {
+            "additionalProperties": false,
+            "properties": {
+              "basis": {
+                "description": "Supplied explanation of this range; it is not assigned confidence or probability.",
+                "maxLength": 2000,
+                "minLength": 1,
+                "title": "Basis",
+                "type": "string"
+              },
+              "lower": {
+                "description": "Inclusive lower possibility endpoint, in the record unit.",
+                "title": "Lower",
+                "type": "number"
+              },
+              "upper": {
+                "description": "Inclusive upper possibility endpoint, in the record unit.",
+                "title": "Upper",
+                "type": "number"
+              }
+            },
+            "required": [
+              "lower",
+              "upper",
+              "basis"
+            ],
+            "title": "PropertyInterval",
+            "type": "object"
+          },
+          "PropertyRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "conditions": {
+                "description": "Up to 16 explicit context tags; values match required tags exactly, with no inference.",
+                "maxProperties": 16,
+                "patternProperties": {
+                  "^[A-Za-z][A-Za-z0-9_.-]{0,63}$": {
+                    "maxLength": 2000,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "propertyNames": {
+                  "maxLength": 64,
+                  "minLength": 1
+                },
+                "title": "Conditions",
+                "type": "object"
+              },
+              "evidence_kind": {
+                "description": "Caller-declared evidence type; no authenticity check is performed.",
+                "enum": [
+                  "measurement",
+                  "manufacturer",
+                  "calculation",
+                  "assumption"
+                ],
+                "title": "Evidence Kind",
+                "type": "string"
+              },
+              "interval": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/PropertyInterval"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Optional supplied possibility range containing value; absent means the point [value, value]."
+              },
+              "quantity": {
+                "description": "Named physical quantity, not a signed change in that quantity.",
+                "enum": [
+                  "density",
+                  "elastic_modulus",
+                  "thermal_conductivity",
+                  "linear_expansion_coefficient",
+                  "specific_capacity",
+                  "mass_fraction",
+                  "length",
+                  "area",
+                  "volume",
+                  "mass",
+                  "time",
+                  "temperature",
+                  "diffusivity",
+                  "dimensionless"
+                ],
+                "title": "Quantity",
+                "type": "string"
+              },
+              "source": {
+                "$ref": "#/$defs/EvidenceSource",
+                "description": "Required source citation and optional locator, retained verbatim."
+              },
+              "unit": {
+                "description": "Explicit closed unit symbol compatible with quantity; see x-quantity-unit-map.",
+                "enum": [
+                  "kg/m3",
+                  "g/cm3",
+                  "g/mL",
+                  "Pa",
+                  "kPa",
+                  "MPa",
+                  "GPa",
+                  "W/(m*K)",
+                  "W/(cm*K)",
+                  "1/K",
+                  "1/degC",
+                  "microstrain/K",
+                  "C/kg",
+                  "Ah/kg",
+                  "mAh/g",
+                  "1",
+                  "%",
+                  "m",
+                  "cm",
+                  "mm",
+                  "um",
+                  "m2",
+                  "cm2",
+                  "mm2",
+                  "m3",
+                  "L",
+                  "mL",
+                  "cm3",
+                  "kg",
+                  "g",
+                  "mg",
+                  "s",
+                  "min",
+                  "h",
+                  "K",
+                  "degC",
+                  "m2/s",
+                  "cm2/s"
+                ],
+                "title": "Unit",
+                "type": "string"
+              },
+              "value": {
+                "description": "Supplied point value in unit; missing evidence must be omitted.",
+                "title": "Value",
+                "type": "number"
+              }
+            },
+            "required": [
+              "quantity",
+              "value",
+              "unit",
+              "evidence_kind",
+              "source"
+            ],
+            "title": "PropertyRecord",
+            "type": "object"
+          },
+          "ScreeningCandidate": {
+            "additionalProperties": false,
+            "properties": {
+              "candidate_id": {
+                "description": "Unique stable candidate identifier; input order is retained.",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,63}$",
+                "title": "Candidate Id",
+                "type": "string"
+              },
+              "properties": {
+                "description": "Zero to 32 semantic property IDs and their evidence; omitted properties remain unknown.",
+                "maxProperties": 32,
+                "patternProperties": {
+                  "^[A-Za-z][A-Za-z0-9_.-]{0,63}$": {
+                    "$ref": "#/$defs/PropertyRecord"
+                  }
+                },
+                "propertyNames": {
+                  "maxLength": 64,
+                  "minLength": 1
+                },
+                "title": "Properties",
+                "type": "object"
+              }
+            },
+            "required": [
+              "candidate_id",
+              "properties"
+            ],
+            "title": "ScreeningCandidate",
+            "type": "object"
+          },
+          "ScreeningConstraint": {
+            "additionalProperties": false,
+            "properties": {
+              "allowed_evidence": {
+                "description": "Unique eligible evidence types; default permits measurement only.",
+                "items": {
+                  "enum": [
+                    "measurement",
+                    "manufacturer",
+                    "calculation",
+                    "assumption"
+                  ],
+                  "type": "string"
+                },
+                "maxItems": 4,
+                "minItems": 1,
+                "title": "Allowed Evidence",
+                "type": "array",
+                "uniqueItems": true
+              },
+              "constraint_id": {
+                "description": "Unique stable constraint identifier; input order is retained.",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,63}$",
+                "title": "Constraint Id",
+                "type": "string"
+              },
+              "maximum": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Optional inclusive upper bound; at least one bound is required.",
+                "title": "Maximum"
+              },
+              "minimum": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Optional inclusive lower bound; at least one bound is required.",
+                "title": "Minimum"
+              },
+              "property_id": {
+                "description": "Exact semantic property key; dimensional similarity does not imply equivalence.",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,63}$",
+                "title": "Property Id",
+                "type": "string"
+              },
+              "quantity": {
+                "description": "Quantity required for this property ID throughout the entire request.",
+                "enum": [
+                  "density",
+                  "elastic_modulus",
+                  "thermal_conductivity",
+                  "linear_expansion_coefficient",
+                  "specific_capacity",
+                  "mass_fraction",
+                  "length",
+                  "area",
+                  "volume",
+                  "mass",
+                  "time",
+                  "temperature",
+                  "diffusivity",
+                  "dimensionless"
+                ],
+                "title": "Quantity",
+                "type": "string"
+              },
+              "required_conditions": {
+                "description": "Required subset of exact context tags; extra record tags are retained without applicability checks.",
+                "maxProperties": 16,
+                "patternProperties": {
+                  "^[A-Za-z][A-Za-z0-9_.-]{0,63}$": {
+                    "maxLength": 2000,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "propertyNames": {
+                  "maxLength": 64,
+                  "minLength": 1
+                },
+                "title": "Required Conditions",
+                "type": "object"
+              },
+              "unit": {
+                "description": "Compatible unit for the original bounds; SI conversion table is in the input schema.",
+                "enum": [
+                  "kg/m3",
+                  "g/cm3",
+                  "g/mL",
+                  "Pa",
+                  "kPa",
+                  "MPa",
+                  "GPa",
+                  "W/(m*K)",
+                  "W/(cm*K)",
+                  "1/K",
+                  "1/degC",
+                  "microstrain/K",
+                  "C/kg",
+                  "Ah/kg",
+                  "mAh/g",
+                  "1",
+                  "%",
+                  "m",
+                  "cm",
+                  "mm",
+                  "um",
+                  "m2",
+                  "cm2",
+                  "mm2",
+                  "m3",
+                  "L",
+                  "mL",
+                  "cm3",
+                  "kg",
+                  "g",
+                  "mg",
+                  "s",
+                  "min",
+                  "h",
+                  "K",
+                  "degC",
+                  "m2/s",
+                  "cm2/s"
+                ],
+                "title": "Unit",
+                "type": "string"
+              }
+            },
+            "required": [
+              "constraint_id",
+              "property_id",
+              "quantity",
+              "unit"
+            ],
+            "title": "ScreeningConstraint",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "candidates": {
+            "description": "One to 100 candidates with unique IDs; each has at most 32 supplied property records.",
+            "items": {
+              "$ref": "#/$defs/ScreeningCandidate"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Candidates",
+            "type": "array"
+          },
+          "constraints": {
+            "description": "One to 20 constraints with unique IDs; each candidate is checked against every constraint.",
+            "items": {
+              "$ref": "#/$defs/ScreeningConstraint"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Constraints",
+            "type": "array"
+          }
+        },
+        "required": [
+          "candidates",
+          "constraints"
+        ],
+        "title": "ScreeningInput",
+        "type": "object",
+        "x-quantity-unit-map": {
+          "area": {
+            "record_domain": "nonnegative",
+            "si_unit": "m2",
+            "units": {
+              "cm2": {
+                "factor": 0.0001,
+                "offset": 0.0
+              },
+              "m2": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "mm2": {
+                "factor": 1e-06,
+                "offset": 0.0
+              }
+            }
+          },
+          "density": {
+            "record_domain": "strictly_positive",
+            "si_unit": "kg/m3",
+            "units": {
+              "g/cm3": {
+                "factor": 1000.0,
+                "offset": 0.0
+              },
+              "g/mL": {
+                "factor": 1000.0,
+                "offset": 0.0
+              },
+              "kg/m3": {
+                "factor": 1.0,
+                "offset": 0.0
+              }
+            }
+          },
+          "diffusivity": {
+            "record_domain": "nonnegative",
+            "si_unit": "m2/s",
+            "units": {
+              "cm2/s": {
+                "factor": 0.0001,
+                "offset": 0.0
+              },
+              "m2/s": {
+                "factor": 1.0,
+                "offset": 0.0
+              }
+            }
+          },
+          "dimensionless": {
+            "record_domain": "signed",
+            "si_unit": "1",
+            "units": {
+              "1": {
+                "factor": 1.0,
+                "offset": 0.0
+              }
+            }
+          },
+          "elastic_modulus": {
+            "record_domain": "strictly_positive",
+            "si_unit": "Pa",
+            "units": {
+              "GPa": {
+                "factor": 1000000000.0,
+                "offset": 0.0
+              },
+              "MPa": {
+                "factor": 1000000.0,
+                "offset": 0.0
+              },
+              "Pa": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "kPa": {
+                "factor": 1000.0,
+                "offset": 0.0
+              }
+            }
+          },
+          "length": {
+            "record_domain": "nonnegative",
+            "si_unit": "m",
+            "units": {
+              "cm": {
+                "factor": 0.01,
+                "offset": 0.0
+              },
+              "m": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "mm": {
+                "factor": 0.001,
+                "offset": 0.0
+              },
+              "um": {
+                "factor": 1e-06,
+                "offset": 0.0
+              }
+            }
+          },
+          "linear_expansion_coefficient": {
+            "record_domain": "signed",
+            "si_unit": "1/K",
+            "units": {
+              "1/K": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "1/degC": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "microstrain/K": {
+                "factor": 1e-06,
+                "offset": 0.0
+              }
+            }
+          },
+          "mass": {
+            "record_domain": "nonnegative",
+            "si_unit": "kg",
+            "units": {
+              "g": {
+                "factor": 0.001,
+                "offset": 0.0
+              },
+              "kg": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "mg": {
+                "factor": 1e-06,
+                "offset": 0.0
+              }
+            }
+          },
+          "mass_fraction": {
+            "record_domain": "zero_to_one",
+            "si_unit": "1",
+            "units": {
+              "%": {
+                "factor": 0.01,
+                "offset": 0.0
+              },
+              "1": {
+                "factor": 1.0,
+                "offset": 0.0
+              }
+            }
+          },
+          "specific_capacity": {
+            "record_domain": "nonnegative",
+            "si_unit": "C/kg",
+            "units": {
+              "Ah/kg": {
+                "factor": 3600.0,
+                "offset": 0.0
+              },
+              "C/kg": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "mAh/g": {
+                "factor": 3600.0,
+                "offset": 0.0
+              }
+            }
+          },
+          "temperature": {
+            "record_domain": "nonnegative",
+            "si_unit": "K",
+            "units": {
+              "K": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "degC": {
+                "factor": 1.0,
+                "offset": 273.15
+              }
+            }
+          },
+          "thermal_conductivity": {
+            "record_domain": "strictly_positive",
+            "si_unit": "W/(m*K)",
+            "units": {
+              "W/(cm*K)": {
+                "factor": 100.0,
+                "offset": 0.0
+              },
+              "W/(m*K)": {
+                "factor": 1.0,
+                "offset": 0.0
+              }
+            }
+          },
+          "time": {
+            "record_domain": "nonnegative",
+            "si_unit": "s",
+            "units": {
+              "h": {
+                "factor": 3600.0,
+                "offset": 0.0
+              },
+              "min": {
+                "factor": 60.0,
+                "offset": 0.0
+              },
+              "s": {
+                "factor": 1.0,
+                "offset": 0.0
+              }
+            }
+          },
+          "volume": {
+            "record_domain": "nonnegative",
+            "si_unit": "m3",
+            "units": {
+              "L": {
+                "factor": 0.001,
+                "offset": 0.0
+              },
+              "cm3": {
+                "factor": 1e-06,
+                "offset": 0.0
+              },
+              "m3": {
+                "factor": 1.0,
+                "offset": 0.0
+              },
+              "mL": {
+                "factor": 1e-06,
+                "offset": 0.0
+              }
+            }
+          }
+        }
+      },
+      "name": "screening.evaluate",
+      "network_access": false,
+      "output_schema": {
+        "$defs": {
+          "EvaluatedCandidate": {
+            "additionalProperties": false,
+            "properties": {
+              "candidate_id": {
+                "description": "Original candidate identifier.",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,63}$",
+                "title": "Candidate Id",
+                "type": "string"
+              },
+              "checks": {
+                "description": "Every constraint result in stable constraint input order.",
+                "items": {
+                  "$ref": "#/$defs/ScreeningCheck"
+                },
+                "maxItems": 20,
+                "minItems": 1,
+                "title": "Checks",
+                "type": "array"
+              },
+              "properties": {
+                "description": "All supplied property records, with original evidence and normalized values retained.",
+                "maxProperties": 32,
+                "patternProperties": {
+                  "^[A-Za-z][A-Za-z0-9_.-]{0,63}$": {
+                    "$ref": "#/$defs/NormalizedPropertyRecord"
+                  }
+                },
+                "propertyNames": {
+                  "maxLength": 64,
+                  "minLength": 1
+                },
+                "title": "Properties",
+                "type": "object"
+              },
+              "status": {
+                "description": "fail if any check fails; otherwise unknown if any check is unknown; otherwise pass.",
+                "enum": [
+                  "pass",
+                  "fail",
+                  "unknown"
+                ],
+                "title": "Status",
+                "type": "string"
+              }
+            },
+            "required": [
+              "candidate_id",
+              "status",
+              "properties",
+              "checks"
+            ],
+            "title": "EvaluatedCandidate",
+            "type": "object"
+          },
+          "EvidenceSource": {
+            "additionalProperties": false,
+            "properties": {
+              "citation": {
+                "description": "Required supplied citation; authenticity is not checked.",
+                "maxLength": 2000,
+                "minLength": 1,
+                "title": "Citation",
+                "type": "string"
+              },
+              "locator": {
+                "anyOf": [
+                  {
+                    "maxLength": 2000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Optional supplied page, table, URL fragment, or other precise source locator.",
+                "title": "Locator"
+              }
+            },
+            "required": [
+              "citation"
+            ],
+            "title": "EvidenceSource",
+            "type": "object"
+          },
+          "NormalizedConstraint": {
+            "additionalProperties": false,
+            "properties": {
+              "allowed_evidence": {
+                "description": "Unique eligible evidence types; default permits measurement only.",
+                "items": {
+                  "enum": [
+                    "measurement",
+                    "manufacturer",
+                    "calculation",
+                    "assumption"
+                  ],
+                  "type": "string"
+                },
+                "maxItems": 4,
+                "minItems": 1,
+                "title": "Allowed Evidence",
+                "type": "array",
+                "uniqueItems": true
+              },
+              "constraint_id": {
+                "description": "Unique stable constraint identifier; input order is retained.",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,63}$",
+                "title": "Constraint Id",
+                "type": "string"
+              },
+              "maximum": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Optional inclusive upper bound; at least one bound is required.",
+                "title": "Maximum"
+              },
+              "minimum": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Optional inclusive lower bound; at least one bound is required.",
+                "title": "Minimum"
+              },
+              "normalized_maximum": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Original maximum converted to si_unit; null for an unbounded upper side.",
+                "title": "Normalized Maximum"
+              },
+              "normalized_minimum": {
+                "anyOf": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Original minimum converted to si_unit; null for an unbounded lower side.",
+                "title": "Normalized Minimum"
+              },
+              "property_id": {
+                "description": "Exact semantic property key; dimensional similarity does not imply equivalence.",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,63}$",
+                "title": "Property Id",
+                "type": "string"
+              },
+              "quantity": {
+                "description": "Quantity required for this property ID throughout the entire request.",
+                "enum": [
+                  "density",
+                  "elastic_modulus",
+                  "thermal_conductivity",
+                  "linear_expansion_coefficient",
+                  "specific_capacity",
+                  "mass_fraction",
+                  "length",
+                  "area",
+                  "volume",
+                  "mass",
+                  "time",
+                  "temperature",
+                  "diffusivity",
+                  "dimensionless"
+                ],
+                "title": "Quantity",
+                "type": "string"
+              },
+              "required_conditions": {
+                "description": "Required subset of exact context tags; extra record tags are retained without applicability checks.",
+                "maxProperties": 16,
+                "patternProperties": {
+                  "^[A-Za-z][A-Za-z0-9_.-]{0,63}$": {
+                    "maxLength": 2000,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "propertyNames": {
+                  "maxLength": 64,
+                  "minLength": 1
+                },
+                "title": "Required Conditions",
+                "type": "object"
+              },
+              "si_unit": {
+                "description": "Canonical SI unit for quantity and both normalized bounds.",
+                "enum": [
+                  "kg/m3",
+                  "Pa",
+                  "W/(m*K)",
+                  "1/K",
+                  "C/kg",
+                  "1",
+                  "m",
+                  "m2",
+                  "m3",
+                  "kg",
+                  "s",
+                  "K",
+                  "m2/s"
+                ],
+                "title": "Si Unit",
+                "type": "string"
+              },
+              "unit": {
+                "description": "Compatible unit for the original bounds; SI conversion table is in the input schema.",
+                "enum": [
+                  "kg/m3",
+                  "g/cm3",
+                  "g/mL",
+                  "Pa",
+                  "kPa",
+                  "MPa",
+                  "GPa",
+                  "W/(m*K)",
+                  "W/(cm*K)",
+                  "1/K",
+                  "1/degC",
+                  "microstrain/K",
+                  "C/kg",
+                  "Ah/kg",
+                  "mAh/g",
+                  "1",
+                  "%",
+                  "m",
+                  "cm",
+                  "mm",
+                  "um",
+                  "m2",
+                  "cm2",
+                  "mm2",
+                  "m3",
+                  "L",
+                  "mL",
+                  "cm3",
+                  "kg",
+                  "g",
+                  "mg",
+                  "s",
+                  "min",
+                  "h",
+                  "K",
+                  "degC",
+                  "m2/s",
+                  "cm2/s"
+                ],
+                "title": "Unit",
+                "type": "string"
+              }
+            },
+            "required": [
+              "constraint_id",
+              "property_id",
+              "quantity",
+              "unit",
+              "si_unit"
+            ],
+            "title": "NormalizedConstraint",
+            "type": "object"
+          },
+          "NormalizedPropertyRecord": {
+            "additionalProperties": false,
+            "properties": {
+              "conditions": {
+                "description": "Up to 16 explicit context tags; values match required tags exactly, with no inference.",
+                "maxProperties": 16,
+                "patternProperties": {
+                  "^[A-Za-z][A-Za-z0-9_.-]{0,63}$": {
+                    "maxLength": 2000,
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "propertyNames": {
+                  "maxLength": 64,
+                  "minLength": 1
+                },
+                "title": "Conditions",
+                "type": "object"
+              },
+              "evidence_kind": {
+                "description": "Caller-declared evidence type; no authenticity check is performed.",
+                "enum": [
+                  "measurement",
+                  "manufacturer",
+                  "calculation",
+                  "assumption"
+                ],
+                "title": "Evidence Kind",
+                "type": "string"
+              },
+              "interval": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/PropertyInterval"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Optional supplied possibility range containing value; absent means the point [value, value]."
+              },
+              "normalized_interval": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/PropertyInterval"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Supplied interval converted to si_unit, retaining its basis; null when no interval was supplied."
+              },
+              "normalized_value": {
+                "description": "Supplied value converted to si_unit using binary64 arithmetic.",
+                "title": "Normalized Value",
+                "type": "number"
+              },
+              "quantity": {
+                "description": "Named physical quantity, not a signed change in that quantity.",
+                "enum": [
+                  "density",
+                  "elastic_modulus",
+                  "thermal_conductivity",
+                  "linear_expansion_coefficient",
+                  "specific_capacity",
+                  "mass_fraction",
+                  "length",
+                  "area",
+                  "volume",
+                  "mass",
+                  "time",
+                  "temperature",
+                  "diffusivity",
+                  "dimensionless"
+                ],
+                "title": "Quantity",
+                "type": "string"
+              },
+              "si_unit": {
+                "description": "Canonical SI unit for quantity.",
+                "enum": [
+                  "kg/m3",
+                  "Pa",
+                  "W/(m*K)",
+                  "1/K",
+                  "C/kg",
+                  "1",
+                  "m",
+                  "m2",
+                  "m3",
+                  "kg",
+                  "s",
+                  "K",
+                  "m2/s"
+                ],
+                "title": "Si Unit",
+                "type": "string"
+              },
+              "source": {
+                "$ref": "#/$defs/EvidenceSource",
+                "description": "Required source citation and optional locator, retained verbatim."
+              },
+              "unit": {
+                "description": "Explicit closed unit symbol compatible with quantity; see x-quantity-unit-map.",
+                "enum": [
+                  "kg/m3",
+                  "g/cm3",
+                  "g/mL",
+                  "Pa",
+                  "kPa",
+                  "MPa",
+                  "GPa",
+                  "W/(m*K)",
+                  "W/(cm*K)",
+                  "1/K",
+                  "1/degC",
+                  "microstrain/K",
+                  "C/kg",
+                  "Ah/kg",
+                  "mAh/g",
+                  "1",
+                  "%",
+                  "m",
+                  "cm",
+                  "mm",
+                  "um",
+                  "m2",
+                  "cm2",
+                  "mm2",
+                  "m3",
+                  "L",
+                  "mL",
+                  "cm3",
+                  "kg",
+                  "g",
+                  "mg",
+                  "s",
+                  "min",
+                  "h",
+                  "K",
+                  "degC",
+                  "m2/s",
+                  "cm2/s"
+                ],
+                "title": "Unit",
+                "type": "string"
+              },
+              "value": {
+                "description": "Supplied point value in unit; missing evidence must be omitted.",
+                "title": "Value",
+                "type": "number"
+              }
+            },
+            "required": [
+              "quantity",
+              "value",
+              "unit",
+              "evidence_kind",
+              "source",
+              "normalized_value",
+              "si_unit"
+            ],
+            "title": "NormalizedPropertyRecord",
+            "type": "object"
+          },
+          "PropertyInterval": {
+            "additionalProperties": false,
+            "properties": {
+              "basis": {
+                "description": "Supplied explanation of this range; it is not assigned confidence or probability.",
+                "maxLength": 2000,
+                "minLength": 1,
+                "title": "Basis",
+                "type": "string"
+              },
+              "lower": {
+                "description": "Inclusive lower possibility endpoint, in the record unit.",
+                "title": "Lower",
+                "type": "number"
+              },
+              "upper": {
+                "description": "Inclusive upper possibility endpoint, in the record unit.",
+                "title": "Upper",
+                "type": "number"
+              }
+            },
+            "required": [
+              "lower",
+              "upper",
+              "basis"
+            ],
+            "title": "PropertyInterval",
+            "type": "object"
+          },
+          "ScreeningCheck": {
+            "additionalProperties": false,
+            "properties": {
+              "constraint_id": {
+                "description": "Constraint producing this check.",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,63}$",
+                "title": "Constraint Id",
+                "type": "string"
+              },
+              "property_id": {
+                "description": "Property key linking this check to its supplied source and context.",
+                "maxLength": 64,
+                "minLength": 1,
+                "pattern": "^[A-Za-z][A-Za-z0-9_.-]{0,63}$",
+                "title": "Property Id",
+                "type": "string"
+              },
+              "reason": {
+                "description": "Exact comparison or eligibility reason, without a ranking or prediction.",
+                "enum": [
+                  "within_bounds",
+                  "outside_bounds",
+                  "interval_overlaps_bound",
+                  "missing_property",
+                  "evidence_not_allowed",
+                  "condition_mismatch"
+                ],
+                "title": "Reason",
+                "type": "string"
+              },
+              "status": {
+                "description": "pass, fail, or unknown for this declared evidence and constraint.",
+                "enum": [
+                  "pass",
+                  "fail",
+                  "unknown"
+                ],
+                "title": "Status",
+                "type": "string"
+              }
+            },
+            "required": [
+              "constraint_id",
+              "property_id",
+              "status",
+              "reason"
+            ],
+            "title": "ScreeningCheck",
+            "type": "object"
+          },
+          "ScreeningSummary": {
+            "additionalProperties": false,
+            "properties": {
+              "failed": {
+                "description": "Candidates with at least one failed check, even if other checks are unknown.",
+                "maximum": 100,
+                "minimum": 0,
+                "title": "Failed",
+                "type": "integer"
+              },
+              "passed": {
+                "description": "Candidates whose every check passes.",
+                "maximum": 100,
+                "minimum": 0,
+                "title": "Passed",
+                "type": "integer"
+              },
+              "total": {
+                "description": "Number of evaluated candidates.",
+                "maximum": 100,
+                "minimum": 1,
+                "title": "Total",
+                "type": "integer"
+              },
+              "unknown": {
+                "description": "Candidates with no failed check and at least one unknown check.",
+                "maximum": 100,
+                "minimum": 0,
+                "title": "Unknown",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "total",
+              "passed",
+              "failed",
+              "unknown"
+            ],
+            "title": "ScreeningSummary",
+            "type": "object"
+          }
+        },
+        "additionalProperties": false,
+        "properties": {
+          "candidates": {
+            "description": "Evaluated candidates in stable input order; no winner or ranking is assigned.",
+            "items": {
+              "$ref": "#/$defs/EvaluatedCandidate"
+            },
+            "maxItems": 100,
+            "minItems": 1,
+            "title": "Candidates",
+            "type": "array"
+          },
+          "normalized_constraints": {
+            "description": "Original constraints and SI bounds in stable input order.",
+            "items": {
+              "$ref": "#/$defs/NormalizedConstraint"
+            },
+            "maxItems": 20,
+            "minItems": 1,
+            "title": "Normalized Constraints",
+            "type": "array"
+          },
+          "summary": {
+            "$ref": "#/$defs/ScreeningSummary",
+            "description": "Counts of candidate-level pass, fail, and unknown outcomes."
+          }
+        },
+        "required": [
+          "normalized_constraints",
+          "candidates",
+          "summary"
+        ],
+        "title": "ScreeningOutput",
+        "type": "object"
+      },
+      "references": [
+        "BIPM SI Brochure, 9th edition: https://www.bipm.org/en/publications/si-brochure",
+        "Possibility-range screening semantics are defined by the screening.evaluate version 1 contract."
       ],
       "side_effects": [],
       "version": "1"

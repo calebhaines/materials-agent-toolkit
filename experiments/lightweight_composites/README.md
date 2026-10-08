@@ -12,6 +12,8 @@ uv run --no-sync python experiments/lightweight_composites/screen.py
 
 The [inputs](inputs.json) contain the property subset, source URLs, grades, units, access dates, temperature notes, gates and sensitivity scenarios. No network access is needed to run the study. The script writes deterministic nominal candidate data, a compressed table for all scenarios and summary results, plus selected actual toolkit responses with scientific input hashes, execution timestamps and software/reference provenance. Response snapshots identify the environment used for generation. `--check` compares their scientific content while excluding runtime-specific timestamps/version fields, and verifies numerical artifacts without overwriting them. It checks this experiment's artifacts rather than replacing the toolkit's catalog check.
 
+Historical package versions remain recorded in response provenance and summary metadata. Read-only replay accepts a different installed package version while still checking scientific content and tool contract versions; it does not rewrite earlier recordings.
+
 ## Constituent evidence
 
 | Phase / source grade | Density kg/m³ | E GPa | ν | Conductivity W/(m·K) | CTE 10⁻⁶/K |

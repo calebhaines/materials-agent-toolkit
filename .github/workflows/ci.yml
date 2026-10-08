@@ -47,7 +47,7 @@ jobs:
           assert importlib.util.find_spec("ase") is None
           result = subprocess.run([sys.executable, "-m", "materials_agent_toolkit", "list"], capture_output=True, text=True)
           assert result.returncode == 0, result.stderr
-          assert len(json.loads(result.stdout)["tools"]) == 9
+          assert len(json.loads(result.stdout)["tools"]) == 10
           from pathlib import Path
           from materials_agent_toolkit.registry import run_tool
           response = run_tool("structure.analyze_cif", {"cif_text": Path("tests/fixtures/structures/al_fcc.cif").read_text()})

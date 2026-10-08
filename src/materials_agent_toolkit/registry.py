@@ -108,9 +108,21 @@ class BatchResponse(StrictModel):
 
 
 def _tools() -> dict[str, ToolSpec]:
-    from materials_agent_toolkit.tools import composition, engineering, mechanics, structures
+    from materials_agent_toolkit.tools import (
+        composition,
+        engineering,
+        mechanics,
+        screening,
+        structures,
+    )
 
-    specs = [*composition.TOOLS, *engineering.TOOLS, *mechanics.TOOLS, *structures.TOOLS]
+    specs = [
+        *composition.TOOLS,
+        *engineering.TOOLS,
+        *mechanics.TOOLS,
+        *screening.TOOLS,
+        *structures.TOOLS,
+    ]
     registry = {spec.name: spec for spec in specs}
     if len(registry) != len(specs):
         raise RuntimeError("Duplicate tool names in registry")

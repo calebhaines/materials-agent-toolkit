@@ -45,6 +45,69 @@ def composition(formula):
 
 
 @pytest.mark.parametrize("source", ["stdin", "argument"])
+def test_screening_batch_preserves_unknown_outcomes_and_cli_python_parity(source):
+    screening = {
+        "tool": "screening.evaluate",
+        "input": {
+            "candidates": [
+                {
+                    "candidate_id": "supplied_measurement",
+                    "properties": {
+                        "thickness": {
+                            "quantity": "length",
+                            "value": 2,
+                            "unit": "mm",
+                            "evidence_kind": "measurement",
+                            "source": {
+                                "citation": "Synthetic supplied data; not measured material."
+                            },
+                            "conditions": {"temperature": "25 degC"},
+                        }
+                    },
+                },
+                {"candidate_id": "missing_data", "properties": {}},
+            ],
+            "constraints": [
+                {
+                    "constraint_id": "thin_sheet",
+                    "property_id": "thickness",
+                    "quantity": "length",
+                    "unit": "cm",
+                    "maximum": 0.3,
+                    "required_conditions": {"temperature": "25 degC"},
+                }
+            ],
+        },
+    }
+    request = {"requests": [screening, composition("H2O")]}
+    encoded = json.dumps(request)
+    process = (
+        invoke(["batch"], encoded)
+        if source == "stdin"
+        else invoke(["batch", "--request", encoded], "invalid unused stdin")
+    )
+    response = assert_json_response(process, 0)
+    assert response["status"] == "ok"
+    assert response["summary"] == {"total": 2, "succeeded": 2, "failed": 0}
+    assert [item["tool"] for item in response["responses"]] == [
+        "screening.evaluate",
+        "composition.analyze",
+    ]
+    result = response["responses"][0]["result"]
+    assert result["summary"] == {"total": 2, "passed": 1, "failed": 0, "unknown": 1}
+    assert [candidate["status"] for candidate in result["candidates"]] == ["pass", "unknown"]
+    measured, missing = result["candidates"]
+    assert measured["properties"]["thickness"]["normalized_value"] == pytest.approx(0.002)
+    assert measured["properties"]["thickness"]["si_unit"] == "m"
+    assert result["normalized_constraints"][0]["normalized_maximum"] == pytest.approx(0.003)
+    assert missing["checks"][0]["reason"] == "missing_property"
+    assert missing["properties"] == {}
+    assert without_timestamps(response) == without_timestamps(
+        registry.run_batch(request).model_dump(mode="json")
+    )
+
+
+@pytest.mark.parametrize("source", ["stdin", "argument"])
 def test_mixed_batch_preserves_order_and_cli_python_parity(source):
     request = {
         "batch_version": "1",
@@ -233,4 +296,4 @@ def test_existing_single_request_cli_contract_is_preserved():
     process = invoke(["list"])
     assert process.returncode == 0
     assert process.stderr == ""
-    assert len(json.loads(process.stdout)["tools"]) == 9
+    assert len(json.loads(process.stdout)["tools"]) == 10

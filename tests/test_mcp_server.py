@@ -12,6 +12,34 @@ from materials_agent_toolkit import mcp_server, registry
 from materials_agent_toolkit.catalog import catalog_json, get_catalog
 
 types = pytest.importorskip("mcp.types")
+SCREENING_INPUT = {
+    "candidates": [
+        {
+            "candidate_id": "supplied_measurement",
+            "properties": {
+                "thickness": {
+                    "quantity": "length",
+                    "value": 2,
+                    "unit": "mm",
+                    "evidence_kind": "measurement",
+                    "source": {"citation": "Synthetic supplied data; not measured material."},
+                    "conditions": {"temperature": "25 degC"},
+                }
+            },
+        },
+        {"candidate_id": "missing_data", "properties": {}},
+    ],
+    "constraints": [
+        {
+            "constraint_id": "thin_sheet",
+            "property_id": "thickness",
+            "quantity": "length",
+            "unit": "cm",
+            "maximum": 0.3,
+            "required_conditions": {"temperature": "25 degC"},
+        }
+    ],
+}
 
 
 @pytest.fixture
@@ -58,6 +86,8 @@ def test_tools_preserve_raw_schemas_and_publish_complete_response_contract(serve
             "INVALID_INPUT",
         ),
         ("structure.analyze_cif", {"cif_text": 123}, "INVALID_INPUT"),
+        ("screening.evaluate", SCREENING_INPUT, None),
+        ("screening.evaluate", {"candidates": [], "constraints": []}, "INVALID_INPUT"),
         ("unknown.tool", {}, "UNKNOWN_TOOL"),
     ],
 )

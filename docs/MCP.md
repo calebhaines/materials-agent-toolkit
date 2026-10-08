@@ -1,6 +1,6 @@
 # Use the toolkit through MCP
 
-The optional stdio MCP server lets compatible AI clients discover and invoke every installed scientific tool. It uses the official Python MCP SDK and delegates validation and calculation to the existing registry. Package version 0.6.0 adds `structure.analyze_cif` at tool version 1; its execution requires the separate `structures` extra. Existing scientific tool versions and input contracts remain unchanged.
+The optional stdio MCP server lets compatible AI clients discover and invoke every installed tool. It uses the official Python MCP SDK and delegates validation and calculation to the existing registry. Package version 0.7.0 adds `screening.evaluate` at tool version 1 using base dependencies. `structure.analyze_cif` execution requires the separate `structures` extra. Existing tool versions and input contracts remain unchanged.
 
 ## Installation
 
@@ -42,7 +42,7 @@ Configuration formats vary between clients. The server uses local stdio and the 
 
 ## Discovery and invocation
 
-`tools/list` advertises the same nine names as `matkit list`, including input schemas, full response-envelope output schemas, tool versions, scientific assumptions and references. All tools are declared read-only and have no external side effects. MCP annotations are descriptive metadata; the actual tools enforce the supported scientific domains.
+`tools/list` advertises the same ten names as `matkit list`, including input schemas, full response-envelope output schemas, tool versions, scientific assumptions and references. All tools are declared read-only and have no external side effects. MCP annotations are descriptive metadata; the actual tools enforce the supported scientific domains.
 
 For example, call the native MCP tool `mechanics.isotropic_moduli` with arguments:
 
@@ -90,6 +90,6 @@ uv run --no-sync ruff check .
 uv run --no-sync ruff format --check .
 ```
 
-To execute CIF calls, also install `.[mcp,structures]` with pip or add `--extra structures` to the uv installation and client launch command. Without ASE, CIF calls return `MISSING_DEPENDENCY` with installation guidance; all nine tools remain discoverable.
+To execute CIF calls, also install `.[mcp,structures]` with pip or add `--extra structures` to the uv installation and client launch command. Without ASE, CIF calls return `MISSING_DEPENDENCY` with installation guidance; all ten tools remain discoverable.
 
 The base installation has no dependency on MCP or ASE. The server exposes the currently registered deterministic calculators; external simulation jobs and additional scientific modules remain tracked in the backlog.

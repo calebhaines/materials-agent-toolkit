@@ -15,6 +15,8 @@ The screen runs offline and requires neither ASE, MCP nor matplotlib. The frozen
 
 The script writes a 331-row candidate CSV, a numerical summary and complete actual response snapshots for both toolkit calls at every composition. CSV and summary bytes are deterministic under the locked scientific dependencies. The 662 stored responses retain actual execution timestamps, validated input hashes, software versions and scientific references. `--check` validates snapshot completeness, timezone-aware timestamps and request hashes before comparing scientific content without runtime timestamps or host version fields. It reruns the calculations and never overwrites artifacts. Run this experiment's check separately from the tool catalog check.
 
+Historical package versions remain recorded in response provenance and summary metadata. Read-only replay accepts a different installed package version while still checking scientific content, tool contract versions and hashes; it does not rewrite earlier recordings.
+
 Optional plotting uses matplotlib, included with the locked `structures` extra:
 
 ```sh

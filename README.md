@@ -2,7 +2,7 @@
 
 A Python library and JSON CLI for materials science and engineering calculations that AI agents can discover, validate and invoke automatically.
 
-The toolkit supplies nine bounded scientific operations through a Python library, JSON CLI and optional MCP server. Additional structure analysis, simulation and trained models are tracked in [ROADMAP.md](ROADMAP.md). Every tool declares its assumptions and exposes input/output JSON schemas. Results carry input hashes, software versions and scientific references. Invalid inputs produce structured errors.
+The toolkit supplies ten bounded operations through a Python library, JSON CLI and optional MCP server. Additional structure analysis, simulation and trained models are tracked in [ROADMAP.md](ROADMAP.md). Every tool declares its assumptions and exposes input/output JSON schemas. Results carry input hashes, software versions and scientific references. Invalid inputs produce structured errors.
 
 ## Install and run
 
@@ -68,7 +68,7 @@ assert batch.status == "ok", batch.responses
 
 Responses retain input order, per-item errors and provenance. Requests run sequentially; an item failure does not stop the remaining calculations. An invalid batch envelope is rejected before execution. The CLI exits with code 2 for mixed or failed batches while still printing their complete JSON responses. The mixed example intentionally includes an unknown tool. See [batch contracts, limits and error handling](docs/BATCH.md).
 
-## Initial tool catalog
+## Tool catalog
 
 | Tool | Purpose |
 | --- | --- |
@@ -78,6 +78,7 @@ Responses retain input order, per-item errors and provenance. Requests run seque
 | `mechanics.isotropic_moduli` | Convert Young's modulus and Poisson ratio into isotropic moduli |
 | `mechanics.elastic_vrh` | Stability validation and Voigt/Reuss/Hill aggregate elastic properties |
 | `mixtures.scalar_bounds` | Scalar arithmetic/harmonic mixture estimates using volume fractions |
+| `screening.evaluate` | Convert source-bearing property records to SI and check numerical constraints with explicit evidence and condition requirements |
 | `thermal.linear_expansion` | Constant-coefficient, small-strain linear thermal expansion |
 | `kinetics.arrhenius_diffusivity` | Diffusivity from an Arrhenius prefactor and activation energy |
 | `structure.analyze_cif` | Validate an ordered CIF crystal, expand symmetry and calculate cell density (requires `structures` extra) |
@@ -96,6 +97,14 @@ uv run --no-sync matkit run < examples/structures/al-fcc.json
 With pip, install `materials-agent-toolkit[structures]` (or `-e '.[structures]'` from this checkout). `structure.analyze_cif` returns the symmetry-expanded supplied cell, atomic coordinates, volume and density. Its descriptor remains available without ASE; execution then returns `MISSING_DEPENDENCY`. See [CIF conventions, resource bounds and reference fixtures](docs/STRUCTURES.md).
 
 Input hashes identify canonical validated inputs, including defaults. Record the tool name/version and software versions alongside the hash for reproducibility. Timestamps identify execution time; they are not part of the input hash. Scientific references explain the model, while numerical tolerances and assumptions are declared in descriptors or source documentation.
+
+Screen supplied material properties through one reusable contract:
+
+```sh
+uv run --no-sync matkit run < examples/screening/measured-only.json
+```
+
+`screening.evaluate` retains each value's citation, evidence kind and condition tags, converts supported units to SI, and checks inclusive limits. Missing measurements, excluded evidence, mismatched required conditions and ranges crossing a limit produce `unknown`. A numerical failure takes precedence in the candidate's overall result while every individual check remains visible. Measurement evidence is accepted by default; using manufacturer data, calculations or assumptions requires explicit allowance. See [property records, unit conversions and screening semantics](docs/SCREENING.md).
 
 No tool downloads data or launches external jobs. Predictions and expensive simulation adapters will have separate contracts when implemented. Model assumptions and warnings must be considered before applying outputs to an engineering decision.
 
@@ -119,7 +128,7 @@ uv sync --locked --extra mcp
 uv run --no-sync matkit-mcp
 ```
 
-Compatible AI clients can discover the nine tools by their names and call them using the input fields shown in their schemas. The server returns the same result/error envelope as the Python and CLI interfaces, with `structuredContent` for machine consumption and equivalent JSON text for other clients. It also exposes the complete catalog and response schema as MCP resources. See [MCP setup and protocol details](docs/MCP.md) for a client configuration and a runnable example.
+Compatible AI clients can discover the ten tools by their names and call them using the input fields shown in their schemas. The server returns the same result/error envelope as the Python and CLI interfaces, with `structuredContent` for machine consumption and equivalent JSON text for other clients. It also exposes the complete catalog and response schema as MCP resources. See [MCP setup and protocol details](docs/MCP.md) for a client configuration and a runnable example.
 
 ## Discovery experiments
 

@@ -34,7 +34,7 @@ def test_discovery_validation_and_catalog_do_not_require_ase(missing_ase):
     inputs = {"cif_text": FIXTURE.read_text()}
     assert validate_input("structure.analyze_cif", inputs) == inputs
     catalog = json.loads(catalog_json())
-    assert len(catalog["tools"]) == 9
+    assert len(catalog["tools"]) == 10
     assert descriptor in catalog["tools"]
 
 
@@ -114,7 +114,7 @@ def test_fresh_process_discovery_does_not_import_optional_engines():
 import sys
 from materials_agent_toolkit.catalog import catalog_json
 from materials_agent_toolkit.registry import list_tools
-assert len(list_tools()) == 9
+assert len(list_tools()) == 10
 assert 'structure.analyze_cif' in catalog_json()
 for package in ('ase', 'scipy', 'matplotlib', 'mcp'):
     assert package not in sys.modules, package
